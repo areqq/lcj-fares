@@ -68,7 +68,7 @@
     },
     {
      "month": "2026-11",
-     "median": 235.56,
+     "median": 238.71,
      "n": 10
     }
    ],
@@ -966,7 +966,7 @@
     {
      "month": "2026-11",
      "weekday": 3,
-     "median": 157.67,
+     "median": 166.43,
      "n": 3
     },
     {
@@ -978,14 +978,14 @@
     {
      "month": "2026-11",
      "weekday": 6,
-     "median": 159.05,
+     "median": 161.24,
      "n": 4
     }
    ],
    "heatmap_weekday": [
     {
      "weekday": 3,
-     "median": 157.67,
+     "median": 166.43,
      "n": 3
     },
     {
@@ -995,7 +995,7 @@
     },
     {
      "weekday": 6,
-     "median": 159.05,
+     "median": 161.24,
      "n": 4
     }
    ],
@@ -1007,7 +1007,7 @@
     },
     {
      "month": "2026-11",
-     "median": 142.33,
+     "median": 146.72,
      "n": 10
     }
    ],
@@ -1225,7 +1225,7 @@
     },
     {
      "bucket": "181+",
-     "median": 442.0,
+     "median": 444.19,
      "ratio": 1.0,
      "n": 46
     }
@@ -1539,7 +1539,7 @@
    "curve": [
     {
      "bucket": "0-7",
-     "median": 277.59,
+     "median": 292.36,
      "ratio": 1.0,
      "n": 2
     },
@@ -1953,7 +1953,7 @@
     {
      "month": "2026-11",
      "weekday": 6,
-     "median": 181.76,
+     "median": 183.95,
      "n": 4
     }
    ],
@@ -1985,7 +1985,7 @@
     },
     {
      "weekday": 6,
-     "median": 181.76,
+     "median": 183.95,
      "n": 4
     }
    ],
@@ -2004,7 +2004,7 @@
    "curve": [
     {
      "bucket": "0-7",
-     "median": 560.72,
+     "median": 579.33,
      "ratio": 1.0,
      "n": 6
     },
@@ -2447,16 +2447,16 @@
      "vs_median_pct": -63
     },
     {
-     "out_day": "2026-11-01",
+     "out_day": "2026-12-13",
      "out_time": "20:20",
-     "out_price": 197.1,
-     "ret_day": "2026-11-05",
-     "ret_time": "08:40",
-     "ret_price": 65.67,
-     "nights": 4,
-     "total": 262.77,
-     "weekend": false,
-     "vs_median_pct": -61
+     "out_price": 121.0,
+     "ret_day": "2026-12-20",
+     "ret_time": "16:10",
+     "ret_price": 145.26,
+     "nights": 7,
+     "total": 266.26,
+     "weekend": true,
+     "vs_median_pct": -60
     }
    ]
   },
