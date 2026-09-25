@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tanie loty z Łodzi</title>
+<style>
+:root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e1dc; --accent:#1f6feb; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg:#161615; --fg:#ecebe6; --muted:#9a9993; --line:#33332f; --accent:#6ea8ff; }
+}
+body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 system-ui, sans-serif; }
+main { max-width:960px; margin:0 auto; padding:16px; }
+h1 { font-size:1.4rem; margin:.2em 0; }
+h2 { font-size:1.1rem; margin:0 0 .3em; }
+.muted { color:var(--muted); font-size:.9rem; margin:.2em 0 .6em; }
+select { font:inherit; padding:.3em .5em; margin:.8em 0; }
+section { margin:1.8em 0; }
+.scroll { overflow-x:auto; }
+table { border-collapse:collapse; font-size:.85rem; }
+th, td { padding:.3em .5em; text-align:right; border-bottom:1px solid var(--line); white-space:nowrap; }
+th:first-child, td:first-child { text-align:left; }
+td.cell { color:#111; }
+.few { opacity:.4; }
+.chart { position:relative; height:240px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Tanie loty z/do Łodzi (Ryanair)</h1>
+  <p class="muted" id="meta">Ładowanie…</p>
+  <label>Kierunek: <select id="route"></select></label>
+
+  <section>
+    <h2>Kiedy tanio: dzień tygodnia × miesiąc</h2>
+    <p class="muted">Mediana ostatniej znanej ceny lotów. Wyszarzone: mniej niż <span class="minn"></span> lotów.</p>
+    <div class="scroll"><table id="heat"></table></div>
+  </section>
+
+  <section>
+    <h2>Kiedy kupować</h2>
+    <p class="muted">Mediana ceny wg liczby dni do wylotu. „× min" — ile razy drożej od najniższej ceny, jaką dany lot kiedykolwiek miał.</p>
+    <div class="chart"><canvas id="curve"></canvas></div>
+    <div class="scroll"><table id="curveTable"></table></div>
+  </section>
+
+  <section>
+    <h2>Najtańsze nadchodzące loty</h2>
+    <p class="muted" id="normal"></p>
+    <div class="scroll"><table id="cheap"></table></div>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+const WD = ["Pn", "Wt", "Śr", "Cz", "Pt", "So", "Nd"];
+const zl = v => v == null ? "–" : Math.round(v) + " zł";
+let DATA, chart;
+
+function el(tag, text, cls) {
+  const e = document.createElement(tag);
+  if (text != null) e.textContent = text;
+  if (cls) e.className = cls;
+  return e;
+}
+function row(cells, tag = "td") {
+  const tr = el("tr");
+  cells.forEach(c => tr.append(c instanceof Node ? c : el(tag, c)));
+  return tr;
+}
+function color(v, lo, hi) {
+  const t = hi > lo ? (v - lo) / (hi - lo) : 0;
+  return `hsl(${120 - 120 * t} 60% 72%)`;
+}
+
+function renderHeat(r) {
+  const t = document.getElementById("heat");
+  t.replaceChildren();
+  const months = [...new Set(r.heatmap.map(c => c.month))].sort();
+  if (!months.length) { t.append(el("caption", "Brak danych")); return; }
+  const vals = r.heatmap.map(c => c.median);
+  const lo = Math.min(...vals), hi = Math.max(...vals);
+  t.append(row(["", ...months], "th"));
+  WD.forEach((name, wd) => {
+    const cells = [el("th", name)];
+    months.forEach(m => {
+      const c = r.heatmap.find(x => x.month === m && x.weekday === wd);
+      const td = el("td", c ? zl(c.median) : "");
+      if (c) {
+        td.className = "cell" + (c.n < DATA.min_n ? " few" : "");
+        td.style.background = color(c.median, lo, hi);
+        td.title = `n=${c.n}`;
+      }
+      cells.push(td);
+    });
+    t.append(row(cells));
+  });
+}
+
+function renderCurve(r) {
+  const t = document.getElementById("curveTable");
+  t.replaceChildren(row(["dni do wylotu", "mediana", "× min", "n"], "th"));
+  r.curve.forEach(c => {
+    const tr = row([c.bucket, zl(c.median), "×" + c.ratio.toFixed(2), String(c.n)]);
+    if (c.n < DATA.min_n) tr.className = "few";
+    t.append(tr);
+  });
+  if (!window.Chart) return;
+  if (chart) chart.destroy();
+  const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
+  chart = new Chart(document.getElementById("curve"), {
+    type: "line",
+    data: {
+      labels: r.curve.map(c => c.bucket),
+      datasets: [{ data: r.curve.map(c => c.median), borderColor: accent, backgroundColor: accent, tension: .3 }],
+    },
+    options: {
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false },
+                 tooltip: { callbacks: { label: ctx => `${zl(ctx.raw)} (n=${r.curve[ctx.dataIndex].n})` } } },
+      scales: { x: { reverse: true, title: { display: true, text: "dni do wylotu" } },
+                y: { title: { display: true, text: "zł" } } },
+    },
+  });
+}
+
+function renderCheap(r) {
+  const n = r.normal;
+  document.getElementById("normal").textContent = n.n
+    ? `Cena normalna (mediana nadchodzących): ${zl(n.median)}, typowo ${zl(n.q1)}–${zl(n.q3)}, lotów: ${n.n}.`
+    : "Brak nadchodzących lotów z ceną.";
+  const t = document.getElementById("cheap");
+  t.replaceChildren(row(["data", "dzień", "godz.", "cena", "vs norma"], "th"));
+  r.cheapest.forEach(c => {
+    const wd = WD[(new Date(c.day + "T12:00:00").getDay() + 6) % 7];
+    const pct = c.vs_median_pct == null ? "–" : (c.vs_median_pct > 0 ? "+" : "") + c.vs_median_pct + "%";
+    t.append(row([c.day, wd, c.dep_time, zl(c.price), pct]));
+  });
+}
+
+function render() {
+  const r = DATA.routes[document.getElementById("route").value];
+  renderHeat(r); renderCurve(r); renderCheap(r);
+}
+
+fetch("data.json", { cache: "no-store" })
+  .then(res => res.json())
+  .then(data => {
+    DATA = data;
+    document.querySelectorAll(".minn").forEach(e => e.textContent = data.min_n);
+    document.getElementById("meta").textContent =
+      `Ostatni udany pomiar: ${data.last_ok ?? "brak"} · dni historii: ${data.history_days}`;
+    const sel = document.getElementById("route");
+    const names = Object.keys(data.routes);
+    if (!names.length) { document.getElementById("meta").textContent += " · brak danych jeszcze"; return; }
+    names.forEach(n => sel.append(new Option(n.replace("-", " → "), n)));
+    sel.value = names.find(n => n.startsWith("LCJ-")) ?? names[0];
+    sel.addEventListener("change", render);
+    render();
+  })
+  .catch(e => { document.getElementById("meta").textContent = "Nie udało się wczytać danych: " + e; });
+</script>
+</body>
+</html>
