@@ -31,7 +31,7 @@ def test_parse_fares_real_fixture():
 
 def test_parse_fares_statuses():
     data = {"outbound": {"fares": [
-        _day("2026-11-01", departureDate="2026-11-01T13:40:00", price={"value": 394.2}),
+        _day("2026-11-01", departureDate="2026-11-01T13:40:00", price={"value": 394.2, "currencyCode": "PLN"}),
         _day("2026-11-02", unavailable=True),
         _day("2026-11-03", departureDate="2026-11-03T09:05:00", soldOut=True),
     ]}}
@@ -91,3 +91,22 @@ def test_routes_from_rejects_unknown_schema(monkeypatch):
     monkeypatch.setattr(ryanair, "_http_get", lambda url, params: {"x": 1})
     with pytest.raises(ApiError):
         ryanair.routes_from("LCJ", sleep=lambda s: None)
+
+
+@pytest.mark.parametrize("price", [
+    {"value": 0, "currencyCode": "PLN"},
+    {"value": -5, "currencyCode": "PLN"},
+    {"value": float("nan"), "currencyCode": "PLN"},
+    {"value": 100, "currencyCode": "EUR"},
+    {"value": 100},
+])
+def test_parse_fares_rejects_bad_price(price):
+    data = {"outbound": {"fares": [_day("2026-11-01", departureDate="2026-11-01T13:40:00", price=price)]}}
+    with pytest.raises(ApiError):
+        ryanair.parse_fares(data)
+
+
+def test_cheapest_per_day_empty_calendar_is_error(monkeypatch):
+    monkeypatch.setattr(ryanair, "_http_get", lambda url, params: {"outbound": {"fares": []}})
+    with pytest.raises(ApiError):
+        ryanair.cheapest_per_day("LCJ", "STN", "2026-11-01", sleep=lambda s: None)

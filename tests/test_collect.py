@@ -1,8 +1,6 @@
 import calendar
 import datetime as dt
 
-import pytest
-
 from lcjfares import collect, ryanair, store
 from lcjfares.ryanair import Fare
 
@@ -111,3 +109,18 @@ def test_no_routes_at_all_is_failed(tmp_path, monkeypatch):
     fake_api(monkeypatch, routes=())
     r = collect.run(tmp_path, NOW, **NOSLEEP)
     assert r["status"] == "failed" and r["requests"] == 0
+
+
+def test_circuit_breaker_stops_after_consecutive_failures(tmp_path, monkeypatch):
+    calls = []
+
+    def boom(origin, dest, month, **kw):
+        calls.append((origin, dest, month))
+        raise ryanair.ApiError("down")
+
+    monkeypatch.setattr(ryanair, "routes_from", lambda origin, **kw: ["STN"])
+    monkeypatch.setattr(ryanair, "cheapest_per_day", boom)
+    r = collect.run(tmp_path, NOW, **NOSLEEP)
+    assert len(calls) == collect.MAX_CONSECUTIVE_FAILURES == 10
+    assert r["requests"] == 24 and r["failed"] == 24 and r["status"] == "failed"
+    assert len(r["missing"].split(";")) == 24

@@ -1,6 +1,7 @@
 """Klient otwartego API fare-finder Ryanair (bez auth). Na bazie skyskaner/ryanair_client.py."""
 from __future__ import annotations
 
+import math
 import time
 from typing import NamedTuple
 
@@ -57,10 +58,15 @@ def parse_fares(data) -> list[Fare]:
             out.append(Fare(f["day"], dep, "", "soldout"))
         else:
             try:
-                price = f"{float(f['price']['value']):.2f}"
-            except (KeyError, TypeError, ValueError) as e:
+                value = float(f["price"]["value"])
+                currency = f["price"].get("currencyCode")
+            except (KeyError, TypeError, ValueError, AttributeError) as e:
                 raise ApiError(f"brak ceny dla {f['day']}: {e!r}") from e
-            out.append(Fare(f["day"], dep, price, "ok"))
+            if not math.isfinite(value) or value <= 0:
+                raise ApiError(f"nieprawidłowa cena dla {f['day']}: {value!r}")
+            if currency != "PLN":
+                raise ApiError(f"nieoczekiwana waluta dla {f['day']}: {currency!r}")
+            out.append(Fare(f["day"], dep, f"{value:.2f}", "ok"))
     return out
 
 
@@ -68,7 +74,10 @@ def cheapest_per_day(origin, dest, month, *, sleep=time.sleep) -> list[Fare]:
     """Najtańszy lot każdego dnia miesiąca (month = YYYY-MM-01)."""
     data = get_json(f"{W}/farfnd/v4/oneWayFares/{origin}/{dest}/cheapestPerDay",
                     {"outboundMonthOfDate": month, "currency": "PLN"}, sleep=sleep)
-    return parse_fares(data)
+    fares = parse_fares(data)
+    if not fares:  # 200 z pustą listą = miękka blokada, nie "brak lotów"
+        raise ApiError(f"pusty kalendarz {origin}-{dest} {month}")
+    return fares
 
 
 def routes_from(origin, *, sleep=time.sleep) -> list[str]:

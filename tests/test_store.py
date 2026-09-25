@@ -51,3 +51,9 @@ def test_routes_roundtrip(tmp_path):
     assert store.load_routes(p) == []
     store.save_routes(p, ["STN", "AGP"])
     assert store.load_routes(p) == ["AGP", "STN"]
+
+
+def test_load_routes_corrupted_file_returns_empty(tmp_path):
+    p = tmp_path / "routes.json"
+    p.write_text("{not json")
+    assert store.load_routes(p) == []

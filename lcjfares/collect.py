@@ -11,6 +11,7 @@ from lcjfares import ryanair, store
 
 HOME = "LCJ"
 MONTHS = 12
+MAX_CONSECUTIVE_FAILURES = 10
 
 
 def months_ahead(today: dt.date, n: int = MONTHS) -> list[str]:
@@ -60,16 +61,23 @@ def run(data_dir: Path, now: dt.datetime, *, pause=(0.5, 1.0), sleep=time.sleep)
     routes = _routes(data_dir / "routes.json", sleep)
     state = store.last_state(store.read_prices(prices_path))
 
-    snapshot, missing, requests = [], [], 0
+    snapshot, missing, requests, streak = [], [], 0, 0
     for origin, dest in directions(routes):
         for month in months_ahead(today):
             requests += 1
+            if streak >= MAX_CONSECUTIVE_FAILURES:  # API leży — nie męczymy go dalej
+                missing.append(f"{origin}-{dest}-{month[:7]}")
+                continue
             try:
                 fares = ryanair.cheapest_per_day(origin, dest, month, sleep=sleep)
             except ryanair.ApiError as e:
                 print(f"{origin}-{dest} {month[:7]}: {e}", file=sys.stderr)
                 missing.append(f"{origin}-{dest}-{month[:7]}")
+                streak += 1
+                if streak == MAX_CONSECUTIVE_FAILURES:
+                    print(f"przerywam po {streak} kolejnych błędach", file=sys.stderr)
             else:
+                streak = 0
                 # API zwraca też minione dni bieżącego miesiąca (jako unavailable) — pomijamy
                 snapshot += [(origin, dest, f) for f in fares
                              if f.day >= observed and f.day[:7] == month[:7]]

@@ -50,7 +50,12 @@ def last_state(rows: list[dict]) -> dict:
 
 
 def load_routes(path: Path) -> list[str]:
-    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    if not path.exists():
+        return []
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return []
 
 
 def save_routes(path: Path, routes: list[str]) -> None:
