@@ -1,0 +1,406 @@
+{
+ "outbound": {
+  "fares": [
+   {
+    "day": "2026-11-01",
+    "arrivalDate": "2026-11-01T15:00:00",
+    "departureDate": "2026-11-01T13:40:00",
+    "price": {
+     "value": 394.24,
+     "valueMainUnit": "394",
+     "valueFractionalUnit": "24",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-02",
+    "arrivalDate": "2026-11-02T12:15:00",
+    "departureDate": "2026-11-02T10:55:00",
+    "price": {
+     "value": 556.33,
+     "valueMainUnit": "556",
+     "valueFractionalUnit": "33",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-03",
+    "arrivalDate": null,
+    "departureDate": null,
+    "price": null,
+    "soldOut": false,
+    "unavailable": true
+   },
+   {
+    "day": "2026-11-04",
+    "arrivalDate": null,
+    "departureDate": null,
+    "price": null,
+    "soldOut": false,
+    "unavailable": true
+   },
+   {
+    "day": "2026-11-05",
+    "arrivalDate": "2026-11-05T19:05:00",
+    "departureDate": "2026-11-05T17:45:00",
+    "price": {
+     "value": 289.1,
+     "valueMainUnit": "289",
+     "valueFractionalUnit": "10",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-06",
+    "arrivalDate": "2026-11-06T11:30:00",
+    "departureDate": "2026-11-06T10:10:00",
+    "price": {
+     "value": 240.57,
+     "valueMainUnit": "240",
+     "valueFractionalUnit": "57",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-07",
+    "arrivalDate": "2026-11-07T13:45:00",
+    "departureDate": "2026-11-07T12:25:00",
+    "price": {
+     "value": 297.86,
+     "valueMainUnit": "297",
+     "valueFractionalUnit": "86",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-08",
+    "arrivalDate": "2026-11-08T15:00:00",
+    "departureDate": "2026-11-08T13:40:00",
+    "price": {
+     "value": 214.62,
+     "valueMainUnit": "214",
+     "valueFractionalUnit": "62",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-09",
+    "arrivalDate": "2026-11-09T12:15:00",
+    "departureDate": "2026-11-09T10:55:00",
+    "price": {
+     "value": 267.19,
+     "valueMainUnit": "267",
+     "valueFractionalUnit": "19",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-10",
+    "arrivalDate": null,
+    "departureDate": null,
+    "price": null,
+    "soldOut": false,
+    "unavailable": true
+   },
+   {
+    "day": "2026-11-11",
+    "arrivalDate": null,
+    "departureDate": null,
+    "price": null,
+    "soldOut": false,
+    "unavailable": true
+   },
+   {
+    "day": "2026-11-12",
+    "arrivalDate": "2026-11-12T19:05:00",
+    "departureDate": "2026-11-12T17:45:00",
+    "price": {
+     "value": 278.2,
+     "valueMainUnit": "278",
+     "valueFractionalUnit": "20",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-13",
+    "arrivalDate": "2026-11-13T11:30:00",
+    "departureDate": "2026-11-13T10:10:00",
+    "price": {
+     "value": 157.67,
+     "valueMainUnit": "157",
+     "valueFractionalUnit": "67",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-14",
+    "arrivalDate": "2026-11-14T13:45:00",
+    "departureDate": "2026-11-14T12:25:00",
+    "price": {
+     "value": 166.43,
+     "valueMainUnit": "166",
+     "valueFractionalUnit": "43",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-15",
+    "arrivalDate": "2026-11-15T18:50:00",
+    "departureDate": "2026-11-15T17:30:00",
+    "price": {
+     "value": 148.91,
+     "valueMainUnit": "148",
+     "valueFractionalUnit": "91",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-16",
+    "arrivalDate": "2026-11-16T12:15:00",
+    "departureDate": "2026-11-16T10:55:00",
+    "price": {
+     "value": 131.38,
+     "valueMainUnit": "131",
+     "valueFractionalUnit": "38",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-17",
+    "arrivalDate": null,
+    "departureDate": null,
+    "price": null,
+    "soldOut": false,
+    "unavailable": true
+   },
+   {
+    "day": "2026-11-18",
+    "arrivalDate": null,
+    "departureDate": null,
+    "price": null,
+    "soldOut": false,
+    "unavailable": true
+   },
+   {
+    "day": "2026-11-19",
+    "arrivalDate": "2026-11-19T19:05:00",
+    "departureDate": "2026-11-19T17:45:00",
+    "price": {
+     "value": 135.67,
+     "valueMainUnit": "135",
+     "valueFractionalUnit": "67",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-20",
+    "arrivalDate": "2026-11-20T11:30:00",
+    "departureDate": "2026-11-20T10:10:00",
+    "price": {
+     "value": 170.81,
+     "valueMainUnit": "170",
+     "valueFractionalUnit": "81",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-21",
+    "arrivalDate": "2026-11-21T13:45:00",
+    "departureDate": "2026-11-21T12:25:00",
+    "price": {
+     "value": 140.14,
+     "valueMainUnit": "140",
+     "valueFractionalUnit": "14",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-22",
+    "arrivalDate": "2026-11-22T18:50:00",
+    "departureDate": "2026-11-22T17:30:00",
+    "price": {
+     "value": 119.75,
+     "valueMainUnit": "119",
+     "valueFractionalUnit": "75",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-23",
+    "arrivalDate": "2026-11-23T12:15:00",
+    "departureDate": "2026-11-23T10:55:00",
+    "price": {
+     "value": 127.0,
+     "valueMainUnit": "127",
+     "valueFractionalUnit": "00",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-24",
+    "arrivalDate": null,
+    "departureDate": null,
+    "price": null,
+    "soldOut": false,
+    "unavailable": true
+   },
+   {
+    "day": "2026-11-25",
+    "arrivalDate": null,
+    "departureDate": null,
+    "price": null,
+    "soldOut": false,
+    "unavailable": true
+   },
+   {
+    "day": "2026-11-26",
+    "arrivalDate": "2026-11-26T19:05:00",
+    "departureDate": "2026-11-26T17:45:00",
+    "price": {
+     "value": 103.3,
+     "valueMainUnit": "103",
+     "valueFractionalUnit": "30",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-27",
+    "arrivalDate": "2026-11-27T11:30:00",
+    "departureDate": "2026-11-27T10:10:00",
+    "price": {
+     "value": 113.86,
+     "valueMainUnit": "113",
+     "valueFractionalUnit": "86",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-28",
+    "arrivalDate": "2026-11-28T13:45:00",
+    "departureDate": "2026-11-28T12:25:00",
+    "price": {
+     "value": 100.72,
+     "valueMainUnit": "100",
+     "valueFractionalUnit": "72",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-29",
+    "arrivalDate": "2026-11-29T15:00:00",
+    "departureDate": "2026-11-29T13:40:00",
+    "price": {
+     "value": 87.0,
+     "valueMainUnit": "87",
+     "valueFractionalUnit": "00",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   },
+   {
+    "day": "2026-11-30",
+    "arrivalDate": "2026-11-30T12:15:00",
+    "departureDate": "2026-11-30T10:55:00",
+    "price": {
+     "value": 232.14,
+     "valueMainUnit": "232",
+     "valueFractionalUnit": "14",
+     "currencyCode": "PLN",
+     "currencySymbol": "zł"
+    },
+    "soldOut": false,
+    "unavailable": false
+   }
+  ],
+  "maxFare": {
+   "day": "2026-11-02",
+   "arrivalDate": "2026-11-02T12:15:00",
+   "departureDate": "2026-11-02T10:55:00",
+   "price": {
+    "value": 556.33,
+    "valueMainUnit": "556",
+    "valueFractionalUnit": "33",
+    "currencyCode": "PLN",
+    "currencySymbol": "zł"
+   },
+   "soldOut": false,
+   "unavailable": false
+  },
+  "minFare": {
+   "day": "2026-11-29",
+   "arrivalDate": "2026-11-29T15:00:00",
+   "departureDate": "2026-11-29T13:40:00",
+   "price": {
+    "value": 87.0,
+    "valueMainUnit": "87",
+    "valueFractionalUnit": "00",
+    "currencyCode": "PLN",
+    "currencySymbol": "zł"
+   },
+   "soldOut": false,
+   "unavailable": false
+  }
+ }
+}

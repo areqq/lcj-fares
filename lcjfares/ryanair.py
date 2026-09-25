@@ -1,0 +1,79 @@
+"""Klient otwartego API fare-finder Ryanair (bez auth). Na bazie skyskaner/ryanair_client.py."""
+from __future__ import annotations
+
+import time
+from typing import NamedTuple
+
+import curl_cffi
+
+W = "https://www.ryanair.com/api"
+_UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131 Safari/537.36"
+_FARE_KEYS = {"day", "departureDate", "price", "soldOut", "unavailable"}
+
+
+class ApiError(Exception):
+    """Zapytanie nieudane po wszystkich próbach albo odpowiedź w nieznanym formacie."""
+
+
+class Fare(NamedTuple):
+    day: str        # YYYY-MM-DD
+    dep_time: str   # HH:MM albo ""
+    price: str      # "%.2f" albo ""
+    status: str     # ok | unavailable | soldout
+
+
+def _http_get(url, params):
+    r = curl_cffi.get(url, params=params, headers={"User-Agent": _UA},
+                      impersonate="chrome131", timeout=30)
+    r.raise_for_status()
+    return r.json()
+
+
+def get_json(url, params=None, *, retries=3, backoff=2.0, sleep=time.sleep):
+    last = None
+    for attempt in range(retries):
+        try:
+            return _http_get(url, params)
+        except Exception as e:  # sieć, HTTP 4xx/5xx, zły JSON — wszystko ponawiamy
+            last = e
+            if attempt < retries - 1:
+                sleep(backoff * 2 ** attempt)
+    raise ApiError(f"{url}: {last}") from last
+
+
+def parse_fares(data) -> list[Fare]:
+    try:
+        raw = data["outbound"]["fares"]
+    except (KeyError, TypeError) as e:
+        raise ApiError(f"brak outbound.fares: {e!r}") from e
+    out = []
+    for f in raw:
+        if not isinstance(f, dict) or not _FARE_KEYS <= f.keys():
+            raise ApiError(f"nieoczekiwany format dnia: {f!r}"[:200])
+        dep = (f["departureDate"] or "")[11:16]
+        if f["unavailable"]:
+            out.append(Fare(f["day"], "", "", "unavailable"))
+        elif f["soldOut"]:
+            out.append(Fare(f["day"], dep, "", "soldout"))
+        else:
+            try:
+                price = f"{float(f['price']['value']):.2f}"
+            except (KeyError, TypeError, ValueError) as e:
+                raise ApiError(f"brak ceny dla {f['day']}: {e!r}") from e
+            out.append(Fare(f["day"], dep, price, "ok"))
+    return out
+
+
+def cheapest_per_day(origin, dest, month, *, sleep=time.sleep) -> list[Fare]:
+    """Najtańszy lot każdego dnia miesiąca (month = YYYY-MM-01)."""
+    data = get_json(f"{W}/farfnd/v4/oneWayFares/{origin}/{dest}/cheapestPerDay",
+                    {"outboundMonthOfDate": month, "currency": "PLN"}, sleep=sleep)
+    return parse_fares(data)
+
+
+def routes_from(origin, *, sleep=time.sleep) -> list[str]:
+    data = get_json(f"{W}/views/locate/searchWidget/routes/en/airport/{origin}", sleep=sleep)
+    try:
+        return [r["arrivalAirport"]["code"] for r in data]
+    except (KeyError, TypeError) as e:
+        raise ApiError(f"nieoczekiwany format tras: {e!r}") from e
