@@ -33,15 +33,18 @@ td.cell { color:#111; }
 
   <section>
     <h2>Kiedy tanio: dzień tygodnia × miesiąc</h2>
-    <p class="muted">Mediana ostatniej znanej ceny lotów. Wyszarzone: mniej niż <span class="minn"></span> lotów.</p>
+    <p class="muted">Mediana ceny lotu na 31–60 dni przed wylotem (porównywalne miesiące). Wyszarzone: mało lotów.</p>
     <div class="scroll"><table id="heat"></table></div>
   </section>
 
-  <section>
+  <section id="curveSection">
     <h2>Kiedy kupować</h2>
-    <p class="muted">Mediana ceny wg liczby dni do wylotu. „× min" — ile razy drożej od najniższej ceny, jaką dany lot kiedykolwiek miał.</p>
-    <div class="chart"><canvas id="curve"></canvas></div>
-    <div class="scroll"><table id="curveTable"></table></div>
+    <p class="muted" id="curveNote" hidden></p>
+    <p class="muted">Mediana ceny wg liczby dni do wylotu. „× min” — ile razy drożej od najniższej ceny, jaką dany lot kiedykolwiek miał.</p>
+    <div id="curveBody">
+      <div class="chart"><canvas id="curve"></canvas></div>
+      <div class="scroll"><table id="curveTable"></table></div>
+    </div>
   </section>
 
   <section>
@@ -50,7 +53,9 @@ td.cell { color:#111; }
     <div class="scroll"><table id="cheap"></table></div>
   </section>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+        integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
+        crossorigin="anonymous"></script>
 <script>
 const WD = ["Pn", "Wt", "Śr", "Cz", "Pt", "So", "Nd"];
 const zl = v => v == null ? "–" : Math.round(v) + " zł";
@@ -72,31 +77,44 @@ function color(v, lo, hi) {
   return `hsl(${120 - 120 * t} 60% 72%)`;
 }
 
+function heatCell(c, lo, hi, min) {
+  const td = el("td", c ? zl(c.median) : "");
+  if (c) {
+    td.className = "cell" + (c.n < min ? " few" : "");
+    td.style.background = color(c.median, lo, hi);
+    td.title = `n=${c.n}`;
+  }
+  return td;
+}
+
 function renderHeat(r) {
   const t = document.getElementById("heat");
   t.replaceChildren();
   const months = [...new Set(r.heatmap.map(c => c.month))].sort();
-  if (!months.length) { t.append(el("caption", "Brak danych")); return; }
+  if (!months.length) { t.append(el("caption", "Brak danych (potrzebne pomiary 31–60 dni przed wylotem)")); return; }
   const vals = r.heatmap.map(c => c.median);
   const lo = Math.min(...vals), hi = Math.max(...vals);
-  t.append(row(["", ...months], "th"));
+  t.append(row(["", ...months, "razem"], "th"));
   WD.forEach((name, wd) => {
     const cells = [el("th", name)];
-    months.forEach(m => {
-      const c = r.heatmap.find(x => x.month === m && x.weekday === wd);
-      const td = el("td", c ? zl(c.median) : "");
-      if (c) {
-        td.className = "cell" + (c.n < DATA.min_n ? " few" : "");
-        td.style.background = color(c.median, lo, hi);
-        td.title = `n=${c.n}`;
-      }
-      cells.push(td);
-    });
+    months.forEach(m => cells.push(heatCell(r.heatmap.find(x => x.month === m && x.weekday === wd), lo, hi, DATA.min_n_cell)));
+    cells.push(heatCell(r.heatmap_weekday.find(x => x.weekday === wd), lo, hi, DATA.min_n));
     t.append(row(cells));
   });
+  const total = [el("th", "razem")];
+  months.forEach(m => total.push(heatCell(r.heatmap_month.find(x => x.month === m), lo, hi, DATA.min_n)));
+  total.push(el("td"));
+  t.append(row(total));
 }
 
 function renderCurve(r) {
+  const young = DATA.history_days < DATA.min_history_days;
+  const note = document.getElementById("curveNote");
+  note.hidden = !young;
+  note.textContent = young
+    ? `Za mało historii (${DATA.history_days}/${DATA.min_history_days} dni): koszyki porównują na razie różne loty, nie zmianę ceny tego samego lotu — nie wyciągaj jeszcze wniosków.`
+    : "";
+  document.getElementById("curveBody").classList.toggle("few", young);
   const t = document.getElementById("curveTable");
   t.replaceChildren(row(["dni do wylotu", "mediana", "× min", "n"], "th"));
   r.curve.forEach(c => {
@@ -146,7 +164,6 @@ fetch("data.json", { cache: "no-store" })
   .then(res => res.json())
   .then(data => {
     DATA = data;
-    document.querySelectorAll(".minn").forEach(e => e.textContent = data.min_n);
     document.getElementById("meta").textContent =
       `Ostatni udany pomiar: ${data.last_ok ?? "brak"} · dni historii: ${data.history_days}`;
     const sel = document.getElementById("route");
