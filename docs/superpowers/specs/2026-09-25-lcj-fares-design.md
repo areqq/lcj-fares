@@ -11,7 +11,7 @@ Zbudować wiedzę, **kiedy loty z/do Łodzi są tanie**, na podstawie własnej h
    (ile dni przed wylotem jest najtaniej).
 
 Poza zakresem (na teraz): alerty/powiadomienia o spadkach, inne linie niż Ryanair, loty z przesiadką,
-ceny round-trip (liczymy 1-way w obie strony osobno).
+taryfy round-trip z API (pary tam+powrót składamy z cen 1-way).
 
 ## Ustalenia
 
@@ -89,13 +89,16 @@ Per kierunek:
   Dodatkowo wskaźnik relatywny: cena / minimalna cena tego lotu w historii — pokazuje, o ile drożeje.
 - **Najtańsze nadchodzące loty** — top 10 cen z ostatniego udanego pomiaru (loty od jutra) + odchylenie od mediany trasy (%).
 - **„Cena normalna”** trasy — mediana i kwartyle tych samych cen (ostatni udany pomiar).
+- **Wyjazdy z Łodzi (tam + powrót)** — dla każdego kierunku X i każdego dnia wylotu LCJ→X (ostatni udany
+  pomiar, loty od jutra) najtańszy powrót X→LCJ 3–10 dni później; top 10 par na kierunek + „typowy wyjazd”
+  (mediana/kwartyle sum najlepszych par) + ranking top 10 ze wszystkich kierunków. Tylko najtańszy lot dnia (ograniczenie API).
 
 Wyniki z małą próbą (`n` poniżej progu, domyślnie 5; komórki heatmapy: 3) są wyszarzone na stronie.
 Krzywa jest wyszarzona z ostrzeżeniem, dopóki historia ma mniej niż 30 dni.
 
 ## Strona (`site/index.html`)
 
-Pojedynczy statyczny plik, Chart.js z CDN, wybór kierunku z listy. Trzy widoki: heatmapa (z wierszem i kolumną „razem”), krzywa
+Pojedynczy statyczny plik, Chart.js z CDN, wybór kierunku z listy. Widoki: ranking najtańszych wyjazdów z Łodzi (wszystkie kierunki), wyjazdy na wybrany kierunek, heatmapa (z wierszem i kolumną „razem”), krzywa
 „kiedy kupować”, tabela najtańszych lotów. Na górze: data ostatniego udanego pobrania i liczba dni historii.
 Działa na telefonie.
 

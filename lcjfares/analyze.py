@@ -16,6 +16,8 @@ MIN_N_CELL = 3            # heatmapa: miesiąc ma tylko 4–5 danego dnia tygodn
 MIN_HISTORY_DAYS = 30     # krzywa „kiedy kupować” wiarygodna dopiero po takiej historii
 HEAT_WINDOW = (31, 60)    # heatmapa: cena lotu na 31–60 dni przed wylotem (porównywalne miesiące)
 HORIZON_MONTHS = 12
+HOME = "LCJ"
+TRIP_NIGHTS = (3, 10)     # wyjazd z Łodzi: powrót 3–10 dni po wylocie
 BUCKETS = [(0, 7), (8, 14), (15, 30), (31, 60), (61, 90), (91, 180), (181, None)]
 LABELS = [f"{lo}+" if hi is None else f"{lo}-{hi}" for lo, hi in BUCKETS]
 
@@ -79,6 +81,27 @@ def _stats(vals):
     return {"median": _median(vals), "q1": round(q1, 2), "q3": round(q3, 2), "n": len(vals)}
 
 
+def pair_trips(out_fares, ret_fares, nights=TRIP_NIGHTS) -> list[dict]:
+    """Dla każdego dnia wylotu najtańszy powrót za `nights` dni. Fares: [(day, dep_time, price)]."""
+    returns = {day: (dep, price) for day, dep, price in ret_fares}
+    trips = []
+    for day, dep, price in out_fares:
+        best = None
+        for k in range(nights[0], nights[1] + 1):
+            rd = (_date(day) + dt.timedelta(days=k)).isoformat()
+            if rd in returns and (best is None or returns[rd][1] < best[2]):
+                best = (rd, returns[rd][0], returns[rd][1], k)
+        if best:
+            trips.append({"out_day": day, "out_time": dep, "out_price": price,
+                          "ret_day": best[0], "ret_time": best[1], "ret_price": best[2],
+                          "nights": best[3], "total": round(price + best[2], 2)})
+    return trips
+
+
+def _vs(p, med):
+    return round((p / med - 1) * 100) if med else None
+
+
 def build(prices: list[dict], runs: list[dict], today: dt.date) -> dict:
     t = today.isoformat()
     ok_days = sorted({r["observed"] for r in runs if r["status"] != "failed"})
@@ -131,13 +154,25 @@ def build(prices: list[dict], runs: list[dict], today: dt.date) -> dict:
                        "ratio": round(statistics.median(r["curve"][lb][1]), 3),
                        "n": len(r["curve"][lb][2])}  # różne loty, nie dni obserwacji
                       for lb in LABELS if lb in r["curve"]],
-            "cheapest": [{"day": d, "dep_time": dep, "price": p,
-                          "vs_median_pct": round((p / med - 1) * 100) if med else None}
+            "cheapest": [{"day": d, "dep_time": dep, "price": p, "vs_median_pct": _vs(p, med)}
                          for d, dep, p in sorted(r["upcoming"], key=lambda x: (x[2], x[0]))[:10]],
         }
+
+    trips, top = {}, []
+    for name in sorted(routes):
+        origin, dest = name.split("-")
+        if origin != HOME or f"{dest}-{HOME}" not in routes:
+            continue
+        pairs = pair_trips(routes[name]["upcoming"], routes[f"{dest}-{HOME}"]["upcoming"])
+        normal = _stats([x["total"] for x in pairs])
+        best = [{**x, "vs_median_pct": _vs(x["total"], normal["median"])}
+                for x in sorted(pairs, key=lambda x: (x["total"], x["out_day"]))]
+        trips[dest] = {"normal": normal, "best": best[:10]}
+        top += [{"dest": dest, **x} for x in best[:10]]
+    top.sort(key=lambda x: (x["total"], x["out_day"], x["dest"]))
     return {"generated": t, "last_ok": last_ok, "history_days": len(ok_days),
             "min_n": MIN_N, "min_n_cell": MIN_N_CELL, "min_history_days": MIN_HISTORY_DAYS,
-            "routes": out}
+            "trip_nights": list(TRIP_NIGHTS), "routes": out, "trips": trips, "trips_top": top[:10]}
 
 
 def main(argv: list[str] | None = None) -> int:
