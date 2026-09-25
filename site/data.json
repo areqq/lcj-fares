@@ -3,6 +3,8 @@
  "last_ok": "2026-09-25",
  "history_days": 1,
  "min_n": 5,
+ "min_n_cell": 3,
+ "min_history_days": 30,
  "routes": {
   "AGP-LCJ": {
    "normal": {
@@ -13,172 +15,57 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 2,
-     "median": 954.99,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 5,
-     "median": 810.42,
-     "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 2,
-     "median": 381.09,
-     "n": 3
-    },
-    {
      "month": "2026-10",
      "weekday": 4,
      "median": 334.24,
      "n": 1
     },
     {
-     "month": "2026-10",
-     "weekday": 5,
-     "median": 468.15,
+     "month": "2026-11",
+     "weekday": 3,
+     "median": 142.68,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 4,
+     "median": 225.83,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 6,
+     "median": 308.92,
+     "n": 4
+    }
+   ],
+   "heatmap_weekday": [
+    {
+     "weekday": 3,
+     "median": 142.68,
+     "n": 3
+    },
+    {
+     "weekday": 4,
+     "median": 280.04,
      "n": 4
     },
     {
-     "month": "2026-10",
      "weekday": 6,
-     "median": 546.38,
+     "median": 308.92,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 334.24,
      "n": 1
     },
     {
      "month": "2026-11",
-     "weekday": 3,
-     "median": 131.84,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 4,
-     "median": 187.37,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 6,
-     "median": 310.58,
-     "n": 5
-    },
-    {
-     "month": "2026-12",
-     "weekday": 4,
-     "median": 157.4,
-     "n": 3
-    },
-    {
-     "month": "2026-12",
-     "weekday": 6,
-     "median": 156.87,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 350.99,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 6,
-     "median": 309.71,
-     "n": 5
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 287.49,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 6,
-     "median": 239.41,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 323.0,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 260.91,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 6,
-     "median": 309.71,
-     "n": 3
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 472.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 3,
-     "median": 518.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
-     "median": 522.38,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 3,
-     "median": 497.19,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 444.5,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 3,
-     "median": 417.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 597.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 3,
-     "median": 518.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 625.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 3,
-     "median": 569.0,
-     "n": 4
+     "median": 235.56,
+     "n": 10
     }
    ],
    "curve": [
@@ -297,40 +184,16 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 0,
-     "median": 1388.7,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 2,
-     "median": 652.04,
-     "n": 1
-    },
-    {
      "month": "2026-10",
      "weekday": 0,
-     "median": 671.29,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 2,
-     "median": 363.57,
-     "n": 3
+     "median": 689.87,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 3,
      "median": 372.86,
      "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 4,
-     "median": 411.76,
-     "n": 4
     },
     {
      "month": "2026-10",
@@ -341,122 +204,43 @@
     {
      "month": "2026-11",
      "weekday": 0,
-     "median": 420.52,
-     "n": 5
+     "median": 423.8,
+     "n": 4
     },
     {
      "month": "2026-11",
      "weekday": 3,
-     "median": 216.61,
-     "n": 4
-    },
+     "median": 262.81,
+     "n": 3
+    }
+   ],
+   "heatmap_weekday": [
     {
-     "month": "2026-12",
      "weekday": 0,
-     "median": 192.39,
-     "n": 4
+     "median": 427.08,
+     "n": 5
     },
     {
-     "month": "2026-12",
      "weekday": 3,
-     "median": 108.0,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 0,
-     "median": 347.65,
+     "median": 317.84,
      "n": 4
     },
     {
-     "month": "2027-01",
-     "weekday": 3,
-     "median": 283.5,
-     "n": 4
+     "weekday": 5,
+     "median": 462.99,
+     "n": 1
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 462.99,
+     "n": 3
     },
     {
-     "month": "2027-02",
-     "weekday": 0,
-     "median": 206.38,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 3,
-     "median": 176.0,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 288.05,
-     "n": 5
-    },
-    {
-     "month": "2027-03",
-     "weekday": 3,
-     "median": 205.19,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 535.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 4,
-     "median": 344.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
-     "median": 586.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 4,
-     "median": 346.5,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 560.5,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 4,
-     "median": 391.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 673.5,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 4,
-     "median": 586.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 778.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 4,
-     "median": 642.0,
-     "n": 4
+     "month": "2026-11",
+     "median": 420.52,
+     "n": 7
     }
    ],
    "curve": [
@@ -575,184 +359,63 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 0,
-     "median": 1471.85,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 1,
-     "median": 919.95,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 2,
-     "median": 91.96,
-     "n": 1
-    },
-    {
      "month": "2026-10",
      "weekday": 0,
-     "median": 237.38,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 1,
-     "median": 127.0,
-     "n": 3
+     "median": 251.37,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 2,
-     "median": 66.03,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 3,
-     "median": 74.43,
-     "n": 4
+     "median": 66.71,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 4,
-     "median": 118.24,
-     "n": 5
-    },
-    {
-     "month": "2026-10",
-     "weekday": 6,
-     "median": 412.0,
-     "n": 3
+     "median": 65.0,
+     "n": 1
     },
     {
      "month": "2026-11",
      "weekday": 0,
-     "median": 168.96,
-     "n": 5
+     "median": 155.25,
+     "n": 4
     },
     {
      "month": "2026-11",
      "weekday": 4,
      "median": 65.0,
-     "n": 4
-    },
+     "n": 3
+    }
+   ],
+   "heatmap_weekday": [
     {
-     "month": "2026-12",
      "weekday": 0,
-     "median": 150.86,
-     "n": 4
+     "median": 168.96,
+     "n": 5
     },
     {
-     "month": "2026-12",
      "weekday": 2,
-     "median": 177.13,
-     "n": 2
+     "median": 66.71,
+     "n": 1
     },
     {
-     "month": "2026-12",
      "weekday": 4,
-     "median": 96.34,
+     "median": 65.0,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 66.71,
      "n": 3
     },
     {
-     "month": "2027-01",
-     "weekday": 0,
-     "median": 273.02,
-     "n": 1
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 128.0,
-     "n": 1
-    },
-    {
-     "month": "2027-02",
-     "weekday": 0,
-     "median": 148.17,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 103.86,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 247.0,
-     "n": 5
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 109.39,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 285.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 4,
-     "median": 247.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
-     "median": 327.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 4,
-     "median": 247.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 327.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 4,
-     "median": 213.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 370.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 4,
-     "median": 327.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 412.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 4,
-     "median": 348.5,
-     "n": 4
+     "month": "2026-11",
+     "median": 121.21,
+     "n": 7
     }
    ],
    "curve": [
@@ -871,22 +534,10 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 0,
-     "median": 102.81,
-     "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 0,
-     "median": 140.26,
-     "n": 3
-    },
-    {
      "month": "2026-10",
      "weekday": 3,
-     "median": 175.31,
-     "n": 5
+     "median": 127.81,
+     "n": 1
     },
     {
      "month": "2026-10",
@@ -895,172 +546,51 @@
      "n": 1
     },
     {
+     "month": "2026-11",
+     "weekday": 3,
+     "median": 96.66,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 4,
+     "median": 87.0,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 6,
+     "median": 97.86,
+     "n": 4
+    }
+   ],
+   "heatmap_weekday": [
+    {
+     "weekday": 3,
+     "median": 104.3,
+     "n": 4
+    },
+    {
+     "weekday": 4,
+     "median": 87.0,
+     "n": 4
+    },
+    {
+     "weekday": 6,
+     "median": 97.86,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
      "month": "2026-10",
-     "weekday": 6,
-     "median": 286.52,
-     "n": 1
+     "median": 100.91,
+     "n": 2
     },
     {
      "month": "2026-11",
-     "weekday": 3,
      "median": 91.83,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 4,
-     "median": 96.33,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 6,
-     "median": 108.72,
-     "n": 5
-    },
-    {
-     "month": "2026-12",
-     "weekday": 3,
-     "median": 190.23,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 4,
-     "median": 198.46,
-     "n": 3
-    },
-    {
-     "month": "2026-12",
-     "weekday": 6,
-     "median": 358.77,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 3,
-     "median": 204.0,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 187.06,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 6,
-     "median": 152.64,
-     "n": 5
-    },
-    {
-     "month": "2027-02",
-     "weekday": 3,
-     "median": 221.0,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 204.0,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 6,
-     "median": 187.0,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 357.0,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 1,
-     "median": 498.73,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 3,
-     "median": 458.01,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 269.49,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 6,
-     "median": 170.0,
-     "n": 3
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 272.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 3,
-     "median": 272.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
-     "median": 310.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 3,
-     "median": 272.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 293.19,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 3,
-     "median": 293.19,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 548.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 3,
-     "median": 591.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 446.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 3,
-     "median": 378.0,
-     "n": 4
+     "n": 10
     }
    ],
    "curve": [
@@ -1177,26 +707,9 @@
     "q3": 127.0,
     "n": 8
    },
-   "heatmap": [
-    {
-     "month": "2026-09",
-     "weekday": 6,
-     "median": 495.0,
-     "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 3,
-     "median": 65.73,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 6,
-     "median": 100.72,
-     "n": 3
-    }
-   ],
+   "heatmap": [],
+   "heatmap_weekday": [],
+   "heatmap_month": [],
    "curve": [
     {
      "bucket": "0-7",
@@ -1277,22 +790,10 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
+     "month": "2026-10",
      "weekday": 0,
-     "median": 718.42,
+     "median": 303.56,
      "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 0,
-     "median": 190.0,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 3,
-     "median": 323.61,
-     "n": 4
     },
     {
      "month": "2026-10",
@@ -1303,134 +804,38 @@
     {
      "month": "2026-11",
      "weekday": 0,
-     "median": 136.22,
-     "n": 5
+     "median": 136.39,
+     "n": 4
     },
     {
      "month": "2026-11",
      "weekday": 4,
-     "median": 132.32,
-     "n": 4
-    },
+     "median": 130.0,
+     "n": 3
+    }
+   ],
+   "heatmap_weekday": [
     {
-     "month": "2026-12",
      "weekday": 0,
-     "median": 321.87,
-     "n": 4
+     "median": 136.57,
+     "n": 5
     },
     {
-     "month": "2026-12",
-     "weekday": 2,
-     "median": 633.78,
+     "weekday": 4,
+     "median": 150.41,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 299.16,
      "n": 2
     },
     {
-     "month": "2026-12",
-     "weekday": 4,
-     "median": 170.81,
-     "n": 3
-    },
-    {
-     "month": "2027-01",
-     "weekday": 0,
-     "median": 264.01,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 214.62,
-     "n": 5
-    },
-    {
-     "month": "2027-02",
-     "weekday": 0,
-     "median": 525.0,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 189.82,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 502.0,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 1,
-     "median": 548.0,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 336.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 1,
-     "median": 349.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 5,
-     "median": 349.0,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 1,
-     "median": 502.0,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 5,
-     "median": 502.0,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 1,
-     "median": 603.0,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 5,
-     "median": 633.19,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 1,
-     "median": 782.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 5,
-     "median": 854.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 1,
-     "median": 391.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 5,
-     "median": 469.5,
-     "n": 4
+     "month": "2026-11",
+     "median": 136.22,
+     "n": 7
     }
    ],
    "curve": [
@@ -1549,172 +954,57 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 2,
-     "median": 108.0,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 5,
-     "median": 227.76,
-     "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 2,
-     "median": 254.05,
-     "n": 3
-    },
-    {
      "month": "2026-10",
      "weekday": 4,
      "median": 127.2,
      "n": 1
     },
     {
-     "month": "2026-10",
-     "weekday": 5,
-     "median": 190.0,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 6,
-     "median": 108.0,
-     "n": 1
-    },
-    {
      "month": "2026-11",
      "weekday": 3,
-     "median": 179.71,
-     "n": 4
+     "median": 157.67,
+     "n": 3
     },
     {
      "month": "2026-11",
      "weekday": 4,
      "median": 121.0,
-     "n": 4
+     "n": 3
     },
     {
      "month": "2026-11",
      "weekday": 6,
-     "median": 121.0,
-     "n": 5
-    },
+     "median": 159.05,
+     "n": 4
+    }
+   ],
+   "heatmap_weekday": [
     {
-     "month": "2026-12",
-     "weekday": 4,
-     "median": 227.38,
+     "weekday": 3,
+     "median": 157.67,
      "n": 3
     },
     {
-     "month": "2026-12",
-     "weekday": 6,
-     "median": 148.51,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
      "weekday": 4,
-     "median": 231.81,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 6,
-     "median": 218.63,
-     "n": 5
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 238.52,
+     "median": 124.1,
      "n": 4
     },
     {
-     "month": "2027-02",
      "weekday": 6,
-     "median": 251.72,
+     "median": 159.05,
      "n": 4
-    },
+    }
+   ],
+   "heatmap_month": [
     {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 417.0,
+     "month": "2026-10",
+     "median": 127.2,
      "n": 1
     },
     {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 222.41,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 6,
-     "median": 213.0,
-     "n": 3
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 393.5,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 3,
-     "median": 370.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
-     "median": 370.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 3,
-     "median": 323.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 348.69,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 3,
-     "median": 323.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 393.5,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 3,
-     "median": 327.38,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 370.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 3,
-     "median": 323.0,
-     "n": 4
+     "month": "2026-11",
+     "median": 142.33,
+     "n": 10
     }
    ],
    "curve": [
@@ -1833,40 +1123,16 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 0,
-     "median": 595.76,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 2,
-     "median": 177.41,
-     "n": 1
-    },
-    {
      "month": "2026-10",
      "weekday": 0,
-     "median": 145.32,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 2,
-     "median": 500.74,
-     "n": 3
+     "median": 159.26,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 3,
      "median": 237.1,
      "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 4,
-     "median": 465.9,
-     "n": 4
     },
     {
      "month": "2026-10",
@@ -1877,122 +1143,43 @@
     {
      "month": "2026-11",
      "weekday": 0,
-     "median": 108.0,
-     "n": 5
+     "median": 113.12,
+     "n": 4
     },
     {
      "month": "2026-11",
      "weekday": 3,
-     "median": 212.43,
-     "n": 4
-    },
+     "median": 214.62,
+     "n": 3
+    }
+   ],
+   "heatmap_weekday": [
     {
-     "month": "2026-12",
      "weekday": 0,
-     "median": 175.0,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 3,
-     "median": 201.48,
+     "median": 118.24,
      "n": 5
     },
     {
-     "month": "2027-01",
-     "weekday": 0,
-     "median": 159.82,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
      "weekday": 3,
-     "median": 175.19,
+     "median": 225.86,
      "n": 4
     },
     {
-     "month": "2027-02",
-     "weekday": 0,
-     "median": 172.85,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 3,
-     "median": 209.94,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 214.26,
-     "n": 5
-    },
-    {
-     "month": "2027-03",
-     "weekday": 3,
-     "median": 247.12,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 346.5,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 4,
-     "median": 535.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
+     "weekday": 5,
      "median": 302.0,
-     "n": 5
+     "n": 1
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 237.1,
+     "n": 3
     },
     {
-     "month": "2027-05",
-     "weekday": 4,
-     "median": 485.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 391.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 4,
-     "median": 512.18,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 416.5,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 4,
-     "median": 535.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 391.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 4,
-     "median": 535.0,
-     "n": 4
+     "month": "2026-11",
+     "median": 166.43,
+     "n": 7
     }
    ],
    "curve": [
@@ -2111,184 +1298,63 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 0,
-     "median": 657.09,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 1,
-     "median": 65.0,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 2,
-     "median": 146.15,
-     "n": 1
-    },
-    {
      "month": "2026-10",
      "weekday": 0,
-     "median": 70.43,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 1,
-     "median": 65.67,
-     "n": 3
+     "median": 67.1,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 2,
-     "median": 67.43,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 3,
-     "median": 140.14,
-     "n": 4
+     "median": 65.7,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 4,
-     "median": 188.33,
-     "n": 5
-    },
-    {
-     "month": "2026-10",
-     "weekday": 6,
-     "median": 78.54,
-     "n": 3
+     "median": 109.41,
+     "n": 1
     },
     {
      "month": "2026-11",
+     "weekday": 0,
+     "median": 65.34,
+     "n": 4
+    },
+    {
+     "month": "2026-11",
+     "weekday": 4,
+     "median": 176.05,
+     "n": 3
+    }
+   ],
+   "heatmap_weekday": [
+    {
      "weekday": 0,
      "median": 65.67,
      "n": 5
     },
     {
-     "month": "2026-11",
-     "weekday": 4,
-     "median": 175.62,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 0,
-     "median": 88.6,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
      "weekday": 2,
-     "median": 248.5,
-     "n": 2
+     "median": 65.7,
+     "n": 1
     },
     {
-     "month": "2026-12",
      "weekday": 4,
-     "median": 188.02,
+     "median": 142.73,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 67.1,
      "n": 3
     },
     {
-     "month": "2027-01",
-     "weekday": 0,
-     "median": 213.0,
-     "n": 1
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 183.0,
-     "n": 1
-    },
-    {
-     "month": "2027-02",
-     "weekday": 0,
-     "median": 90.98,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 110.58,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 122.41,
-     "n": 5
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 161.87,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 230.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 4,
-     "median": 412.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
-     "median": 285.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 4,
-     "median": 306.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 230.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 4,
-     "median": 266.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 285.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 4,
-     "median": 247.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 285.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 4,
-     "median": 327.0,
-     "n": 4
+     "month": "2026-11",
+     "median": 65.67,
+     "n": 7
     }
    ],
    "curve": [
@@ -2407,22 +1473,10 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 0,
-     "median": 379.87,
-     "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 0,
-     "median": 145.37,
-     "n": 3
-    },
-    {
      "month": "2026-10",
      "weekday": 3,
-     "median": 145.37,
-     "n": 5
+     "median": 175.31,
+     "n": 1
     },
     {
      "month": "2026-10",
@@ -2431,172 +1485,51 @@
      "n": 1
     },
     {
+     "month": "2026-11",
+     "weekday": 3,
+     "median": 102.56,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 4,
+     "median": 87.0,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 6,
+     "median": 192.28,
+     "n": 4
+    }
+   ],
+   "heatmap_weekday": [
+    {
+     "weekday": 3,
+     "median": 127.75,
+     "n": 4
+    },
+    {
+     "weekday": 4,
+     "median": 141.34,
+     "n": 4
+    },
+    {
+     "weekday": 6,
+     "median": 192.28,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
      "month": "2026-10",
-     "weekday": 6,
-     "median": 140.26,
-     "n": 1
+     "median": 192.28,
+     "n": 2
     },
     {
      "month": "2026-11",
-     "weekday": 3,
-     "median": 99.45,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 4,
-     "median": 87.0,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 6,
-     "median": 179.57,
-     "n": 5
-    },
-    {
-     "month": "2026-12",
-     "weekday": 3,
-     "median": 100.63,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 4,
-     "median": 87.0,
-     "n": 3
-    },
-    {
-     "month": "2026-12",
-     "weekday": 6,
-     "median": 204.38,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 3,
-     "median": 255.0,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 183.64,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 6,
-     "median": 170.52,
-     "n": 5
-    },
-    {
-     "month": "2027-02",
-     "weekday": 3,
-     "median": 221.0,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 170.0,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 6,
-     "median": 183.38,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 446.0,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 1,
-     "median": 288.61,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 3,
-     "median": 170.52,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 175.19,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 6,
-     "median": 148.66,
-     "n": 3
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 359.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 3,
-     "median": 272.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
-     "median": 310.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 3,
-     "median": 272.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 312.19,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 3,
-     "median": 293.19,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 272.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 3,
-     "median": 272.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 591.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 3,
-     "median": 563.0,
-     "n": 4
+     "median": 133.13,
+     "n": 10
     }
    ],
    "curve": [
@@ -2713,26 +1646,9 @@
     "q3": 129.19,
     "n": 8
    },
-   "heatmap": [
-    {
-     "month": "2026-09",
-     "weekday": 6,
-     "median": 538.81,
-     "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 3,
-     "median": 67.77,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 6,
-     "median": 113.86,
-     "n": 3
-    }
-   ],
+   "heatmap": [],
+   "heatmap_weekday": [],
+   "heatmap_month": [],
    "curve": [
     {
      "bucket": "0-7",
@@ -2813,22 +1729,10 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
+     "month": "2026-10",
      "weekday": 0,
-     "median": 1585.95,
+     "median": 196.91,
      "n": 1
-    },
-    {
-     "month": "2026-10",
-     "weekday": 0,
-     "median": 231.26,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 3,
-     "median": 168.62,
-     "n": 4
     },
     {
      "month": "2026-10",
@@ -2839,134 +1743,38 @@
     {
      "month": "2026-11",
      "weekday": 0,
-     "median": 130.0,
-     "n": 5
+     "median": 135.19,
+     "n": 4
     },
     {
      "month": "2026-11",
      "weekday": 4,
-     "median": 151.09,
-     "n": 4
-    },
+     "median": 162.05,
+     "n": 3
+    }
+   ],
+   "heatmap_weekday": [
     {
-     "month": "2026-12",
      "weekday": 0,
-     "median": 293.07,
-     "n": 4
+     "median": 140.38,
+     "n": 5
     },
     {
-     "month": "2026-12",
-     "weekday": 2,
-     "median": 343.27,
+     "weekday": 4,
+     "median": 190.53,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 305.92,
      "n": 2
     },
     {
-     "month": "2026-12",
-     "weekday": 4,
-     "median": 130.0,
-     "n": 3
-    },
-    {
-     "month": "2027-01",
-     "weekday": 0,
-     "median": 440.15,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 218.63,
-     "n": 5
-    },
-    {
-     "month": "2027-02",
-     "weekday": 0,
-     "median": 525.0,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 170.59,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 502.0,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 1,
-     "median": 659.0,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 163.97,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 1,
-     "median": 575.5,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 5,
-     "median": 720.5,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 1,
-     "median": 502.0,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 5,
-     "median": 446.0,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 1,
-     "median": 502.0,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 5,
-     "median": 448.19,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 1,
-     "median": 631.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 5,
-     "median": 718.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 1,
-     "median": 935.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 5,
-     "median": 1066.5,
-     "n": 4
+     "month": "2026-11",
+     "median": 140.38,
+     "n": 7
     }
    ],
    "curve": [
@@ -3085,58 +1893,22 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 0,
-     "median": 684.46,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 1,
-     "median": 303.18,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 2,
-     "median": 262.58,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 5,
-     "median": 1075.54,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 6,
-     "median": 1539.87,
-     "n": 1
-    },
-    {
      "month": "2026-10",
      "weekday": 0,
-     "median": 211.91,
-     "n": 4
+     "median": 96.13,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 1,
-     "median": 111.67,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 2,
-     "median": 111.18,
-     "n": 3
+     "median": 102.86,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 3,
      "median": 215.32,
-     "n": 5
+     "n": 1
     },
     {
      "month": "2026-10",
@@ -3147,398 +1919,82 @@
     {
      "month": "2026-10",
      "weekday": 5,
-     "median": 234.23,
-     "n": 5
-    },
-    {
-     "month": "2026-10",
-     "weekday": 6,
-     "median": 305.51,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 0,
-     "median": 232.14,
-     "n": 5
-    },
-    {
-     "month": "2026-11",
-     "weekday": 3,
-     "median": 206.94,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 4,
-     "median": 164.24,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 5,
-     "median": 153.28,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 6,
-     "median": 148.91,
-     "n": 5
-    },
-    {
-     "month": "2026-12",
-     "weekday": 0,
-     "median": 141.35,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 1,
-     "median": 326.84,
-     "n": 2
-    },
-    {
-     "month": "2026-12",
-     "weekday": 2,
-     "median": 410.09,
-     "n": 2
-    },
-    {
-     "month": "2026-12",
-     "weekday": 3,
-     "median": 137.87,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 4,
-     "median": 102.34,
-     "n": 3
-    },
-    {
-     "month": "2026-12",
-     "weekday": 5,
-     "median": 145.57,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 6,
-     "median": 109.56,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 0,
-     "median": 223.0,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 3,
-     "median": 129.4,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 158.0,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 5,
-     "median": 192.39,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 6,
-     "median": 238.47,
-     "n": 5
-    },
-    {
-     "month": "2027-02",
-     "weekday": 0,
-     "median": 172.2,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 3,
-     "median": 153.45,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 179.74,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 5,
-     "median": 223.5,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 6,
-     "median": 157.7,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 161.78,
-     "n": 5
-    },
-    {
-     "month": "2027-03",
-     "weekday": 1,
-     "median": 314.89,
-     "n": 2
-    },
-    {
-     "month": "2027-03",
-     "weekday": 2,
-     "median": 514.0,
+     "median": 384.66,
      "n": 1
     },
     {
-     "month": "2027-03",
-     "weekday": 3,
-     "median": 177.08,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 140.2,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 5,
-     "median": 204.5,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 6,
-     "median": 235.31,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
+     "month": "2026-11",
      "weekday": 0,
-     "median": 514.0,
+     "median": 199.28,
      "n": 4
     },
     {
-     "month": "2027-04",
-     "weekday": 1,
-     "median": 423.19,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 2,
-     "median": 399.5,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
+     "month": "2026-11",
      "weekday": 3,
-     "median": 421.0,
-     "n": 5
+     "median": 278.2,
+     "n": 3
     },
     {
-     "month": "2027-04",
+     "month": "2026-11",
      "weekday": 4,
-     "median": 421.0,
-     "n": 5
+     "median": 170.81,
+     "n": 3
     },
     {
-     "month": "2027-04",
+     "month": "2026-11",
      "weekday": 5,
-     "median": 491.0,
-     "n": 4
+     "median": 166.43,
+     "n": 3
     },
     {
-     "month": "2027-04",
+     "month": "2026-11",
      "weekday": 6,
-     "median": 514.0,
+     "median": 181.76,
      "n": 4
-    },
+    }
+   ],
+   "heatmap_weekday": [
     {
-     "month": "2027-05",
      "weekday": 0,
-     "median": 289.0,
+     "median": 131.38,
      "n": 5
     },
     {
-     "month": "2027-05",
      "weekday": 1,
-     "median": 289.0,
-     "n": 4
+     "median": 102.86,
+     "n": 1
     },
     {
-     "month": "2027-05",
-     "weekday": 2,
-     "median": 217.0,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
      "weekday": 3,
-     "median": 202.0,
+     "median": 246.76,
      "n": 4
     },
     {
-     "month": "2027-05",
      "weekday": 4,
-     "median": 217.0,
+     "median": 184.89,
      "n": 4
     },
     {
-     "month": "2027-05",
      "weekday": 5,
-     "median": 217.0,
-     "n": 5
+     "median": 232.15,
+     "n": 4
     },
     {
-     "month": "2027-05",
      "weekday": 6,
-     "median": 289.0,
+     "median": 181.76,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 198.98,
      "n": 5
     },
     {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 293.69,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 1,
-     "median": 293.38,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 2,
-     "median": 217.0,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 3,
-     "median": 219.19,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 4,
-     "median": 217.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 5,
-     "median": 291.19,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 6,
-     "median": 289.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 217.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 1,
-     "median": 217.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 2,
-     "median": 187.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 3,
-     "median": 187.0,
-     "n": 5
-    },
-    {
-     "month": "2027-07",
-     "weekday": 4,
-     "median": 206.02,
-     "n": 5
-    },
-    {
-     "month": "2027-07",
-     "weekday": 5,
-     "median": 217.0,
-     "n": 5
-    },
-    {
-     "month": "2027-07",
-     "weekday": 6,
-     "median": 227.74,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 565.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 1,
-     "median": 565.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 2,
-     "median": 446.0,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 3,
-     "median": 467.5,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 4,
-     "median": 491.0,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 5,
-     "median": 539.5,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 6,
-     "median": 514.0,
-     "n": 5
+     "month": "2026-11",
+     "median": 170.81,
+     "n": 17
     }
    ],
    "curve": [
@@ -3657,58 +2113,22 @@
    },
    "heatmap": [
     {
-     "month": "2026-09",
-     "weekday": 0,
-     "median": 540.31,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 1,
-     "median": 187.77,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 2,
-     "median": 139.15,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 5,
-     "median": 1261.26,
-     "n": 1
-    },
-    {
-     "month": "2026-09",
-     "weekday": 6,
-     "median": 1523.28,
-     "n": 1
-    },
-    {
      "month": "2026-10",
      "weekday": 0,
-     "median": 162.85,
-     "n": 4
+     "median": 172.34,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 1,
-     "median": 145.37,
-     "n": 4
-    },
-    {
-     "month": "2026-10",
-     "weekday": 2,
-     "median": 91.76,
-     "n": 3
+     "median": 260.36,
+     "n": 1
     },
     {
      "month": "2026-10",
      "weekday": 3,
-     "median": 304.61,
-     "n": 5
+     "median": 218.33,
+     "n": 1
     },
     {
      "month": "2026-10",
@@ -3719,398 +2139,82 @@
     {
      "month": "2026-10",
      "weekday": 5,
-     "median": 336.37,
-     "n": 5
-    },
-    {
-     "month": "2026-10",
-     "weekday": 6,
-     "median": 241.81,
-     "n": 4
+     "median": 137.48,
+     "n": 1
     },
     {
      "month": "2026-11",
      "weekday": 0,
-     "median": 91.57,
-     "n": 5
+     "median": 94.19,
+     "n": 4
     },
     {
      "month": "2026-11",
+     "weekday": 3,
+     "median": 162.83,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 4,
+     "median": 89.28,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 5,
+     "median": 106.84,
+     "n": 3
+    },
+    {
+     "month": "2026-11",
+     "weekday": 6,
+     "median": 111.93,
+     "n": 4
+    }
+   ],
+   "heatmap_weekday": [
+    {
+     "weekday": 0,
+     "median": 101.38,
+     "n": 5
+    },
+    {
+     "weekday": 1,
+     "median": 260.36,
+     "n": 1
+    },
+    {
      "weekday": 3,
      "median": 165.4,
      "n": 4
     },
     {
+     "weekday": 4,
+     "median": 92.7,
+     "n": 4
+    },
+    {
+     "weekday": 5,
+     "median": 111.93,
+     "n": 4
+    },
+    {
+     "weekday": 6,
+     "median": 111.93,
+     "n": 4
+    }
+   ],
+   "heatmap_month": [
+    {
+     "month": "2026-10",
+     "median": 172.34,
+     "n": 5
+    },
+    {
      "month": "2026-11",
-     "weekday": 4,
-     "median": 131.14,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 5,
-     "median": 104.3,
-     "n": 4
-    },
-    {
-     "month": "2026-11",
-     "weekday": 6,
-     "median": 87.0,
-     "n": 5
-    },
-    {
-     "month": "2026-12",
-     "weekday": 0,
-     "median": 217.03,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 1,
-     "median": 485.64,
-     "n": 2
-    },
-    {
-     "month": "2026-12",
-     "weekday": 2,
-     "median": 558.55,
-     "n": 2
-    },
-    {
-     "month": "2026-12",
-     "weekday": 3,
-     "median": 201.0,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 4,
-     "median": 105.23,
-     "n": 3
-    },
-    {
-     "month": "2026-12",
-     "weekday": 5,
-     "median": 265.26,
-     "n": 4
-    },
-    {
-     "month": "2026-12",
-     "weekday": 6,
-     "median": 226.45,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 0,
-     "median": 121.96,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 3,
-     "median": 140.81,
-     "n": 4
-    },
-    {
-     "month": "2027-01",
-     "weekday": 4,
-     "median": 132.0,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 5,
-     "median": 152.64,
-     "n": 5
-    },
-    {
-     "month": "2027-01",
-     "weekday": 6,
-     "median": 132.0,
-     "n": 5
-    },
-    {
-     "month": "2027-02",
-     "weekday": 0,
-     "median": 172.5,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 3,
-     "median": 290.06,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 4,
-     "median": 228.99,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 5,
-     "median": 172.5,
-     "n": 4
-    },
-    {
-     "month": "2027-02",
-     "weekday": 6,
-     "median": 158.0,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 0,
-     "median": 217.0,
-     "n": 5
-    },
-    {
-     "month": "2027-03",
-     "weekday": 1,
-     "median": 274.5,
-     "n": 2
-    },
-    {
-     "month": "2027-03",
-     "weekday": 2,
-     "median": 187.0,
-     "n": 1
-    },
-    {
-     "month": "2027-03",
-     "weekday": 3,
-     "median": 213.72,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 4,
-     "median": 313.0,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 5,
-     "median": 257.58,
-     "n": 4
-    },
-    {
-     "month": "2027-03",
-     "weekday": 6,
-     "median": 190.32,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 0,
-     "median": 187.0,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 1,
-     "median": 240.19,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 2,
-     "median": 259.5,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 3,
-     "median": 217.0,
-     "n": 5
-    },
-    {
-     "month": "2027-04",
-     "weekday": 4,
-     "median": 251.0,
-     "n": 5
-    },
-    {
-     "month": "2027-04",
-     "weekday": 5,
-     "median": 259.5,
-     "n": 4
-    },
-    {
-     "month": "2027-04",
-     "weekday": 6,
-     "median": 187.0,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 0,
-     "median": 289.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 1,
-     "median": 332.0,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 2,
-     "median": 253.19,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 3,
-     "median": 310.5,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 4,
-     "median": 333.5,
-     "n": 4
-    },
-    {
-     "month": "2027-05",
-     "weekday": 5,
-     "median": 332.0,
-     "n": 5
-    },
-    {
-     "month": "2027-05",
-     "weekday": 6,
-     "median": 289.0,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 0,
-     "median": 253.19,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 1,
-     "median": 251.0,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 2,
-     "median": 217.0,
-     "n": 5
-    },
-    {
-     "month": "2027-06",
-     "weekday": 3,
-     "median": 236.19,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 4,
-     "median": 272.19,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 5,
-     "median": 332.0,
-     "n": 4
-    },
-    {
-     "month": "2027-06",
-     "weekday": 6,
-     "median": 332.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 0,
-     "median": 516.5,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 1,
-     "median": 516.5,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 2,
-     "median": 493.0,
-     "n": 4
-    },
-    {
-     "month": "2027-07",
-     "weekday": 3,
-     "median": 514.0,
-     "n": 5
-    },
-    {
-     "month": "2027-07",
-     "weekday": 4,
-     "median": 565.0,
-     "n": 5
-    },
-    {
-     "month": "2027-07",
-     "weekday": 5,
-     "median": 625.0,
-     "n": 5
-    },
-    {
-     "month": "2027-07",
-     "weekday": 6,
-     "median": 578.0,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 0,
-     "median": 332.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 1,
-     "median": 332.0,
-     "n": 5
-    },
-    {
-     "month": "2027-08",
-     "weekday": 2,
-     "median": 291.5,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 3,
-     "median": 291.5,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 4,
-     "median": 355.0,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 5,
-     "median": 423.0,
-     "n": 4
-    },
-    {
-     "month": "2027-08",
-     "weekday": 6,
-     "median": 514.0,
-     "n": 5
+     "median": 101.75,
+     "n": 17
     }
    ],
    "curve": [
