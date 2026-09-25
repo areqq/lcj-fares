@@ -81,18 +81,21 @@ z udanym pobraniem danego `ORIGIN-DEST-miesiąc` (wg `runs.csv`); w przeciwnym r
 
 Per kierunek:
 
-- **Heatmapa** dzień tygodnia × miesiąc lotu → mediana ceny (z najnowszej obserwacji każdego lotu) + `n`.
+- **Heatmapa** dzień tygodnia × miesiąc lotu → mediana „wartości lotu” + `n` (liczba lotów), gdzie wartość lotu =
+  mediana jego cen zmierzonych 31–60 dni przed wylotem (stałe wyprzedzenie → miesiące porównywalne; loty bez
+  pomiaru w tym oknie pomijane). Plus marginesy „razem”: per dzień tygodnia i per miesiąc.
 - **Krzywa „kiedy kupować”** — dla każdego lotu i każdego dnia pomiaru: `days_before = day − observed`;
-  mediana ceny w koszykach dni do wylotu (0–7, 8–14, 15–30, 31–60, 61–90, 91–180, 181+) + `n`.
+  mediana ceny w koszykach dni do wylotu (0–7, 8–14, 15–30, 31–60, 61–90, 91–180, 181+) + `n` (liczba różnych lotów).
   Dodatkowo wskaźnik relatywny: cena / minimalna cena tego lotu w historii — pokazuje, o ile drożeje.
-- **Najtańsze nadchodzące loty** — top 10 aktualnych cen + odchylenie od mediany trasy (%).
-- **„Cena normalna”** trasy — mediana i kwartyle aktualnych cen.
+- **Najtańsze nadchodzące loty** — top 10 cen z ostatniego udanego pomiaru (loty od jutra) + odchylenie od mediany trasy (%).
+- **„Cena normalna”** trasy — mediana i kwartyle tych samych cen (ostatni udany pomiar).
 
-Wyniki z małą próbą (`n` poniżej progu, domyślnie 5) są wyszarzone na stronie.
+Wyniki z małą próbą (`n` poniżej progu, domyślnie 5; komórki heatmapy: 3) są wyszarzone na stronie.
+Krzywa jest wyszarzona z ostrzeżeniem, dopóki historia ma mniej niż 30 dni.
 
 ## Strona (`site/index.html`)
 
-Pojedynczy statyczny plik, Chart.js z CDN, wybór kierunku z listy. Trzy widoki: heatmapa, krzywa
+Pojedynczy statyczny plik, Chart.js z CDN, wybór kierunku z listy. Trzy widoki: heatmapa (z wierszem i kolumną „razem”), krzywa
 „kiedy kupować”, tabela najtańszych lotów. Na górze: data ostatniego udanego pobrania i liczba dni historii.
 Działa na telefonie.
 

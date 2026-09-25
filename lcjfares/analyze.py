@@ -12,6 +12,9 @@ from pathlib import Path
 from lcjfares import store
 
 MIN_N = 5
+MIN_N_CELL = 3            # heatmapa: miesiąc ma tylko 4–5 danego dnia tygodnia
+MIN_HISTORY_DAYS = 30     # krzywa „kiedy kupować” wiarygodna dopiero po takiej historii
+HEAT_WINDOW = (31, 60)    # heatmapa: cena lotu na 31–60 dni przed wylotem (porównywalne miesiące)
 HORIZON_MONTHS = 12
 BUCKETS = [(0, 7), (8, 14), (15, 30), (31, 60), (61, 90), (91, 180), (181, None)]
 LABELS = [f"{lo}+" if hi is None else f"{lo}-{hi}" for lo, hi in BUCKETS]
@@ -59,7 +62,7 @@ def reconstruct(prices: list[dict], runs: list[dict]) -> list[dict]:
             row = rows[bisect_right(dates, d) - 1]
             obs.append({"origin": origin, "dest": dest, "day": day, "observed": d,
                         "price": float(row["price"]) if row["price"] else None,
-                        "status": row["status"]})
+                        "status": row["status"], "dep_time": row["dep_time"]})
     return obs
 
 
@@ -78,52 +81,63 @@ def _stats(vals):
 
 def build(prices: list[dict], runs: list[dict], today: dt.date) -> dict:
     t = today.isoformat()
-    state = store.last_state(prices)
-    last_priced = {}  # ostatnia znana cena lotu (także lotów już odbytych / wyprzedanych)
-    for r in prices:
-        if r["price"]:
-            last_priced[(r["origin"], r["dest"], r["day"])] = r
+    ok_days = sorted({r["observed"] for r in runs if r["status"] != "failed"})
+    last_ok = ok_days[-1] if ok_days else None
     obs = [o for o in reconstruct(prices, runs) if o["price"] is not None]
     min_price = {}
     for o in obs:
         k = (o["origin"], o["dest"], o["day"])
         min_price[k] = min(min_price.get(k, o["price"]), o["price"])
 
-    routes = defaultdict(lambda: {"heat": defaultdict(list), "upcoming": [],
-                                  "curve": defaultdict(lambda: ([], []))})
-    for (origin, dest, day), r in last_priced.items():
-        routes[f"{origin}-{dest}"]["heat"][(day[:7], _date(day).weekday())].append(float(r["price"]))
-    for (origin, dest, day), (dep, price, status) in state.items():
-        if status == "ok" and price and day >= t:
-            routes[f"{origin}-{dest}"]["upcoming"].append((day, dep, float(price)))
+    routes = defaultdict(lambda: {"window": defaultdict(list), "upcoming": [],
+                                  "curve": defaultdict(lambda: ([], [], set()))})
     for o in obs:
-        label = bucket_label((_date(o["day"]) - _date(o["observed"])).days)
+        r = routes[f"{o['origin']}-{o['dest']}"]
+        days = (_date(o["day"]) - _date(o["observed"])).days
+        if HEAT_WINDOW[0] <= days <= HEAT_WINDOW[1]:
+            r["window"][o["day"]].append(o["price"])
+        # „nadchodzące” tylko z ostatniego udanego pomiaru (luki i zniknięte trasy odpadają)
+        if o["observed"] == last_ok and o["status"] == "ok" and o["day"] > t:
+            r["upcoming"].append((o["day"], o["dep_time"], o["price"]))
+        label = bucket_label(days)
         if label is None:
             continue
-        ps, ratios = routes[f"{o['origin']}-{o['dest']}"]["curve"][label]
+        ps, ratios, flights = r["curve"][label]
         ps.append(o["price"])
         ratios.append(o["price"] / min_price[(o["origin"], o["dest"], o["day"])])
+        flights.add(o["day"])
 
     out = {}
     for name in sorted(routes):
         r = routes[name]
         normal = _stats([p for _, _, p in r["upcoming"]])
         med = normal["median"]
+        cells, by_wd, by_month = defaultdict(list), defaultdict(list), defaultdict(list)
+        for day, ps in r["window"].items():
+            v = statistics.median(ps)
+            m, wd = day[:7], _date(day).weekday()
+            cells[(m, wd)].append(v)
+            by_wd[wd].append(v)
+            by_month[m].append(v)
         out[name] = {
             "normal": normal,
             "heatmap": [{"month": m, "weekday": wd, "median": _median(v), "n": len(v)}
-                        for (m, wd), v in sorted(r["heat"].items())],
+                        for (m, wd), v in sorted(cells.items())],
+            "heatmap_weekday": [{"weekday": wd, "median": _median(v), "n": len(v)}
+                                for wd, v in sorted(by_wd.items())],
+            "heatmap_month": [{"month": m, "median": _median(v), "n": len(v)}
+                              for m, v in sorted(by_month.items())],
             "curve": [{"bucket": lb, "median": _median(r["curve"][lb][0]),
                        "ratio": round(statistics.median(r["curve"][lb][1]), 3),
-                       "n": len(r["curve"][lb][0])}
+                       "n": len(r["curve"][lb][2])}  # różne loty, nie dni obserwacji
                       for lb in LABELS if lb in r["curve"]],
             "cheapest": [{"day": d, "dep_time": dep, "price": p,
                           "vs_median_pct": round((p / med - 1) * 100) if med else None}
                          for d, dep, p in sorted(r["upcoming"], key=lambda x: (x[2], x[0]))[:10]],
         }
-    ok_days = sorted({r["observed"] for r in runs if r["status"] != "failed"})
-    return {"generated": t, "last_ok": ok_days[-1] if ok_days else None,
-            "history_days": len(ok_days), "min_n": MIN_N, "routes": out}
+    return {"generated": t, "last_ok": last_ok, "history_days": len(ok_days),
+            "min_n": MIN_N, "min_n_cell": MIN_N_CELL, "min_history_days": MIN_HISTORY_DAYS,
+            "routes": out}
 
 
 def main(argv: list[str] | None = None) -> int:
