@@ -30,7 +30,20 @@ td.cell { color:#111; }
 <main>
   <h1>Tanie loty z/do Łodzi (Ryanair)</h1>
   <p class="muted" id="meta">Ładowanie…</p>
+
+  <section>
+    <h2>Najtańsze wyjazdy z Łodzi</h2>
+    <p class="muted" id="tripsTopNote"></p>
+    <div class="scroll"><table id="tripsTop"></table></div>
+  </section>
+
   <label>Kierunek: <select id="route"></select></label>
+
+  <section>
+    <h2 id="tripsTitle">Wyjazdy na ten kierunek</h2>
+    <p class="muted" id="tripsNormal"></p>
+    <div class="scroll"><table id="trips"></table></div>
+  </section>
 
   <section>
     <h2>Kiedy tanio: dzień tygodnia × miesiąc</h2>
@@ -142,6 +155,27 @@ function renderCurve(r) {
   });
 }
 
+const wdOf = day => WD[(new Date(day + "T12:00:00").getDay() + 6) % 7];
+const pct = v => v == null ? "–" : (v > 0 ? "+" : "") + v + "%";
+
+function renderTrips(t, list, withDest) {
+  t.replaceChildren(row([...(withDest ? ["dokąd"] : []),
+    "wylot", "powrót", "noce", "tam", "z powrotem", "razem", "vs norma"], "th"));
+  list.forEach(x => t.append(row([...(withDest ? [x.dest] : []),
+    `${x.out_day} ${wdOf(x.out_day)} ${x.out_time}`, `${x.ret_day} ${wdOf(x.ret_day)} ${x.ret_time}`,
+    String(x.nights), zl(x.out_price), zl(x.ret_price), zl(x.total), pct(x.vs_median_pct)])));
+}
+
+function renderRouteTrips(name) {
+  const dest = name.split("-").find(c => c !== "LCJ");
+  const tr = DATA.trips[dest];
+  document.getElementById("tripsTitle").textContent = `Wyjazdy Łódź ⇄ ${dest}`;
+  document.getElementById("tripsNormal").textContent = tr && tr.normal.n
+    ? `Typowy wyjazd (mediana najlepszych par z każdego dnia wylotu): ${zl(tr.normal.median)}, zwykle ${zl(tr.normal.q1)}–${zl(tr.normal.q3)}.`
+    : "Brak par wylot + powrót w oknie.";
+  renderTrips(document.getElementById("trips"), tr ? tr.best : [], false);
+}
+
 function renderCheap(r) {
   const n = r.normal;
   document.getElementById("normal").textContent = n.n
@@ -149,16 +183,13 @@ function renderCheap(r) {
     : "Brak nadchodzących lotów z ceną.";
   const t = document.getElementById("cheap");
   t.replaceChildren(row(["data", "dzień", "godz.", "cena", "vs norma"], "th"));
-  r.cheapest.forEach(c => {
-    const wd = WD[(new Date(c.day + "T12:00:00").getDay() + 6) % 7];
-    const pct = c.vs_median_pct == null ? "–" : (c.vs_median_pct > 0 ? "+" : "") + c.vs_median_pct + "%";
-    t.append(row([c.day, wd, c.dep_time, zl(c.price), pct]));
-  });
+  r.cheapest.forEach(c => t.append(row([c.day, wdOf(c.day), c.dep_time, zl(c.price), pct(c.vs_median_pct)])));
 }
 
 function render() {
-  const r = DATA.routes[document.getElementById("route").value];
-  renderHeat(r); renderCurve(r); renderCheap(r);
+  const name = document.getElementById("route").value;
+  const r = DATA.routes[name];
+  renderRouteTrips(name); renderHeat(r); renderCurve(r); renderCheap(r);
 }
 
 fetch("data.json", { cache: "no-store" })
@@ -170,6 +201,10 @@ fetch("data.json", { cache: "no-store" })
     const sel = document.getElementById("route");
     const names = Object.keys(data.routes);
     if (!names.length) { document.getElementById("meta").textContent += " · brak danych jeszcze"; return; }
+    const [lo, hi] = data.trip_nights;
+    document.getElementById("tripsTopNote").textContent =
+      `Wylot z Łodzi + najtańszy powrót ${lo}–${hi} dni później, ceny z ostatniego pomiaru. „vs norma” — względem typowego wyjazdu na ten kierunek.`;
+    renderTrips(document.getElementById("tripsTop"), data.trips_top, true);
     names.forEach(n => sel.append(new Option(n.replace("-", " → "), n)));
     sel.value = names.find(n => n.startsWith("LCJ-")) ?? names[0];
     sel.addEventListener("change", render);

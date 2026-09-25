@@ -5,6 +5,10 @@
  "min_n": 5,
  "min_n_cell": 3,
  "min_history_days": 30,
+ "trip_nights": [
+  3,
+  10
+ ],
  "routes": {
   "AGP-LCJ": {
    "normal": {
@@ -2324,5 +2328,936 @@
     }
    ]
   }
- }
+ },
+ "trips": {
+  "AGP": {
+   "normal": {
+    "median": 666.5,
+    "q1": 420.55,
+    "q3": 841.25,
+    "n": 100
+   },
+   "best": [
+    {
+     "out_day": "2026-10-30",
+     "out_time": "20:40",
+     "out_price": 127.2,
+     "ret_day": "2026-11-05",
+     "ret_time": "08:40",
+     "ret_price": 65.67,
+     "nights": 6,
+     "total": 192.87,
+     "vs_median_pct": -71
+    },
+    {
+     "out_day": "2026-11-15",
+     "out_time": "20:20",
+     "out_price": 100.72,
+     "ret_day": "2026-11-20",
+     "ret_time": "16:30",
+     "ret_price": 121.0,
+     "nights": 5,
+     "total": 221.72,
+     "vs_median_pct": -67
+    },
+    {
+     "out_day": "2026-11-20",
+     "out_time": "20:40",
+     "out_price": 113.86,
+     "ret_day": "2026-11-26",
+     "ret_time": "08:40",
+     "ret_price": 121.0,
+     "nights": 6,
+     "total": 234.86,
+     "vs_median_pct": -65
+    },
+    {
+     "out_day": "2026-11-13",
+     "out_time": "20:40",
+     "out_price": 121.0,
+     "ret_day": "2026-11-20",
+     "ret_time": "16:30",
+     "ret_price": 121.0,
+     "nights": 7,
+     "total": 242.0,
+     "vs_median_pct": -64
+    },
+    {
+     "out_day": "2026-11-22",
+     "out_time": "20:20",
+     "out_price": 121.0,
+     "ret_day": "2026-11-26",
+     "ret_time": "08:40",
+     "ret_price": 121.0,
+     "nights": 4,
+     "total": 242.0,
+     "vs_median_pct": -64
+    },
+    {
+     "out_day": "2026-12-04",
+     "out_time": "20:40",
+     "out_price": 121.0,
+     "ret_day": "2026-12-11",
+     "ret_time": "16:30",
+     "ret_price": 121.0,
+     "nights": 7,
+     "total": 242.0,
+     "vs_median_pct": -64
+    },
+    {
+     "out_day": "2026-12-06",
+     "out_time": "20:20",
+     "out_price": 121.0,
+     "ret_day": "2026-12-11",
+     "ret_time": "16:30",
+     "ret_price": 121.0,
+     "nights": 5,
+     "total": 242.0,
+     "vs_median_pct": -64
+    },
+    {
+     "out_day": "2026-11-19",
+     "out_time": "12:50",
+     "out_price": 127.0,
+     "ret_day": "2026-11-26",
+     "ret_time": "08:40",
+     "ret_price": 121.0,
+     "nights": 7,
+     "total": 248.0,
+     "vs_median_pct": -63
+    },
+    {
+     "out_day": "2027-01-10",
+     "out_time": "20:20",
+     "out_price": 96.17,
+     "ret_day": "2027-01-15",
+     "ret_time": "16:30",
+     "ret_price": 153.0,
+     "nights": 5,
+     "total": 249.17,
+     "vs_median_pct": -63
+    },
+    {
+     "out_day": "2026-11-01",
+     "out_time": "20:20",
+     "out_price": 197.1,
+     "ret_day": "2026-11-05",
+     "ret_time": "08:40",
+     "ret_price": 65.67,
+     "nights": 4,
+     "total": 262.77,
+     "vs_median_pct": -61
+    }
+   ]
+  },
+  "ALC": {
+   "normal": {
+    "median": 651.56,
+    "q1": 379.64,
+    "q3": 926.0,
+    "n": 101
+   },
+   "best": [
+    {
+     "out_day": "2026-11-16",
+     "out_time": "19:20",
+     "out_price": 96.34,
+     "ret_day": "2026-11-26",
+     "ret_time": "08:15",
+     "ret_price": 96.34,
+     "nights": 10,
+     "total": 192.68,
+     "vs_median_pct": -70
+    },
+    {
+     "out_day": "2026-11-30",
+     "out_time": "19:20",
+     "out_price": 108.0,
+     "ret_day": "2026-12-10",
+     "ret_time": "08:15",
+     "ret_price": 96.17,
+     "nights": 10,
+     "total": 204.17,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-23",
+     "out_time": "19:20",
+     "out_price": 108.0,
+     "ret_day": "2026-11-26",
+     "ret_time": "08:15",
+     "ret_price": 96.34,
+     "nights": 3,
+     "total": 204.34,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-12-14",
+     "out_time": "19:20",
+     "out_price": 104.92,
+     "ret_day": "2026-12-24",
+     "ret_time": "08:15",
+     "ret_price": 100.55,
+     "nights": 10,
+     "total": 205.47,
+     "vs_median_pct": -68
+    },
+    {
+     "out_day": "2026-12-17",
+     "out_time": "11:55",
+     "out_price": 108.0,
+     "ret_day": "2026-12-24",
+     "ret_time": "08:15",
+     "ret_price": 100.55,
+     "nights": 7,
+     "total": 208.55,
+     "vs_median_pct": -68
+    },
+    {
+     "out_day": "2026-12-07",
+     "out_time": "19:20",
+     "out_price": 118.24,
+     "ret_day": "2026-12-10",
+     "ret_time": "08:15",
+     "ret_price": 96.17,
+     "nights": 3,
+     "total": 214.41,
+     "vs_median_pct": -67
+    },
+    {
+     "out_day": "2026-12-10",
+     "out_time": "11:55",
+     "out_price": 115.1,
+     "ret_day": "2026-12-17",
+     "ret_time": "08:15",
+     "ret_price": 108.0,
+     "nights": 7,
+     "total": 223.1,
+     "vs_median_pct": -66
+    },
+    {
+     "out_day": "2027-03-01",
+     "out_time": "19:20",
+     "out_price": 136.0,
+     "ret_day": "2027-03-04",
+     "ret_time": "08:15",
+     "ret_price": 136.0,
+     "nights": 3,
+     "total": 272.0,
+     "vs_median_pct": -58
+    },
+    {
+     "out_day": "2027-01-11",
+     "out_time": "19:20",
+     "out_price": 136.0,
+     "ret_day": "2027-01-21",
+     "ret_time": "08:15",
+     "ret_price": 144.28,
+     "nights": 10,
+     "total": 280.28,
+     "vs_median_pct": -57
+    },
+    {
+     "out_day": "2027-01-28",
+     "out_time": "11:55",
+     "out_price": 136.0,
+     "ret_day": "2027-02-04",
+     "ret_time": "08:15",
+     "ret_price": 148.25,
+     "nights": 7,
+     "total": 284.25,
+     "vs_median_pct": -56
+    }
+   ]
+  },
+  "BGY": {
+   "normal": {
+    "median": 282.14,
+    "q1": 200.76,
+    "q3": 574.0,
+    "n": 105
+   },
+   "best": [
+    {
+     "out_day": "2026-10-22",
+     "out_time": "09:50",
+     "out_price": 65.0,
+     "ret_day": "2026-10-30",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 8,
+     "total": 130.0,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-11-09",
+     "out_time": "12:25",
+     "out_price": 65.0,
+     "ret_day": "2026-11-13",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 4,
+     "total": 130.0,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-11-13",
+     "out_time": "12:10",
+     "out_price": 65.0,
+     "ret_day": "2026-11-20",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 7,
+     "total": 130.0,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-11-16",
+     "out_time": "12:25",
+     "out_price": 65.0,
+     "ret_day": "2026-11-20",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 4,
+     "total": 130.0,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-09-29",
+     "out_time": "22:10",
+     "out_price": 65.0,
+     "ret_day": "2026-10-08",
+     "ret_time": "07:35",
+     "ret_price": 65.67,
+     "nights": 9,
+     "total": 130.67,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-10-06",
+     "out_time": "22:10",
+     "out_price": 65.67,
+     "ret_day": "2026-10-14",
+     "ret_time": "10:30",
+     "ret_price": 65.0,
+     "nights": 8,
+     "total": 130.67,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-10-07",
+     "out_time": "12:45",
+     "out_price": 65.67,
+     "ret_day": "2026-10-14",
+     "ret_time": "10:30",
+     "ret_price": 65.0,
+     "nights": 7,
+     "total": 130.67,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-10-13",
+     "out_time": "22:10",
+     "out_price": 65.0,
+     "ret_day": "2026-10-21",
+     "ret_time": "06:20",
+     "ret_price": 65.67,
+     "nights": 8,
+     "total": 130.67,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-10-20",
+     "out_time": "22:10",
+     "out_price": 65.67,
+     "ret_day": "2026-10-30",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 10,
+     "total": 130.67,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-11-23",
+     "out_time": "12:25",
+     "out_price": 65.67,
+     "ret_day": "2026-11-27",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 4,
+     "total": 130.67,
+     "vs_median_pct": -54
+    }
+   ]
+  },
+  "BHX": {
+   "normal": {
+    "median": 538.56,
+    "q1": 334.62,
+    "q3": 658.23,
+    "n": 114
+   },
+   "best": [
+    {
+     "out_day": "2026-11-20",
+     "out_time": "10:25",
+     "out_price": 87.0,
+     "ret_day": "2026-11-26",
+     "ret_time": "15:25",
+     "ret_price": 87.0,
+     "nights": 6,
+     "total": 174.0,
+     "vs_median_pct": -68
+    },
+    {
+     "out_day": "2026-11-27",
+     "out_time": "10:25",
+     "out_price": 87.0,
+     "ret_day": "2026-12-03",
+     "ret_time": "15:25",
+     "ret_price": 87.0,
+     "nights": 6,
+     "total": 174.0,
+     "vs_median_pct": -68
+    },
+    {
+     "out_day": "2026-12-03",
+     "out_time": "19:10",
+     "out_price": 78.81,
+     "ret_day": "2026-12-06",
+     "ret_time": "15:45",
+     "ret_price": 101.75,
+     "nights": 3,
+     "total": 180.56,
+     "vs_median_pct": -66
+    },
+    {
+     "out_day": "2026-11-19",
+     "out_time": "19:10",
+     "out_price": 96.34,
+     "ret_day": "2026-11-26",
+     "ret_time": "15:25",
+     "ret_price": 87.0,
+     "nights": 7,
+     "total": 183.34,
+     "vs_median_pct": -66
+    },
+    {
+     "out_day": "2026-11-26",
+     "out_time": "19:10",
+     "out_price": 96.34,
+     "ret_day": "2026-12-03",
+     "ret_time": "15:25",
+     "ret_price": 87.0,
+     "nights": 7,
+     "total": 183.34,
+     "vs_median_pct": -66
+    },
+    {
+     "out_day": "2026-11-13",
+     "out_time": "10:25",
+     "out_price": 87.0,
+     "ret_day": "2026-11-19",
+     "ret_time": "15:25",
+     "ret_price": 96.66,
+     "nights": 6,
+     "total": 183.66,
+     "vs_median_pct": -66
+    },
+    {
+     "out_day": "2026-11-12",
+     "out_time": "19:10",
+     "out_price": 102.56,
+     "ret_day": "2026-11-15",
+     "ret_time": "15:45",
+     "ret_price": 87.0,
+     "nights": 3,
+     "total": 189.56,
+     "vs_median_pct": -65
+    },
+    {
+     "out_day": "2026-11-22",
+     "out_time": "19:30",
+     "out_price": 127.0,
+     "ret_day": "2026-11-26",
+     "ret_time": "15:25",
+     "ret_price": 87.0,
+     "nights": 4,
+     "total": 214.0,
+     "vs_median_pct": -60
+    },
+    {
+     "out_day": "2026-10-25",
+     "out_time": "19:30",
+     "out_price": 140.26,
+     "ret_day": "2026-10-30",
+     "ret_time": "06:40",
+     "ret_price": 74.0,
+     "nights": 5,
+     "total": 214.26,
+     "vs_median_pct": -60
+    },
+    {
+     "out_day": "2026-10-22",
+     "out_time": "10:20",
+     "out_price": 141.0,
+     "ret_day": "2026-10-30",
+     "ret_time": "06:40",
+     "ret_price": 74.0,
+     "nights": 8,
+     "total": 215.0,
+     "vs_median_pct": -60
+    }
+   ]
+  },
+  "CRL": {
+   "normal": {
+    "median": 170.77,
+    "q1": 134.81,
+    "q3": 210.25,
+    "n": 7
+   },
+   "best": [
+    {
+     "out_day": "2026-10-08",
+     "out_time": "15:30",
+     "out_price": 65.67,
+     "ret_day": "2026-10-15",
+     "ret_time": "13:05",
+     "ret_price": 65.67,
+     "nights": 7,
+     "total": 131.34,
+     "vs_median_pct": -23
+    },
+    {
+     "out_day": "2026-10-15",
+     "out_time": "15:30",
+     "out_price": 65.67,
+     "ret_day": "2026-10-22",
+     "ret_time": "13:05",
+     "ret_price": 65.67,
+     "nights": 7,
+     "total": 131.34,
+     "vs_median_pct": -23
+    },
+    {
+     "out_day": "2026-10-01",
+     "out_time": "15:30",
+     "out_price": 72.49,
+     "ret_day": "2026-10-08",
+     "ret_time": "13:05",
+     "ret_price": 65.79,
+     "nights": 7,
+     "total": 138.28,
+     "vs_median_pct": -19
+    },
+    {
+     "out_day": "2026-10-18",
+     "out_time": "14:25",
+     "out_price": 105.1,
+     "ret_day": "2026-10-22",
+     "ret_time": "13:05",
+     "ret_price": 65.67,
+     "nights": 4,
+     "total": 170.77,
+     "vs_median_pct": 0
+    },
+    {
+     "out_day": "2026-10-04",
+     "out_time": "14:25",
+     "out_price": 113.86,
+     "ret_day": "2026-10-08",
+     "ret_time": "13:05",
+     "ret_price": 65.79,
+     "nights": 4,
+     "total": 179.65,
+     "vs_median_pct": 5
+    },
+    {
+     "out_day": "2026-10-11",
+     "out_time": "14:25",
+     "out_price": 175.19,
+     "ret_day": "2026-10-15",
+     "ret_time": "13:05",
+     "ret_price": 65.67,
+     "nights": 4,
+     "total": 240.86,
+     "vs_median_pct": 41
+    },
+    {
+     "out_day": "2026-09-27",
+     "out_time": "14:25",
+     "out_price": 538.81,
+     "ret_day": "2026-10-01",
+     "ret_time": "13:05",
+     "ret_price": 70.05,
+     "nights": 4,
+     "total": 608.86,
+     "vs_median_pct": 257
+    }
+   ]
+  },
+  "DUB": {
+   "normal": {
+    "median": 837.0,
+    "q1": 426.15,
+    "q3": 1159.76,
+    "n": 97
+   },
+   "best": [
+    {
+     "out_day": "2026-12-04",
+     "out_time": "20:25",
+     "out_price": 109.48,
+     "ret_day": "2026-12-07",
+     "ret_time": "09:00",
+     "ret_price": 130.0,
+     "nights": 3,
+     "total": 239.48,
+     "vs_median_pct": -71
+    },
+    {
+     "out_day": "2026-11-16",
+     "out_time": "13:05",
+     "out_price": 130.0,
+     "ret_day": "2026-11-20",
+     "ret_time": "16:20",
+     "ret_price": 130.0,
+     "nights": 4,
+     "total": 260.0,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-23",
+     "out_time": "13:05",
+     "out_price": 130.0,
+     "ret_day": "2026-11-30",
+     "ret_time": "09:00",
+     "ret_price": 130.0,
+     "nights": 7,
+     "total": 260.0,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-27",
+     "out_time": "20:25",
+     "out_price": 130.0,
+     "ret_day": "2026-11-30",
+     "ret_time": "09:00",
+     "ret_price": 130.0,
+     "nights": 3,
+     "total": 260.0,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-30",
+     "out_time": "13:05",
+     "out_price": 130.0,
+     "ret_day": "2026-12-07",
+     "ret_time": "09:00",
+     "ret_price": 130.0,
+     "nights": 7,
+     "total": 260.0,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-13",
+     "out_time": "20:25",
+     "out_price": 140.14,
+     "ret_day": "2026-11-20",
+     "ret_time": "16:20",
+     "ret_price": 130.0,
+     "nights": 7,
+     "total": 270.14,
+     "vs_median_pct": -68
+    },
+    {
+     "out_day": "2026-11-09",
+     "out_time": "13:05",
+     "out_price": 140.38,
+     "ret_day": "2026-11-13",
+     "ret_time": "16:20",
+     "ret_price": 130.0,
+     "nights": 4,
+     "total": 270.38,
+     "vs_median_pct": -68
+    },
+    {
+     "out_day": "2026-11-20",
+     "out_time": "20:25",
+     "out_price": 162.05,
+     "ret_day": "2026-11-30",
+     "ret_time": "09:00",
+     "ret_price": 130.0,
+     "nights": 10,
+     "total": 292.05,
+     "vs_median_pct": -65
+    },
+    {
+     "out_day": "2027-01-22",
+     "out_time": "20:25",
+     "out_price": 166.0,
+     "ret_day": "2027-01-29",
+     "ret_time": "16:20",
+     "ret_price": 157.4,
+     "nights": 7,
+     "total": 323.4,
+     "vs_median_pct": -61
+    },
+    {
+     "out_day": "2027-02-26",
+     "out_time": "20:25",
+     "out_price": 175.19,
+     "ret_day": "2027-03-05",
+     "ret_time": "16:20",
+     "ret_price": 148.66,
+     "nights": 7,
+     "total": 323.85,
+     "vs_median_pct": -61
+    }
+   ]
+  },
+  "STN": {
+   "normal": {
+    "median": 479.3,
+    "q1": 332.62,
+    "q3": 655.0,
+    "n": 293
+   },
+   "best": [
+    {
+     "out_day": "2026-10-20",
+     "out_time": "20:45",
+     "out_price": 77.64,
+     "ret_day": "2026-10-30",
+     "ret_time": "06:35",
+     "ret_price": 96.13,
+     "nights": 10,
+     "total": 173.77,
+     "vs_median_pct": -64
+    },
+    {
+     "out_day": "2026-11-29",
+     "out_time": "13:40",
+     "out_price": 87.0,
+     "ret_day": "2026-12-04",
+     "ret_time": "06:35",
+     "ret_price": 87.0,
+     "nights": 5,
+     "total": 174.0,
+     "vs_median_pct": -64
+    },
+    {
+     "out_day": "2026-10-21",
+     "out_time": "11:50",
+     "out_price": 83.55,
+     "ret_day": "2026-10-30",
+     "ret_time": "06:35",
+     "ret_price": 96.13,
+     "nights": 9,
+     "total": 179.68,
+     "vs_median_pct": -63
+    },
+    {
+     "out_day": "2026-10-26",
+     "out_time": "10:55",
+     "out_price": 96.13,
+     "ret_day": "2026-11-01",
+     "ret_time": "10:05",
+     "ret_price": 86.48,
+     "nights": 6,
+     "total": 182.61,
+     "vs_median_pct": -62
+    },
+    {
+     "out_day": "2026-11-28",
+     "out_time": "12:25",
+     "out_price": 100.72,
+     "ret_day": "2026-12-04",
+     "ret_time": "06:35",
+     "ret_price": 87.0,
+     "nights": 6,
+     "total": 187.72,
+     "vs_median_pct": -61
+    },
+    {
+     "out_day": "2026-10-27",
+     "out_time": "20:30",
+     "out_price": 102.86,
+     "ret_day": "2026-11-01",
+     "ret_time": "10:05",
+     "ret_price": 86.48,
+     "nights": 5,
+     "total": 189.34,
+     "vs_median_pct": -60
+    },
+    {
+     "out_day": "2026-11-26",
+     "out_time": "17:45",
+     "out_price": 103.3,
+     "ret_day": "2026-11-29",
+     "ret_time": "10:05",
+     "ret_price": 87.0,
+     "nights": 3,
+     "total": 190.3,
+     "vs_median_pct": -60
+    },
+    {
+     "out_day": "2026-12-05",
+     "out_time": "12:25",
+     "out_price": 87.0,
+     "ret_day": "2026-12-11",
+     "ret_time": "10:45",
+     "ret_price": 105.23,
+     "nights": 6,
+     "total": 192.23,
+     "vs_median_pct": -60
+    },
+    {
+     "out_day": "2026-12-06",
+     "out_time": "13:40",
+     "out_price": 91.96,
+     "ret_day": "2026-12-11",
+     "ret_time": "10:45",
+     "ret_price": 105.23,
+     "nights": 5,
+     "total": 197.19,
+     "vs_median_pct": -59
+    },
+    {
+     "out_day": "2026-10-25",
+     "out_time": "13:40",
+     "out_price": 111.88,
+     "ret_day": "2026-11-01",
+     "ret_time": "10:05",
+     "ret_price": 86.48,
+     "nights": 7,
+     "total": 198.36,
+     "vs_median_pct": -59
+    }
+   ]
+  }
+ },
+ "trips_top": [
+  {
+   "dest": "BGY",
+   "out_day": "2026-10-22",
+   "out_time": "09:50",
+   "out_price": 65.0,
+   "ret_day": "2026-10-30",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 8,
+   "total": 130.0,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-11-09",
+   "out_time": "12:25",
+   "out_price": 65.0,
+   "ret_day": "2026-11-13",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 4,
+   "total": 130.0,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-11-13",
+   "out_time": "12:10",
+   "out_price": 65.0,
+   "ret_day": "2026-11-20",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 7,
+   "total": 130.0,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-11-16",
+   "out_time": "12:25",
+   "out_price": 65.0,
+   "ret_day": "2026-11-20",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 4,
+   "total": 130.0,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-09-29",
+   "out_time": "22:10",
+   "out_price": 65.0,
+   "ret_day": "2026-10-08",
+   "ret_time": "07:35",
+   "ret_price": 65.67,
+   "nights": 9,
+   "total": 130.67,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-10-06",
+   "out_time": "22:10",
+   "out_price": 65.67,
+   "ret_day": "2026-10-14",
+   "ret_time": "10:30",
+   "ret_price": 65.0,
+   "nights": 8,
+   "total": 130.67,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-10-07",
+   "out_time": "12:45",
+   "out_price": 65.67,
+   "ret_day": "2026-10-14",
+   "ret_time": "10:30",
+   "ret_price": 65.0,
+   "nights": 7,
+   "total": 130.67,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-10-13",
+   "out_time": "22:10",
+   "out_price": 65.0,
+   "ret_day": "2026-10-21",
+   "ret_time": "06:20",
+   "ret_price": 65.67,
+   "nights": 8,
+   "total": 130.67,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-10-20",
+   "out_time": "22:10",
+   "out_price": 65.67,
+   "ret_day": "2026-10-30",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 10,
+   "total": 130.67,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-11-23",
+   "out_time": "12:25",
+   "out_price": 65.67,
+   "ret_day": "2026-11-27",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 4,
+   "total": 130.67,
+   "vs_median_pct": -54
+  }
+ ]
 }
