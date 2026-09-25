@@ -82,6 +82,17 @@ def _stats(vals):
     return {"median": _median(vals), "q1": round(q1, 2), "q3": round(q3, 2), "n": len(vals)}
 
 
+def covers_weekend(out_day: str, ret_day: str) -> bool:
+    """Czy pobyt obejmuje całą sobotę i niedzielę (wylot najpóźniej w sobotę, powrót najwcześniej w niedzielę)."""
+    out, ret = _date(out_day), _date(ret_day)
+    sat = out + dt.timedelta(days=(5 - out.weekday()) % 7)
+    return sat + dt.timedelta(days=1) <= ret
+
+
+def _trip_key(total, weekend):
+    return (total, not weekend)  # przy równej cenie wygrywa wyjazd z weekendem
+
+
 def pair_trips(out_fares, ret_fares, nights=TRIP_NIGHTS) -> list[dict]:
     """Dla każdego dnia wylotu najtańszy powrót za `nights` dni. Fares: [(day, dep_time, price)]."""
     returns = {day: (dep, price) for day, dep, price in ret_fares}
@@ -90,12 +101,15 @@ def pair_trips(out_fares, ret_fares, nights=TRIP_NIGHTS) -> list[dict]:
         best = None
         for k in range(nights[0], nights[1] + 1):
             rd = (_date(day) + dt.timedelta(days=k)).isoformat()
-            if rd in returns and (best is None or returns[rd][1] < best[2]):
-                best = (rd, returns[rd][0], returns[rd][1], k)
+            if rd not in returns:
+                continue
+            cand = (rd, returns[rd][0], returns[rd][1], k, covers_weekend(day, rd))
+            if best is None or _trip_key(cand[2], cand[4]) < _trip_key(best[2], best[4]):
+                best = cand
         if best:
             trips.append({"out_day": day, "out_time": dep, "out_price": price,
                           "ret_day": best[0], "ret_time": best[1], "ret_price": best[2],
-                          "nights": best[3], "total": round(price + best[2], 2)})
+                          "nights": best[3], "total": round(price + best[2], 2), "weekend": best[4]})
     return trips
 
 
@@ -167,10 +181,10 @@ def build(prices: list[dict], runs: list[dict], today: dt.date) -> dict:
         pairs = pair_trips(routes[name]["upcoming"], routes[f"{dest}-{HOME}"]["upcoming"])
         normal = _stats([x["total"] for x in pairs])
         best = [{**x, "vs_median_pct": _vs(x["total"], normal["median"])}
-                for x in sorted(pairs, key=lambda x: (x["total"], x["out_day"]))]
+                for x in sorted(pairs, key=lambda x: (*_trip_key(x["total"], x["weekend"]), x["out_day"]))]
         trips[dest] = {"normal": normal, "best": best[:10]}
         top += [{"dest": dest, **x} for x in best[:TOP_PER_DEST]]
-    top.sort(key=lambda x: (x["total"], x["out_day"], x["dest"]))
+    top.sort(key=lambda x: (*_trip_key(x["total"], x["weekend"]), x["out_day"], x["dest"]))
     return {"generated": t, "last_ok": last_ok, "history_days": len(ok_days),
             "min_n": MIN_N, "min_n_cell": MIN_N_CELL, "min_history_days": MIN_HISTORY_DAYS,
             "trip_nights": list(TRIP_NIGHTS), "routes": out, "trips": trips, "trips_top": top[:10]}

@@ -162,7 +162,7 @@ def test_pair_trips_picks_cheapest_return_within_window():
     assert analyze.pair_trips(out, ret) == [{
         "out_day": "2026-10-10", "out_time": "06:00", "out_price": 100.0,
         "ret_day": "2026-10-20", "ret_time": "09:00", "ret_price": 40.0,
-        "nights": 10, "total": 140.0}]
+        "nights": 10, "total": 140.0, "weekend": True}]
 
 
 def test_pair_trips_tie_prefers_shorter_stay_and_skips_without_return():
@@ -186,7 +186,7 @@ def test_build_trips_per_destination_and_top():
     assert stn["normal"]["median"] == 150.0 and stn["normal"]["n"] == 1
     assert stn["best"] == [{"out_day": "2026-10-10", "out_time": "10:00", "out_price": 100.0,
                             "ret_day": "2026-10-15", "ret_time": "10:00", "ret_price": 50.0,
-                            "nights": 5, "total": 150.0, "vs_median_pct": 0}]
+                            "nights": 5, "total": 150.0, "weekend": True, "vs_median_pct": 0}]
     assert [t["out_day"] for t in out["trips"]["DUB"]["best"]] == ["2026-10-11"]
     assert [(t["dest"], t["total"]) for t in out["trips_top"]] == [("DUB", 50.0), ("STN", 150.0)]
     assert out["trip_nights"] == [3, 10]
@@ -202,3 +202,32 @@ def test_trips_top_caps_three_per_destination():
     out = analyze.build(prices, [run("2026-09-01", routes="DUB;STN")], dt.date(2026, 9, 1))
     assert len(out["trips"]["STN"]["best"]) == 5
     assert [t["dest"] for t in out["trips_top"]] == ["STN", "STN", "STN", "DUB"]
+
+
+@pytest.mark.parametrize("out,ret,expected", [
+    ("2026-10-09", "2026-10-12", True),   # pt → pn: cała sob+nd
+    ("2026-10-10", "2026-10-13", True),   # sob → wt
+    ("2026-10-11", "2026-10-14", False),  # nd → śr: brak soboty
+    ("2026-10-06", "2026-10-10", False),  # wt → sob: brak niedzieli
+    ("2026-10-06", "2026-10-11", True),   # wt → nd
+])
+def test_covers_weekend(out, ret, expected):
+    assert analyze.covers_weekend(out, ret) is expected
+
+
+def test_pair_trips_equal_price_prefers_weekend_return():
+    out = [("2026-10-06", "06:00", 100.0)]                          # wtorek
+    ret = [("2026-10-09", "07:00", 40.0),                           # pt — bez weekendu
+           ("2026-10-12", "07:00", 40.0)]                           # pn — z weekendem
+    [t] = analyze.pair_trips(out, ret)
+    assert t["ret_day"] == "2026-10-12" and t["weekend"] is True
+
+
+def test_ranking_equal_total_prefers_weekend_trip():
+    prices = [p("2026-09-01", "2026-10-06", "50.00"),               # wt → pt: bez weekendu
+              p("2026-09-01", "2026-10-09", "50.00", origin="STN", dest="LCJ"),
+              p("2026-09-01", "2026-10-16", "50.00"),               # pt → pn: z weekendem
+              p("2026-09-01", "2026-10-19", "50.00", origin="STN", dest="LCJ")]
+    out = analyze.build(prices, [run("2026-09-01")], dt.date(2026, 9, 1))
+    assert [t["out_day"] for t in out["trips"]["STN"]["best"]] == ["2026-10-16", "2026-10-06"]
+    assert out["trips_top"][0]["out_day"] == "2026-10-16"

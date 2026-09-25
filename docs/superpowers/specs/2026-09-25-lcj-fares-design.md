@@ -91,7 +91,8 @@ Per kierunek:
 - **„Cena normalna”** trasy — mediana i kwartyle tych samych cen (ostatni udany pomiar).
 - **Wyjazdy z Łodzi (tam + powrót)** — dla każdego kierunku X i każdego dnia wylotu LCJ→X (ostatni udany
   pomiar, loty od jutra) najtańszy powrót X→LCJ 3–10 dni później; top 10 par na kierunek + „typowy wyjazd”
-  (mediana/kwartyle sum najlepszych par) + ranking top 10 ze wszystkich kierunków (max 3 na kierunek). Tylko najtańszy lot dnia (ograniczenie API).
+  (mediana/kwartyle sum najlepszych par) + ranking top 10 ze wszystkich kierunków (max 3 na kierunek). Przy równej cenie preferowany wyjazd obejmujący
+  weekend (cała sobota i niedziela w trakcie pobytu) — przy wyborze powrotu i w rankingach. Tylko najtańszy lot dnia (ograniczenie API).
 
 Wyniki z małą próbą (`n` poniżej progu, domyślnie 5; komórki heatmapy: 3) są wyszarzone na stronie.
 Krzywa jest wyszarzona z ostrzeżeniem, dopóki historia ma mniej niż 30 dni.

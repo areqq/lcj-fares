@@ -2347,6 +2347,7 @@
      "ret_price": 65.67,
      "nights": 6,
      "total": 192.87,
+     "weekend": true,
      "vs_median_pct": -71
     },
     {
@@ -2358,6 +2359,7 @@
      "ret_price": 121.0,
      "nights": 5,
      "total": 221.72,
+     "weekend": false,
      "vs_median_pct": -67
     },
     {
@@ -2369,6 +2371,7 @@
      "ret_price": 121.0,
      "nights": 6,
      "total": 234.86,
+     "weekend": true,
      "vs_median_pct": -65
     },
     {
@@ -2380,17 +2383,7 @@
      "ret_price": 121.0,
      "nights": 7,
      "total": 242.0,
-     "vs_median_pct": -64
-    },
-    {
-     "out_day": "2026-11-22",
-     "out_time": "20:20",
-     "out_price": 121.0,
-     "ret_day": "2026-11-26",
-     "ret_time": "08:40",
-     "ret_price": 121.0,
-     "nights": 4,
-     "total": 242.0,
+     "weekend": true,
      "vs_median_pct": -64
     },
     {
@@ -2402,6 +2395,19 @@
      "ret_price": 121.0,
      "nights": 7,
      "total": 242.0,
+     "weekend": true,
+     "vs_median_pct": -64
+    },
+    {
+     "out_day": "2026-11-22",
+     "out_time": "20:20",
+     "out_price": 121.0,
+     "ret_day": "2026-11-26",
+     "ret_time": "08:40",
+     "ret_price": 121.0,
+     "nights": 4,
+     "total": 242.0,
+     "weekend": false,
      "vs_median_pct": -64
     },
     {
@@ -2413,6 +2419,7 @@
      "ret_price": 121.0,
      "nights": 5,
      "total": 242.0,
+     "weekend": false,
      "vs_median_pct": -64
     },
     {
@@ -2424,17 +2431,19 @@
      "ret_price": 121.0,
      "nights": 7,
      "total": 248.0,
+     "weekend": true,
      "vs_median_pct": -63
     },
     {
      "out_day": "2027-01-10",
      "out_time": "20:20",
      "out_price": 96.17,
-     "ret_day": "2027-01-15",
-     "ret_time": "16:30",
+     "ret_day": "2027-01-17",
+     "ret_time": "16:10",
      "ret_price": 153.0,
-     "nights": 5,
+     "nights": 7,
      "total": 249.17,
+     "weekend": true,
      "vs_median_pct": -63
     },
     {
@@ -2446,6 +2455,7 @@
      "ret_price": 65.67,
      "nights": 4,
      "total": 262.77,
+     "weekend": false,
      "vs_median_pct": -61
     }
    ]
@@ -2467,6 +2477,7 @@
      "ret_price": 96.34,
      "nights": 10,
      "total": 192.68,
+     "weekend": true,
      "vs_median_pct": -70
     },
     {
@@ -2478,6 +2489,7 @@
      "ret_price": 96.17,
      "nights": 10,
      "total": 204.17,
+     "weekend": true,
      "vs_median_pct": -69
     },
     {
@@ -2489,6 +2501,7 @@
      "ret_price": 96.34,
      "nights": 3,
      "total": 204.34,
+     "weekend": false,
      "vs_median_pct": -69
     },
     {
@@ -2500,6 +2513,7 @@
      "ret_price": 100.55,
      "nights": 10,
      "total": 205.47,
+     "weekend": true,
      "vs_median_pct": -68
     },
     {
@@ -2511,6 +2525,7 @@
      "ret_price": 100.55,
      "nights": 7,
      "total": 208.55,
+     "weekend": true,
      "vs_median_pct": -68
     },
     {
@@ -2522,6 +2537,7 @@
      "ret_price": 96.17,
      "nights": 3,
      "total": 214.41,
+     "weekend": false,
      "vs_median_pct": -67
     },
     {
@@ -2533,6 +2549,7 @@
      "ret_price": 108.0,
      "nights": 7,
      "total": 223.1,
+     "weekend": true,
      "vs_median_pct": -66
     },
     {
@@ -2544,6 +2561,7 @@
      "ret_price": 136.0,
      "nights": 3,
      "total": 272.0,
+     "weekend": false,
      "vs_median_pct": -58
     },
     {
@@ -2555,6 +2573,7 @@
      "ret_price": 144.28,
      "nights": 10,
      "total": 280.28,
+     "weekend": true,
      "vs_median_pct": -57
     },
     {
@@ -2566,6 +2585,7 @@
      "ret_price": 148.25,
      "nights": 7,
      "total": 284.25,
+     "weekend": true,
      "vs_median_pct": -56
     }
    ]
@@ -2587,17 +2607,7 @@
      "ret_price": 65.0,
      "nights": 8,
      "total": 130.0,
-     "vs_median_pct": -54
-    },
-    {
-     "out_day": "2026-11-09",
-     "out_time": "12:25",
-     "out_price": 65.0,
-     "ret_day": "2026-11-13",
-     "ret_time": "09:50",
-     "ret_price": 65.0,
-     "nights": 4,
-     "total": 130.0,
+     "weekend": true,
      "vs_median_pct": -54
     },
     {
@@ -2609,6 +2619,19 @@
      "ret_price": 65.0,
      "nights": 7,
      "total": 130.0,
+     "weekend": true,
+     "vs_median_pct": -54
+    },
+    {
+     "out_day": "2026-11-09",
+     "out_time": "12:25",
+     "out_price": 65.0,
+     "ret_day": "2026-11-13",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 4,
+     "total": 130.0,
+     "weekend": false,
      "vs_median_pct": -54
     },
     {
@@ -2620,6 +2643,7 @@
      "ret_price": 65.0,
      "nights": 4,
      "total": 130.0,
+     "weekend": false,
      "vs_median_pct": -54
     },
     {
@@ -2631,6 +2655,7 @@
      "ret_price": 65.67,
      "nights": 9,
      "total": 130.67,
+     "weekend": true,
      "vs_median_pct": -54
     },
     {
@@ -2642,6 +2667,7 @@
      "ret_price": 65.0,
      "nights": 8,
      "total": 130.67,
+     "weekend": true,
      "vs_median_pct": -54
     },
     {
@@ -2653,6 +2679,7 @@
      "ret_price": 65.0,
      "nights": 7,
      "total": 130.67,
+     "weekend": true,
      "vs_median_pct": -54
     },
     {
@@ -2664,6 +2691,7 @@
      "ret_price": 65.67,
      "nights": 8,
      "total": 130.67,
+     "weekend": true,
      "vs_median_pct": -54
     },
     {
@@ -2675,6 +2703,7 @@
      "ret_price": 65.0,
      "nights": 10,
      "total": 130.67,
+     "weekend": true,
      "vs_median_pct": -54
     },
     {
@@ -2686,6 +2715,7 @@
      "ret_price": 65.0,
      "nights": 4,
      "total": 130.67,
+     "weekend": false,
      "vs_median_pct": -54
     }
    ]
@@ -2707,6 +2737,7 @@
      "ret_price": 87.0,
      "nights": 6,
      "total": 174.0,
+     "weekend": true,
      "vs_median_pct": -68
     },
     {
@@ -2718,6 +2749,7 @@
      "ret_price": 87.0,
      "nights": 6,
      "total": 174.0,
+     "weekend": true,
      "vs_median_pct": -68
     },
     {
@@ -2729,6 +2761,7 @@
      "ret_price": 101.75,
      "nights": 3,
      "total": 180.56,
+     "weekend": true,
      "vs_median_pct": -66
     },
     {
@@ -2740,6 +2773,7 @@
      "ret_price": 87.0,
      "nights": 7,
      "total": 183.34,
+     "weekend": true,
      "vs_median_pct": -66
     },
     {
@@ -2751,6 +2785,7 @@
      "ret_price": 87.0,
      "nights": 7,
      "total": 183.34,
+     "weekend": true,
      "vs_median_pct": -66
     },
     {
@@ -2762,6 +2797,7 @@
      "ret_price": 96.66,
      "nights": 6,
      "total": 183.66,
+     "weekend": true,
      "vs_median_pct": -66
     },
     {
@@ -2773,6 +2809,7 @@
      "ret_price": 87.0,
      "nights": 3,
      "total": 189.56,
+     "weekend": true,
      "vs_median_pct": -65
     },
     {
@@ -2784,6 +2821,7 @@
      "ret_price": 87.0,
      "nights": 4,
      "total": 214.0,
+     "weekend": false,
      "vs_median_pct": -60
     },
     {
@@ -2795,6 +2833,7 @@
      "ret_price": 74.0,
      "nights": 5,
      "total": 214.26,
+     "weekend": false,
      "vs_median_pct": -60
     },
     {
@@ -2806,6 +2845,7 @@
      "ret_price": 74.0,
      "nights": 8,
      "total": 215.0,
+     "weekend": true,
      "vs_median_pct": -60
     }
    ]
@@ -2827,6 +2867,7 @@
      "ret_price": 65.67,
      "nights": 7,
      "total": 131.34,
+     "weekend": true,
      "vs_median_pct": -23
     },
     {
@@ -2838,6 +2879,7 @@
      "ret_price": 65.67,
      "nights": 7,
      "total": 131.34,
+     "weekend": true,
      "vs_median_pct": -23
     },
     {
@@ -2849,6 +2891,7 @@
      "ret_price": 65.79,
      "nights": 7,
      "total": 138.28,
+     "weekend": true,
      "vs_median_pct": -19
     },
     {
@@ -2860,6 +2903,7 @@
      "ret_price": 65.67,
      "nights": 4,
      "total": 170.77,
+     "weekend": false,
      "vs_median_pct": 0
     },
     {
@@ -2871,6 +2915,7 @@
      "ret_price": 65.79,
      "nights": 4,
      "total": 179.65,
+     "weekend": false,
      "vs_median_pct": 5
     },
     {
@@ -2882,6 +2927,7 @@
      "ret_price": 65.67,
      "nights": 4,
      "total": 240.86,
+     "weekend": false,
      "vs_median_pct": 41
     },
     {
@@ -2893,6 +2939,7 @@
      "ret_price": 70.05,
      "nights": 4,
      "total": 608.86,
+     "weekend": false,
      "vs_median_pct": 257
     }
    ]
@@ -2914,18 +2961,8 @@
      "ret_price": 130.0,
      "nights": 3,
      "total": 239.48,
+     "weekend": true,
      "vs_median_pct": -71
-    },
-    {
-     "out_day": "2026-11-16",
-     "out_time": "13:05",
-     "out_price": 130.0,
-     "ret_day": "2026-11-20",
-     "ret_time": "16:20",
-     "ret_price": 130.0,
-     "nights": 4,
-     "total": 260.0,
-     "vs_median_pct": -69
     },
     {
      "out_day": "2026-11-23",
@@ -2936,6 +2973,7 @@
      "ret_price": 130.0,
      "nights": 7,
      "total": 260.0,
+     "weekend": true,
      "vs_median_pct": -69
     },
     {
@@ -2947,6 +2985,7 @@
      "ret_price": 130.0,
      "nights": 3,
      "total": 260.0,
+     "weekend": true,
      "vs_median_pct": -69
     },
     {
@@ -2958,6 +2997,19 @@
      "ret_price": 130.0,
      "nights": 7,
      "total": 260.0,
+     "weekend": true,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-16",
+     "out_time": "13:05",
+     "out_price": 130.0,
+     "ret_day": "2026-11-20",
+     "ret_time": "16:20",
+     "ret_price": 130.0,
+     "nights": 4,
+     "total": 260.0,
+     "weekend": false,
      "vs_median_pct": -69
     },
     {
@@ -2969,6 +3021,7 @@
      "ret_price": 130.0,
      "nights": 7,
      "total": 270.14,
+     "weekend": true,
      "vs_median_pct": -68
     },
     {
@@ -2980,6 +3033,7 @@
      "ret_price": 130.0,
      "nights": 4,
      "total": 270.38,
+     "weekend": false,
      "vs_median_pct": -68
     },
     {
@@ -2991,6 +3045,7 @@
      "ret_price": 130.0,
      "nights": 10,
      "total": 292.05,
+     "weekend": true,
      "vs_median_pct": -65
     },
     {
@@ -3002,6 +3057,7 @@
      "ret_price": 157.4,
      "nights": 7,
      "total": 323.4,
+     "weekend": true,
      "vs_median_pct": -61
     },
     {
@@ -3013,6 +3069,7 @@
      "ret_price": 148.66,
      "nights": 7,
      "total": 323.85,
+     "weekend": true,
      "vs_median_pct": -61
     }
    ]
@@ -3034,6 +3091,7 @@
      "ret_price": 96.13,
      "nights": 10,
      "total": 173.77,
+     "weekend": true,
      "vs_median_pct": -64
     },
     {
@@ -3045,6 +3103,7 @@
      "ret_price": 87.0,
      "nights": 5,
      "total": 174.0,
+     "weekend": false,
      "vs_median_pct": -64
     },
     {
@@ -3056,6 +3115,7 @@
      "ret_price": 96.13,
      "nights": 9,
      "total": 179.68,
+     "weekend": true,
      "vs_median_pct": -63
     },
     {
@@ -3067,6 +3127,7 @@
      "ret_price": 86.48,
      "nights": 6,
      "total": 182.61,
+     "weekend": true,
      "vs_median_pct": -62
     },
     {
@@ -3078,6 +3139,7 @@
      "ret_price": 87.0,
      "nights": 6,
      "total": 187.72,
+     "weekend": true,
      "vs_median_pct": -61
     },
     {
@@ -3089,6 +3151,7 @@
      "ret_price": 86.48,
      "nights": 5,
      "total": 189.34,
+     "weekend": true,
      "vs_median_pct": -60
     },
     {
@@ -3100,6 +3163,7 @@
      "ret_price": 87.0,
      "nights": 3,
      "total": 190.3,
+     "weekend": true,
      "vs_median_pct": -60
     },
     {
@@ -3111,6 +3175,7 @@
      "ret_price": 105.23,
      "nights": 6,
      "total": 192.23,
+     "weekend": true,
      "vs_median_pct": -60
     },
     {
@@ -3122,6 +3187,7 @@
      "ret_price": 105.23,
      "nights": 5,
      "total": 197.19,
+     "weekend": false,
      "vs_median_pct": -59
     },
     {
@@ -3133,6 +3199,7 @@
      "ret_price": 86.48,
      "nights": 7,
      "total": 198.36,
+     "weekend": true,
      "vs_median_pct": -59
     }
    ]
@@ -3149,18 +3216,7 @@
    "ret_price": 65.0,
    "nights": 8,
    "total": 130.0,
-   "vs_median_pct": -54
-  },
-  {
-   "dest": "BGY",
-   "out_day": "2026-11-09",
-   "out_time": "12:25",
-   "out_price": 65.0,
-   "ret_day": "2026-11-13",
-   "ret_time": "09:50",
-   "ret_price": 65.0,
-   "nights": 4,
-   "total": 130.0,
+   "weekend": true,
    "vs_median_pct": -54
   },
   {
@@ -3173,6 +3229,20 @@
    "ret_price": 65.0,
    "nights": 7,
    "total": 130.0,
+   "weekend": true,
+   "vs_median_pct": -54
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-11-09",
+   "out_time": "12:25",
+   "out_price": 65.0,
+   "ret_day": "2026-11-13",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 4,
+   "total": 130.0,
+   "weekend": false,
    "vs_median_pct": -54
   },
   {
@@ -3185,6 +3255,7 @@
    "ret_price": 65.67,
    "nights": 7,
    "total": 131.34,
+   "weekend": true,
    "vs_median_pct": -23
   },
   {
@@ -3197,6 +3268,7 @@
    "ret_price": 65.67,
    "nights": 7,
    "total": 131.34,
+   "weekend": true,
    "vs_median_pct": -23
   },
   {
@@ -3209,6 +3281,7 @@
    "ret_price": 65.79,
    "nights": 7,
    "total": 138.28,
+   "weekend": true,
    "vs_median_pct": -19
   },
   {
@@ -3221,6 +3294,7 @@
    "ret_price": 96.13,
    "nights": 10,
    "total": 173.77,
+   "weekend": true,
    "vs_median_pct": -64
   },
   {
@@ -3233,6 +3307,7 @@
    "ret_price": 87.0,
    "nights": 6,
    "total": 174.0,
+   "weekend": true,
    "vs_median_pct": -68
   },
   {
@@ -3245,6 +3320,7 @@
    "ret_price": 87.0,
    "nights": 6,
    "total": 174.0,
+   "weekend": true,
    "vs_median_pct": -68
   },
   {
@@ -3257,6 +3333,7 @@
    "ret_price": 87.0,
    "nights": 5,
    "total": 174.0,
+   "weekend": false,
    "vs_median_pct": -64
   }
  ]

@@ -32,7 +32,7 @@ td.cell { color:#111; }
   <p class="muted" id="meta">Ładowanie…</p>
 
   <section>
-    <h2>Najtańsze wyjazdy z Łodzi</h2>
+    <h2>Najtańsze wyjazdy z Łodzi (powrót po 3–10 dniach)</h2>
     <p class="muted" id="tripsTopNote"></p>
     <div class="scroll"><table id="tripsTop"></table></div>
   </section>
@@ -163,7 +163,7 @@ function renderTrips(t, list, withDest) {
     "wylot", "powrót", "noce", "tam", "z powrotem", "razem", "vs norma"], "th"));
   list.forEach(x => t.append(row([...(withDest ? [x.dest] : []),
     `${x.out_day} ${wdOf(x.out_day)} ${x.out_time}`, `${x.ret_day} ${wdOf(x.ret_day)} ${x.ret_time}`,
-    String(x.nights), zl(x.out_price), zl(x.ret_price), zl(x.total), pct(x.vs_median_pct)])));
+    x.weekend ? `${x.nights} · weekend` : String(x.nights), zl(x.out_price), zl(x.ret_price), zl(x.total), pct(x.vs_median_pct)])));
 }
 
 function renderRouteTrips(name) {
@@ -203,7 +203,7 @@ fetch("data.json", { cache: "no-store" })
     if (!names.length) { document.getElementById("meta").textContent += " · brak danych jeszcze"; return; }
     const [lo, hi] = data.trip_nights;
     document.getElementById("tripsTopNote").textContent =
-      `Wylot z Łodzi + najtańszy powrót ${lo}–${hi} dni później, ceny z ostatniego pomiaru, max 3 na kierunek. „vs norma” — względem typowego wyjazdu na ten kierunek.`;
+      `Wylot z Łodzi + najtańszy powrót ${lo}–${hi} dni później, ceny z ostatniego pomiaru, max 3 na kierunek; przy równej cenie wyżej wyjazdy obejmujące weekend. „vs norma” — względem typowego wyjazdu na ten kierunek.`;
     renderTrips(document.getElementById("tripsTop"), data.trips_top, true);
     names.forEach(n => sel.append(new Option(n.replace("-", " → "), n)));
     sel.value = names.find(n => n.startsWith("LCJ-")) ?? names[0];
