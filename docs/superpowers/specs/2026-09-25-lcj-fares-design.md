@@ -68,7 +68,8 @@ Wiersz dopisujemy tylko, gdy dla klucza `(origin, dest, day)` zmieniła się kt�
 Ponowne uruchomienie tego samego dnia nie dubluje wierszy (idempotencja: brak zmiany ⇒ brak wiersza).
 
 **`data/runs.csv`** — jeden wiersz na uruchomienie:
-`observed, started_utc, requests, failed, status (ok|partial|failed), missing` —
+`observed, started_utc, requests, failed, status (ok|partial|failed), routes, missing` —
+`routes` = `;`-lista kierunków próbowanych w runie (odróżnia „nie próbowano” od „bez zmian”),
 `missing` = lista `ORIGIN-DEST-YYYY-MM`, których nie pobrano.
 
 **`data/routes.json`** — ostatnia udanie pobrana lista kierunków z LCJ (fallback, gdy API tras zawiedzie).
