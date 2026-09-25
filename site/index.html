@@ -203,7 +203,7 @@ fetch("data.json", { cache: "no-store" })
     if (!names.length) { document.getElementById("meta").textContent += " · brak danych jeszcze"; return; }
     const [lo, hi] = data.trip_nights;
     document.getElementById("tripsTopNote").textContent =
-      `Wylot z Łodzi + najtańszy powrót ${lo}–${hi} dni później, ceny z ostatniego pomiaru. „vs norma” — względem typowego wyjazdu na ten kierunek.`;
+      `Wylot z Łodzi + najtańszy powrót ${lo}–${hi} dni później, ceny z ostatniego pomiaru, max 3 na kierunek. „vs norma” — względem typowego wyjazdu na ten kierunek.`;
     renderTrips(document.getElementById("tripsTop"), data.trips_top, true);
     names.forEach(n => sel.append(new Option(n.replace("-", " → "), n)));
     sel.value = names.find(n => n.startsWith("LCJ-")) ?? names[0];

@@ -18,6 +18,7 @@ HEAT_WINDOW = (31, 60)    # heatmapa: cena lotu na 31–60 dni przed wylotem (po
 HORIZON_MONTHS = 12
 HOME = "LCJ"
 TRIP_NIGHTS = (3, 10)     # wyjazd z Łodzi: powrót 3–10 dni po wylocie
+TOP_PER_DEST = 3          # ranking łączny: max tyle wyjazdów na kierunek (różnorodność)
 BUCKETS = [(0, 7), (8, 14), (15, 30), (31, 60), (61, 90), (91, 180), (181, None)]
 LABELS = [f"{lo}+" if hi is None else f"{lo}-{hi}" for lo, hi in BUCKETS]
 
@@ -168,7 +169,7 @@ def build(prices: list[dict], runs: list[dict], today: dt.date) -> dict:
         best = [{**x, "vs_median_pct": _vs(x["total"], normal["median"])}
                 for x in sorted(pairs, key=lambda x: (x["total"], x["out_day"]))]
         trips[dest] = {"normal": normal, "best": best[:10]}
-        top += [{"dest": dest, **x} for x in best[:10]]
+        top += [{"dest": dest, **x} for x in best[:TOP_PER_DEST]]
     top.sort(key=lambda x: (x["total"], x["out_day"], x["dest"]))
     return {"generated": t, "last_ok": last_ok, "history_days": len(ok_days),
             "min_n": MIN_N, "min_n_cell": MIN_N_CELL, "min_history_days": MIN_HISTORY_DAYS,

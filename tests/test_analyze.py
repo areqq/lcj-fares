@@ -190,3 +190,15 @@ def test_build_trips_per_destination_and_top():
     assert [t["out_day"] for t in out["trips"]["DUB"]["best"]] == ["2026-10-11"]
     assert [(t["dest"], t["total"]) for t in out["trips_top"]] == [("DUB", 50.0), ("STN", 150.0)]
     assert out["trip_nights"] == [3, 10]
+
+
+def test_trips_top_caps_three_per_destination():
+    prices = []
+    for d in range(1, 6):  # 5 wyjazdów do STN, każdy tańszy niż jedyny do DUB
+        prices += [p("2026-09-01", f"2026-10-0{d}", "10.00"),
+                   p("2026-09-01", f"2026-10-{d + 10}", "10.00", origin="STN", dest="LCJ")]
+    prices += [p("2026-09-01", "2026-10-01", "90.00", dest="DUB"),
+               p("2026-09-01", "2026-10-05", "90.00", origin="DUB", dest="LCJ")]
+    out = analyze.build(prices, [run("2026-09-01", routes="DUB;STN")], dt.date(2026, 9, 1))
+    assert len(out["trips"]["STN"]["best"]) == 5
+    assert [t["dest"] for t in out["trips_top"]] == ["STN", "STN", "STN", "DUB"]
