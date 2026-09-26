@@ -72,6 +72,11 @@ td.cell { color:#111; }
         crossorigin="anonymous"></script>
 <script>
 const WD = ["Pn", "Wt", "Śr", "Cz", "Pt", "So", "Nd"];
+const AIRPORTS = {
+  LCJ: ["🇵🇱", "Łódź"], AGP: ["🇪🇸", "Malaga"], ALC: ["🇪🇸", "Alicante"], BGY: ["🇮🇹", "Mediolan-Bergamo"],
+  BHX: ["🇬🇧", "Birmingham"], CRL: ["🇧🇪", "Bruksela-Charleroi"], DUB: ["🇮🇪", "Dublin"], STN: ["🇬🇧", "Londyn-Stansted"],
+};
+const ap = code => AIRPORTS[code] ? `${AIRPORTS[code][0]} ${AIRPORTS[code][1]} (${code})` : code;
 const zl = v => v == null ? "–" : Math.round(v) + " zł";
 let DATA, chart;
 
@@ -161,7 +166,7 @@ const pct = v => v == null ? "–" : (v > 0 ? "+" : "") + v + "%";
 function renderTrips(t, list, withDest) {
   t.replaceChildren(row([...(withDest ? ["dokąd"] : []),
     "wylot", "powrót", "noce", "tam", "z powrotem", "razem", "vs norma"], "th"));
-  list.forEach(x => t.append(row([...(withDest ? [x.dest] : []),
+  list.forEach(x => t.append(row([...(withDest ? [ap(x.dest)] : []),
     `${x.out_day} ${wdOf(x.out_day)} ${x.out_time}`, `${x.ret_day} ${wdOf(x.ret_day)} ${x.ret_time}`,
     x.weekend ? `${x.nights} · weekend` : String(x.nights), zl(x.out_price), zl(x.ret_price), zl(x.total), pct(x.vs_median_pct)])));
 }
@@ -169,7 +174,7 @@ function renderTrips(t, list, withDest) {
 function renderRouteTrips(name) {
   const dest = name.split("-").find(c => c !== "LCJ");
   const tr = DATA.trips[dest];
-  document.getElementById("tripsTitle").textContent = `Wyjazdy Łódź ⇄ ${dest}`;
+  document.getElementById("tripsTitle").textContent = `Wyjazdy Łódź ⇄ ${ap(dest)}`;
   document.getElementById("tripsNormal").textContent = tr && tr.normal.n
     ? `Typowy wyjazd (mediana najlepszych par z każdego dnia wylotu): ${zl(tr.normal.median)}, zwykle ${zl(tr.normal.q1)}–${zl(tr.normal.q3)}.`
     : "Brak par wylot + powrót w oknie.";
@@ -205,7 +210,7 @@ fetch("data.json", { cache: "no-store" })
     document.getElementById("tripsTopNote").textContent =
       `Wylot z Łodzi + najtańszy powrót ${lo}–${hi} dni później, ceny z ostatniego pomiaru, max 3 na kierunek; przy równej cenie wyżej wyjazdy obejmujące weekend. „vs norma” — względem typowego wyjazdu na ten kierunek.`;
     renderTrips(document.getElementById("tripsTop"), data.trips_top, true);
-    names.forEach(n => sel.append(new Option(n.replace("-", " → "), n)));
+    names.forEach(n => sel.append(new Option(n.split("-").map(ap).join(" → "), n)));
     sel.value = names.find(n => n.startsWith("LCJ-")) ?? names[0];
     sel.addEventListener("change", render);
     render();
