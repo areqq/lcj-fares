@@ -7,11 +7,13 @@
 <style>
 :root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e1dc; --accent:#1f6feb;
   --out:#2a78d6; --ret:#eb6834; --band:rgba(137,135,129,.16); --wk-row:rgba(137,135,129,.09);
-  --cheap:rgba(42,120,214,.18); --pricey:rgba(227,73,72,.16); }
+  --cheap:rgba(42,120,214,.18); --pricey:rgba(227,73,72,.16);
+  --trip:#1baf7a; --trip-band:rgba(27,175,122,.18); }
 @media (prefers-color-scheme: dark) {
   :root { --bg:#161615; --fg:#ecebe6; --muted:#9a9993; --line:#33332f; --accent:#6ea8ff;
     --out:#3987e5; --ret:#d95926; --band:rgba(137,135,129,.20); --wk-row:rgba(137,135,129,.12);
-    --cheap:rgba(57,135,229,.30); --pricey:rgba(230,103,103,.26); }
+    --cheap:rgba(57,135,229,.30); --pricey:rgba(230,103,103,.26);
+    --trip:#199e70; --trip-band:rgba(25,158,112,.24); }
 }
 body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 system-ui, sans-serif; }
 main { max-width:960px; margin:0 auto; padding:16px; }
@@ -71,6 +73,10 @@ b.wkd { font-weight:700; }
     <p class="muted">Słupki: cena wylotu w danym dniu; linia: cena lotu powrotnego w danym dniu. Szare pasy to soboty i niedziele. Kliknij słupek, żeby przejść do tego dnia w tabeli.</p>
     <div class="legend"><span><i style="background:var(--out)"></i><span id="lgOut">tam</span></span><span><i style="background:var(--ret)"></i><span id="lgRet">z powrotem</span></span><span><i style="background:var(--band)"></i>sobota/niedziela</span></div>
     <div class="chart tall"><canvas id="cal"></canvas></div>
+    <h3 style="font-size:1rem;margin:1.2em 0 .2em">Cena wyjazdu: tam + powrót</h3>
+    <p class="muted">Dla każdego dnia wylotu: najtańszy z 3 najbliższych powrotów (od 2. dnia). Pas pokazuje rozrzut między tymi 3 powrotami — szeroki znaczy, że dzień powrotu mocno zmienia cenę. Kropki: okazje (najtańsze 25% wyjazdów na tej trasie). Szczegóły 3 powrotów po najechaniu.</p>
+    <div class="legend"><span><i style="background:var(--trip);height:3px;vertical-align:3px"></i>najtańszy z 3 powrotów</span><span><i style="background:var(--trip-band)"></i>rozrzut 3 powrotów</span><span><i style="background:var(--trip);border-radius:50%;width:8px;height:8px"></i>okazja</span><span><i style="background:var(--band)"></i>sobota/niedziela</span></div>
+    <div class="chart tall"><canvas id="trip"></canvas></div>
     <div class="filters">
       <label>Miesiąc: <select id="calMonth"></select></label>
       <label><input type="checkbox" id="calWeekend"> tylko wylot w pt/sob</label>
@@ -244,7 +250,7 @@ const dayDiff = (a, b) => Math.round((new Date(b + "T12:00:00Z") - new Date(a + 
 const wdIdx = day => (new Date(day + "T12:00:00Z").getUTCDay() + 6) % 7;  // 0 = pn
 const short = day => `${WD[wdIdx(day)]} ${day.slice(8, 10)}.${day.slice(5, 7)}`;
 const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-let calChart;
+let calChart, tripChart;
 
 function quartiles(vals) {
   const v = [...vals].sort((a, b) => a - b), q = f => v[Math.min(v.length - 1, Math.floor(f * (v.length - 1)))];
@@ -278,6 +284,7 @@ function renderCalendar(name) {
   if (days.length) for (let x = days[0]; x <= days[days.length - 1]; x = addDays(x, 1)) labels.push(x);
   const outBy = Object.fromEntries(out.map(x => [x[0], x])), retBy = Object.fromEntries(ret.map(x => [x[0], x]));
   if (calChart) calChart.destroy();
+  if (tripChart) tripChart.destroy();
   if (window.Chart && labels.length) {
     const bands = { id: "weekendBands", beforeDatasetsDraw(c) {
       const { ctx, chartArea: a, scales: { x } } = c, w = (a.right - a.left) / labels.length;
@@ -285,6 +292,23 @@ function renderCalendar(name) {
       labels.forEach((l, i) => { if (wdIdx(l) >= 5) ctx.fillRect(x.getPixelForValue(i) - w / 2, a.top, w, a.bottom - a.top); });
       ctx.restore();
     } };
+    // wspólna oś i zachowanie obu wykresów — te same dni, więc wykresy są wyrównane jeden pod drugim
+    const base = tooltip => ({
+      maintainAspectRatio: false, animation: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: { legend: { display: false }, tooltip },
+      scales: {
+        x: { grid: { display: false }, ticks: { autoSkip: false, maxRotation: 0, color: cssVar("--muted"),
+          callback: function (v, i) {  // na wąskim ekranie co 3. miesiąc, żeby etykiety nie nachodziły
+            const l = labels[i], m = +l.slice(5, 7) - 1, step = this.chart.width < 640 ? 3 : 1;
+            return l.endsWith("-01") && m % step === 0 ? `${MONTHS[m]} ${l.slice(2, 4)}` : "";
+          } } },
+        y: { beginAtZero: true, grid: { color: cssVar("--line") }, ticks: { color: cssVar("--muted"), callback: v => v + " zł" } },
+      },
+      onClick: (e, els) => { if (els.length) jumpTo(labels[els[0].index]); },
+    });
+    const title = it => { const l = labels[it[0].dataIndex]; return `${WD[wdIdx(l)]} ${l}`; };
+
     calChart = new Chart(document.getElementById("cal"), {
       data: { labels, datasets: [
         { type: "bar", label: "tam", data: labels.map(l => outBy[l] ? outBy[l][2] : null),
@@ -293,24 +317,31 @@ function renderCalendar(name) {
           borderColor: cssVar("--ret"), borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, spanGaps: true, tension: .2 },
       ] },
       plugins: [bands],
-      options: {
-        maintainAspectRatio: false, animation: false,
-        interaction: { mode: "index", intersect: false },
-        plugins: { legend: { display: false }, tooltip: { callbacks: {
-          title: it => { const l = labels[it[0].dataIndex]; return `${WD[wdIdx(l)]} ${l}`; },
-          label: it => { const l = labels[it.dataIndex], f = it.datasetIndex ? retBy[l] : outBy[l];
-            return f ? `${it.datasetIndex ? "z powrotem" : "tam"}: ${zl(f[2])} (${f[1]})` : null; },
-        } } },
-        scales: {
-          x: { grid: { display: false }, ticks: { autoSkip: false, maxRotation: 0, color: cssVar("--muted"),
-            callback: function (v, i) {  // na wąskim ekranie co 3. miesiąc, żeby etykiety nie nachodziły
-              const l = labels[i], m = +l.slice(5, 7) - 1, step = this.chart.width < 640 ? 3 : 1;
-              return l.endsWith("-01") && m % step === 0 ? `${MONTHS[m]} ${l.slice(2, 4)}` : "";
-            } } },
-          y: { beginAtZero: true, grid: { color: cssVar("--line") }, ticks: { color: cssVar("--muted"), callback: v => v + " zł" } },
-        },
-        onClick: (e, els) => { if (els.length) jumpTo(labels[els[0].index]); },
-      },
+      options: base({ callbacks: { title,
+        label: it => { const l = labels[it.dataIndex], f = it.datasetIndex ? retBy[l] : outBy[l];
+          return f ? `${it.datasetIndex ? "z powrotem" : "tam"}: ${zl(f[2])} (${f[1]})` : null; } } }),
+    });
+
+    const rowBy = Object.fromEntries(rows.filter(r => r.rets.length).map(r => [r.day, r]));
+    const best = r => Math.min(...r.rets.map(x => x.total)), worst = r => Math.max(...r.rets.map(x => x.total));
+    const deal = quartiles(Object.values(rowBy).map(best))[0];
+    const bestData = labels.map(l => rowBy[l] ? best(rowBy[l]) : null);
+    tripChart = new Chart(document.getElementById("trip"), {
+      type: "line",
+      data: { labels, datasets: [
+        { label: "najtaniej", data: bestData, borderColor: cssVar("--trip"), borderWidth: 2.5, tension: .2, spanGaps: true,
+          pointRadius: c => c.raw != null && c.raw <= deal ? 3.5 : 0, pointHoverRadius: 5,
+          pointBackgroundColor: cssVar("--trip"), pointBorderColor: cssVar("--bg"), pointBorderWidth: 1.5 },
+        { label: "rozrzut", data: labels.map(l => rowBy[l] ? worst(rowBy[l]) : null), borderWidth: 0,
+          pointRadius: 0, pointHoverRadius: 0, tension: .2, spanGaps: true, fill: 0, backgroundColor: cssVar("--trip-band") },
+      ] },
+      plugins: [bands],
+      options: base({ filter: it => it.datasetIndex === 0, callbacks: { title,
+        label: it => `najtaniej: ${zl(it.raw)}${it.raw <= deal ? " · okazja" : ""}`,
+        afterBody: its => { const r = rowBy[labels[its[0].dataIndex]]; if (!r) return [];
+          const b = best(r);
+          return [`wylot ${r.time} · ${zl(r.price)}`, ...r.rets.map(x =>
+            `${x.total === b ? "★" : "  "} powrót ${short(x.day)} ${x.time} (+${x.nights}) · ${zl(x.price)} → ${zl(x.total)}`)]; } } }),
     });
   }
 
