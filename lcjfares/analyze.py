@@ -176,6 +176,8 @@ def build(prices, runs: list[dict], today: dt.date, home: str = "LCJ", airports:
                        "ratio": round(statistics.median(r["curve"][lb][1]), 3),
                        "n": len(r["curve"][lb][0])}  # liczba lotów
                       for lb in LABELS if lb in r["curve"]],
+            # pełny kalendarz z ostatniego pomiaru — strona składa z niego pary wylot + powroty
+            "calendar": [[d, dep, p] for d, dep, p in sorted(r["upcoming"])],
             "cheapest": [{"day": d, "dep_time": dep, "price": p, "vs_median_pct": _vs(p, med)}
                          for d, dep, p in sorted(r["upcoming"], key=lambda x: (x[2], x[0]))[:10]],
         }

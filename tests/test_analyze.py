@@ -251,3 +251,12 @@ def test_ranking_equal_total_prefers_weekend_trip():
     out = analyze.build(prices, [run("2026-09-01")], dt.date(2026, 9, 1))
     assert [t["out_day"] for t in out["trips"]["STN"]["best"]] == ["2026-10-16", "2026-10-06"]
     assert out["trips_top"][0]["out_day"] == "2026-10-16"
+
+
+def test_route_calendar_lists_all_upcoming_by_day():
+    prices = [p("2026-09-01", "2026-10-12", "80.00"),
+              p("2026-09-01", "2026-10-10", "100.00", dep="06:30"),
+              p("2026-09-01", "2026-10-11", "", "soldout"),
+              p("2026-09-01", "2026-09-01", "50.00")]                 # dzisiejszy — pomijany
+    r = analyze.build(prices, [run("2026-09-01")], dt.date(2026, 9, 1))["routes"]["LCJ-STN"]
+    assert r["calendar"] == [["2026-10-10", "06:30", 100.0], ["2026-10-12", "10:00", 80.0]]

@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tanie loty z Polski</title>
 <style>
-:root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e1dc; --accent:#1f6feb; }
+:root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e1dc; --accent:#1f6feb;
+  --out:#2a78d6; --ret:#eb6834; --band:rgba(137,135,129,.16); --wk-row:rgba(137,135,129,.09);
+  --cheap:rgba(42,120,214,.18); --pricey:rgba(227,73,72,.16); }
 @media (prefers-color-scheme: dark) {
-  :root { --bg:#161615; --fg:#ecebe6; --muted:#9a9993; --line:#33332f; --accent:#6ea8ff; }
+  :root { --bg:#161615; --fg:#ecebe6; --muted:#9a9993; --line:#33332f; --accent:#6ea8ff;
+    --out:#3987e5; --ret:#d95926; --band:rgba(137,135,129,.20); --wk-row:rgba(137,135,129,.12);
+    --cheap:rgba(57,135,229,.30); --pricey:rgba(230,103,103,.26); }
 }
 body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.5 system-ui, sans-serif; }
 main { max-width:960px; margin:0 auto; padding:16px; }
@@ -27,6 +31,19 @@ td.cell { color:#111; }
 .few { opacity:.4; }
 .few .few { opacity:1; }
 .chart { position:relative; height:240px; }
+.chart.tall { height:300px; }
+.legend { display:flex; gap:16px; flex-wrap:wrap; font-size:.85rem; color:var(--muted); margin:.2em 0 .4em; }
+.legend i { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:5px; }
+.filters { display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin:.8em 0 .4em; font-size:.9rem; }
+#calTable td, #calTable th { vertical-align:top; font-variant-numeric:tabular-nums; }
+.tablebox { max-height:560px; overflow-y:auto; border:1px solid var(--line); border-radius:6px; }
+#calTable th { position:sticky; top:0; background:var(--bg); z-index:1; }
+#calTable tr.wk td { background:var(--wk-row); }
+#calTable .cheap { background:var(--cheap) !important; }
+#calTable .pricey { background:var(--pricey) !important; }
+#calTable .sub { display:block; color:var(--muted); font-size:.8rem; }
+#calTable tr.flash td { outline:2px solid var(--out); outline-offset:-2px; }
+b.wkd { font-weight:700; }
 </style>
 </head>
 <body>
@@ -48,6 +65,19 @@ td.cell { color:#111; }
   </section>
 
   <label>Kierunek: <select id="route"></select></label>
+
+  <section>
+    <h2 id="calTitle">Kalendarz cen</h2>
+    <p class="muted">Słupki: cena wylotu w danym dniu; linia: cena lotu powrotnego w danym dniu. Szare pasy to soboty i niedziele. Kliknij słupek, żeby przejść do tego dnia w tabeli.</p>
+    <div class="legend"><span><i style="background:var(--out)"></i><span id="lgOut">tam</span></span><span><i style="background:var(--ret)"></i><span id="lgRet">z powrotem</span></span><span><i style="background:var(--band)"></i>sobota/niedziela</span></div>
+    <div class="chart tall"><canvas id="cal"></canvas></div>
+    <div class="filters">
+      <label>Miesiąc: <select id="calMonth"></select></label>
+      <label><input type="checkbox" id="calWeekend"> tylko wylot w pt/sob</label>
+    </div>
+    <p class="muted">Każdy wiersz: wylot i trzy najbliższe powroty (od 2. dnia). Tło ceny: <span style="background:var(--cheap)">&nbsp;tanio&nbsp;</span> = najtańsze 25% na tej trasie, <span style="background:var(--pricey)">&nbsp;drogo&nbsp;</span> = najdroższe 25%. Szare wiersze: wylot pt–nd.</p>
+    <div class="scroll tablebox"><table id="calTable"></table></div>
+  </section>
 
   <section>
     <h2 id="tripsTitle">Wyjazdy na ten kierunek</h2>
@@ -207,10 +237,131 @@ function renderCheap(r) {
   r.cheapest.forEach(c => t.append(row([c.day, wdOf(c.day), c.dep_time, zl(c.price), pct(c.vs_median_pct)])));
 }
 
+const MIN_RET_DAYS = 2, RET_COUNT = 3;
+const MONTHS = ["sty", "lut", "mar", "kwi", "maj", "cze", "lip", "sie", "wrz", "paź", "lis", "gru"];
+const addDays = (day, k) => { const d = new Date(day + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + k); return d.toISOString().slice(0, 10); };
+const dayDiff = (a, b) => Math.round((new Date(b + "T12:00:00Z") - new Date(a + "T12:00:00Z")) / 864e5);
+const wdIdx = day => (new Date(day + "T12:00:00Z").getUTCDay() + 6) % 7;  // 0 = pn
+const short = day => `${WD[wdIdx(day)]} ${day.slice(8, 10)}.${day.slice(5, 7)}`;
+const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let calChart;
+
+function quartiles(vals) {
+  const v = [...vals].sort((a, b) => a - b), q = f => v[Math.min(v.length - 1, Math.floor(f * (v.length - 1)))];
+  return v.length ? [q(.25), q(.75)] : [0, 0];
+}
+const tint = (p, [lo, hi]) => p <= lo ? "cheap" : p >= hi ? "pricey" : "";
+
+// dla każdego wylotu: RET_COUNT najbliższych powrotów od MIN_RET_DAYS dnia
+function calendarRows(out, ret) {
+  let j = 0;
+  return out.map(([day, time, price]) => {
+    const from = addDays(day, MIN_RET_DAYS);
+    while (j < ret.length && ret[j][0] < from) j++;
+    return { day, time, price, rets: ret.slice(j, j + RET_COUNT).map(([rd, rt, rp]) =>
+      ({ day: rd, time: rt, price: rp, nights: dayDiff(day, rd), total: Math.round((price + rp) * 100) / 100 })) };
+  });
+}
+
+function renderCalendar(name) {
+  const [o, d] = name.split("-");
+  const out = DATA.routes[name].calendar || [], ret = (DATA.routes[`${d}-${o}`] || {}).calendar || [];
+  document.getElementById("calTitle").textContent = `Kalendarz cen: ${ap(o)} → ${ap(d)}`;
+  document.getElementById("lgOut").textContent = `tam (${o} → ${d})`;
+  document.getElementById("lgRet").textContent = `z powrotem (${d} → ${o})`;
+  const rows = calendarRows(out, ret);
+  const qOut = quartiles(out.map(x => x[2])), qTot = quartiles(rows.flatMap(r => r.rets.map(x => x.total)));
+
+  // wykres: ciągły kalendarz, żeby luki (dni bez lotu) były widoczne
+  const days = [...out, ...ret].map(x => x[0]).sort();
+  const labels = [];
+  if (days.length) for (let x = days[0]; x <= days[days.length - 1]; x = addDays(x, 1)) labels.push(x);
+  const outBy = Object.fromEntries(out.map(x => [x[0], x])), retBy = Object.fromEntries(ret.map(x => [x[0], x]));
+  if (calChart) calChart.destroy();
+  if (window.Chart && labels.length) {
+    const bands = { id: "weekendBands", beforeDatasetsDraw(c) {
+      const { ctx, chartArea: a, scales: { x } } = c, w = (a.right - a.left) / labels.length;
+      ctx.save(); ctx.fillStyle = cssVar("--band");
+      labels.forEach((l, i) => { if (wdIdx(l) >= 5) ctx.fillRect(x.getPixelForValue(i) - w / 2, a.top, w, a.bottom - a.top); });
+      ctx.restore();
+    } };
+    calChart = new Chart(document.getElementById("cal"), {
+      data: { labels, datasets: [
+        { type: "bar", label: "tam", data: labels.map(l => outBy[l] ? outBy[l][2] : null),
+          backgroundColor: cssVar("--out"), borderRadius: 2, barPercentage: .9, categoryPercentage: 1 },
+        { type: "line", label: "z powrotem", data: labels.map(l => retBy[l] ? retBy[l][2] : null),
+          borderColor: cssVar("--ret"), borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, spanGaps: true, tension: .2 },
+      ] },
+      plugins: [bands],
+      options: {
+        maintainAspectRatio: false, animation: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: { legend: { display: false }, tooltip: { callbacks: {
+          title: it => { const l = labels[it[0].dataIndex]; return `${WD[wdIdx(l)]} ${l}`; },
+          label: it => { const l = labels[it.dataIndex], f = it.datasetIndex ? retBy[l] : outBy[l];
+            return f ? `${it.datasetIndex ? "z powrotem" : "tam"}: ${zl(f[2])} (${f[1]})` : null; },
+        } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { autoSkip: false, maxRotation: 0, color: cssVar("--muted"),
+            callback: function (v, i) {  // na wąskim ekranie co 3. miesiąc, żeby etykiety nie nachodziły
+              const l = labels[i], m = +l.slice(5, 7) - 1, step = this.chart.width < 640 ? 3 : 1;
+              return l.endsWith("-01") && m % step === 0 ? `${MONTHS[m]} ${l.slice(2, 4)}` : "";
+            } } },
+          y: { beginAtZero: true, grid: { color: cssVar("--line") }, ticks: { color: cssVar("--muted"), callback: v => v + " zł" } },
+        },
+        onClick: (e, els) => { if (els.length) jumpTo(labels[els[0].index]); },
+      },
+    });
+  }
+
+  const monthSel = document.getElementById("calMonth"), keep = monthSel.value;
+  const months = [...new Set(out.map(x => x[0].slice(0, 7)))];
+  monthSel.replaceChildren(new Option("wszystkie", ""), ...months.map(m => new Option(`${MONTHS[+m.slice(5) - 1]} ${m.slice(0, 4)}`, m)));
+  monthSel.value = months.includes(keep) ? keep : "";
+  renderCalTable(rows, qOut, qTot);
+}
+
+let calRows = [], calQ = [];
+function renderCalTable(rows = calRows, qOut = calQ[0], qTot = calQ[1]) {
+  calRows = rows; calQ = [qOut, qTot];
+  const m = document.getElementById("calMonth").value, wk = document.getElementById("calWeekend").checked;
+  const t = document.getElementById("calTable");
+  t.replaceChildren(row(["wylot", "godz.", "cena", ...Array.from({ length: RET_COUNT }, (_, i) => `powrót ${i + 1}`)], "th"));
+  rows.filter(r => (!m || r.day.startsWith(m)) && (!wk || [4, 5].includes(wdIdx(r.day)))).forEach(r => {
+    const dayCell = el("td"), b = el("b", short(r.day), wdIdx(r.day) >= 4 ? "wkd" : "");
+    dayCell.append(b);
+    const priceCell = el("td", zl(r.price), tint(r.price, qOut));
+    const cells = [dayCell, el("td", r.time), priceCell];
+    r.rets.forEach(x => {
+      const c = el("td", `${short(x.day)} ${x.time} · ${zl(x.price)}`, tint(x.total, qTot));
+      c.append(el("span", `+${x.nights} dni · razem ${zl(x.total)}`, "sub"));
+      cells.push(c);
+    });
+    while (cells.length < 3 + RET_COUNT) cells.push(el("td", "–"));
+    const tr = row(cells);
+    tr.id = `cal-${r.day}`;
+    if (wdIdx(r.day) >= 4) tr.className = "wk";
+    t.append(tr);
+  });
+}
+
+function jumpTo(day) {
+  const rowEl = () => document.getElementById(`cal-${day}`);
+  if (!rowEl()) {
+    document.getElementById("calMonth").value = day.slice(0, 7);
+    document.getElementById("calWeekend").checked = false;
+    renderCalTable();
+  }
+  const tr = rowEl();
+  if (!tr) return;  // tego dnia brak lotu tam
+  tr.scrollIntoView({ behavior: "smooth", block: "center" });
+  tr.classList.add("flash"); setTimeout(() => tr.classList.remove("flash"), 1600);
+}
+
 function render() {
   const name = document.getElementById("route").value;
   const r = DATA.routes[name];
-  renderRouteTrips(name); renderHeat(r); renderCurve(r); renderCheap(r);
+  renderCalendar(name); renderRouteTrips(name); renderHeat(r); renderCurve(r); renderCheap(r);
 }
 
 let seq = 0;
@@ -253,6 +404,8 @@ Object.entries(HOMES).forEach(([code, [name]]) => homeSel.append(new Option(`${n
 homeSel.value = isHome(location.hash.slice(1)) ? location.hash.slice(1) : "LCJ";
 homeSel.addEventListener("change", () => load(homeSel.value));
 document.getElementById("route").addEventListener("change", render);
+document.getElementById("calMonth").addEventListener("change", () => renderCalTable());
+document.getElementById("calWeekend").addEventListener("change", () => renderCalTable());
 load(homeSel.value);
 </script>
 </body>
