@@ -1,0 +1,114 @@
+{
+ "AAR": {
+  "name": "Aarhus",
+  "country": "dk"
+ },
+ "AGP": {
+  "name": "Malaga",
+  "country": "es"
+ },
+ "AHO": {
+  "name": "Alghero",
+  "country": "it"
+ },
+ "ALC": {
+  "name": "Alicante",
+  "country": "es"
+ },
+ "ATH": {
+  "name": "Ateny",
+  "country": "gr"
+ },
+ "BGY": {
+  "name": "Mediolan-Bergamo",
+  "country": "it"
+ },
+ "BRI": {
+  "name": "Bari",
+  "country": "it"
+ },
+ "BUD": {
+  "name": "Budapeszt",
+  "country": "hu"
+ },
+ "CRL": {
+  "name": "Bruksela-Charleroi",
+  "country": "be"
+ },
+ "CTA": {
+  "name": "Catania",
+  "country": "it"
+ },
+ "DBV": {
+  "name": "Dubrownik",
+  "country": "hr"
+ },
+ "DUB": {
+  "name": "Dublin",
+  "country": "ie"
+ },
+ "FCO": {
+  "name": "Rzym-Fiumicino",
+  "country": "it"
+ },
+ "MAN": {
+  "name": "Manchester",
+  "country": "gb"
+ },
+ "MLA": {
+  "name": "Malta",
+  "country": "mt"
+ },
+ "NAP": {
+  "name": "Neapol",
+  "country": "it"
+ },
+ "OSL": {
+  "name": "Oslo",
+  "country": "no"
+ },
+ "PFO": {
+  "name": "Pafos",
+  "country": "cy"
+ },
+ "PUY": {
+  "name": "Pula",
+  "country": "hr"
+ },
+ "REG": {
+  "name": "Reggio Calabria",
+  "country": "it"
+ },
+ "STN": {
+  "name": "Londyn-Stansted",
+  "country": "gb"
+ },
+ "SUF": {
+  "name": "Lamezia",
+  "country": "it"
+ },
+ "TIA": {
+  "name": "Tirana",
+  "country": "al"
+ },
+ "TPS": {
+  "name": "Trapani-Marsala",
+  "country": "it"
+ },
+ "TRN": {
+  "name": "Turyn",
+  "country": "it"
+ },
+ "TSF": {
+  "name": "Wenecja-Treviso",
+  "country": "it"
+ },
+ "VAR": {
+  "name": "Varna",
+  "country": "bg"
+ },
+ "ZAD": {
+  "name": "Zadar",
+  "country": "hr"
+ }
+}
