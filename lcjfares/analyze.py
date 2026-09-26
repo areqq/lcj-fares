@@ -213,7 +213,7 @@ def main(argv: list[str] | None = None) -> int:
     data = build(store.iter_prices(data_dir / "prices.csv"), store.read_runs(data_dir / "runs.csv"),
                  dt.datetime.now(dt.timezone.utc).date(), home, store.load_airports(data_dir / "airports.json"))
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    out_path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     print(f"{out_path}: {len(data['routes'])} kierunków, {data['history_days']} dni historii")
     return 0
 
