@@ -205,14 +205,24 @@ function render() {
   renderRouteTrips(name); renderHeat(r); renderCurve(r); renderCheap(r);
 }
 
+let seq = 0;
+const isHome = h => Object.hasOwn(HOMES, h);
+
 function load(home) {
-  location.hash = home;
+  history.replaceState(null, "", "#" + home);
+  const my = ++seq;
   const meta = document.getElementById("meta"), content = document.getElementById("content");
   const sel = document.getElementById("route");
   DATA = null; sel.replaceChildren(); content.hidden = true; meta.textContent = "Ładowanie…";
   fetch(`data/${home}.json`, { cache: "no-store" })
-    .then(res => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
+    .then(res => {
+      if (res.status === 404) return null;
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
     .then(data => {
+      if (my !== seq) return;  // w międzyczasie wybrano inne lotnisko
+      if (!data) { meta.textContent = `Brak danych dla ${HOMES[home][1]} — pierwszy pomiar jeszcze się nie odbył.`; return; }
       DATA = data;
       meta.textContent = `Ostatni udany pomiar: ${data.last_ok ?? "brak"} · dni historii: ${data.history_days}`;
       const names = Object.keys(data.routes);
@@ -227,12 +237,12 @@ function load(home) {
       content.hidden = false;
       render();
     })
-    .catch(e => { meta.textContent = `Brak danych dla ${HOMES[home][1]} (${e.message}) — pierwszy pomiar jeszcze się nie odbył?`; });
+    .catch(e => { if (my === seq) meta.textContent = `Błąd wczytywania danych ${HOMES[home][1]}: ${e.message}`; });
 }
 
 const homeSel = document.getElementById("home");
 Object.entries(HOMES).forEach(([code, [name]]) => homeSel.append(new Option(`${name} (${code})`, code)));
-homeSel.value = HOMES[location.hash.slice(1)] ? location.hash.slice(1) : "LCJ";
+homeSel.value = isHome(location.hash.slice(1)) ? location.hash.slice(1) : "LCJ";
 homeSel.addEventListener("change", () => load(homeSel.value));
 document.getElementById("route").addEventListener("change", render);
 load(homeSel.value);

@@ -46,6 +46,7 @@ jobs:
             "0 0 * * *")  H=WMI ;;
             *)            H="${{ inputs.airport }}" ;;
           esac
+          [ -n "$H" ] || { echo "nieznany harmonogram: ${{ github.event.schedule }}"; exit 1; }
           echo "home=$H" >> "$GITHUB_OUTPUT"
           echo "Lotnisko: $H"
       - name: Public IP
