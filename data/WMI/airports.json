@@ -1,0 +1,210 @@
+{
+ "AGP": {
+  "name": "Malaga",
+  "country": "es"
+ },
+ "AHO": {
+  "name": "Alghero",
+  "country": "it"
+ },
+ "ALC": {
+  "name": "Alicante",
+  "country": "es"
+ },
+ "ARN": {
+  "name": "Sztokholm Arlanda",
+  "country": "se"
+ },
+ "ATH": {
+  "name": "Ateny",
+  "country": "gr"
+ },
+ "BCN": {
+  "name": "Barcelona-El Prat",
+  "country": "es"
+ },
+ "BGY": {
+  "name": "Mediolan-Bergamo",
+  "country": "it"
+ },
+ "BHX": {
+  "name": "Birmingham",
+  "country": "gb"
+ },
+ "BLQ": {
+  "name": "Bolonia",
+  "country": "it"
+ },
+ "BOJ": {
+  "name": "Burgas",
+  "country": "bg"
+ },
+ "BRI": {
+  "name": "Bari",
+  "country": "it"
+ },
+ "BRS": {
+  "name": "Bristol",
+  "country": "gb"
+ },
+ "BTS": {
+  "name": "Bratysława",
+  "country": "sk"
+ },
+ "BUD": {
+  "name": "Budapeszt",
+  "country": "hu"
+ },
+ "BVA": {
+  "name": "Paryż-Beauvais",
+  "country": "fr"
+ },
+ "CFU": {
+  "name": "Korfu",
+  "country": "gr"
+ },
+ "CHQ": {
+  "name": "Chania (Kreta)",
+  "country": "gr"
+ },
+ "CIA": {
+  "name": "Rzym-Ciampino",
+  "country": "it"
+ },
+ "CPH": {
+  "name": "Kopenhaga",
+  "country": "dk"
+ },
+ "CRL": {
+  "name": "Bruksela-Charleroi",
+  "country": "be"
+ },
+ "CTA": {
+  "name": "Catania",
+  "country": "it"
+ },
+ "DUB": {
+  "name": "Dublin",
+  "country": "ie"
+ },
+ "EDI": {
+  "name": "Edynburg",
+  "country": "gb"
+ },
+ "EIN": {
+  "name": "Eindhoven",
+  "country": "nl"
+ },
+ "FAO": {
+  "name": "Faro",
+  "country": "pt"
+ },
+ "GLA": {
+  "name": "Glasgow",
+  "country": "gb"
+ },
+ "HEL": {
+  "name": "Helsinki",
+  "country": "fi"
+ },
+ "LIS": {
+  "name": "Lisbon",
+  "country": "pt"
+ },
+ "LPL": {
+  "name": "Liverpool",
+  "country": "gb"
+ },
+ "MAD": {
+  "name": "Madryt",
+  "country": "es"
+ },
+ "MAN": {
+  "name": "Manchester",
+  "country": "gb"
+ },
+ "MLA": {
+  "name": "Malta",
+  "country": "mt"
+ },
+ "MMX": {
+  "name": "Malmo",
+  "country": "se"
+ },
+ "MXP": {
+  "name": "Mediolan-Malpensa",
+  "country": "it"
+ },
+ "NAP": {
+  "name": "Neapol",
+  "country": "it"
+ },
+ "OPO": {
+  "name": "Porto",
+  "country": "pt"
+ },
+ "PFO": {
+  "name": "Pafos",
+  "country": "cy"
+ },
+ "PMI": {
+  "name": "Palma",
+  "country": "es"
+ },
+ "PMO": {
+  "name": "Palermo",
+  "country": "it"
+ },
+ "RHO": {
+  "name": "Rodos",
+  "country": "gr"
+ },
+ "SKG": {
+  "name": "Saloniki",
+  "country": "gr"
+ },
+ "SNN": {
+  "name": "Shannon",
+  "country": "ie"
+ },
+ "SOF": {
+  "name": "Sofia",
+  "country": "bg"
+ },
+ "STN": {
+  "name": "Londyn-Stansted",
+  "country": "gb"
+ },
+ "SUF": {
+  "name": "Lamezia",
+  "country": "it"
+ },
+ "TFS": {
+  "name": "Teneryfa-Południe",
+  "country": "es"
+ },
+ "TIA": {
+  "name": "Tirana",
+  "country": "al"
+ },
+ "TSF": {
+  "name": "Wenecja-Treviso",
+  "country": "it"
+ },
+ "VLC": {
+  "name": "Walencja",
+  "country": "es"
+ },
+ "ZAD": {
+  "name": "Zadar",
+  "country": "hr"
+ },
+ "ZAG": {
+  "name": "Zagrzeb",
+  "country": "hr"
+ },
+ "ZTH": {
+  "name": "Zakynthos",
+  "country": "gr"
+ }
+}
