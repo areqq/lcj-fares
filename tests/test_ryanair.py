@@ -81,16 +81,19 @@ def test_get_json_gives_up_after_retries(monkeypatch):
     assert len(calls) == 3
 
 
-def test_routes_from(monkeypatch):
+def test_routes_info(monkeypatch):
     monkeypatch.setattr(ryanair, "_http_get", lambda url, params: [
-        {"arrivalAirport": {"code": "STN"}}, {"arrivalAirport": {"code": "DUB"}}])
-    assert ryanair.routes_from("LCJ", sleep=lambda s: None) == ["STN", "DUB"]
+        {"arrivalAirport": {"code": "STN", "name": "Londyn Stansted", "country": {"code": "gb"}}},
+        {"arrivalAirport": {"code": "DUB", "name": "Dublin", "country": {"code": "ie"}}}])
+    assert ryanair.routes_info("LCJ", sleep=lambda s: None) == {
+        "STN": {"name": "Londyn Stansted", "country": "gb"},
+        "DUB": {"name": "Dublin", "country": "ie"}}
 
 
-def test_routes_from_rejects_unknown_schema(monkeypatch):
+def test_routes_info_rejects_unknown_schema(monkeypatch):
     monkeypatch.setattr(ryanair, "_http_get", lambda url, params: {"x": 1})
     with pytest.raises(ApiError):
-        ryanair.routes_from("LCJ", sleep=lambda s: None)
+        ryanair.routes_info("LCJ", sleep=lambda s: None)
 
 
 @pytest.mark.parametrize("price", [

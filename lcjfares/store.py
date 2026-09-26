@@ -1,4 +1,4 @@
-"""Pliki danych: dziennik zmian cen (prices.csv), log uruchomień (runs.csv), lista tras (routes.json)."""
+"""Pliki danych lotniska: dziennik zmian cen (prices.csv), log uruchomień (runs.csv), trasy (routes.json, airports.json)."""
 from __future__ import annotations
 
 import csv
@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 PRICE_FIELDS = ["observed", "origin", "dest", "day", "dep_time", "price", "status"]
-RUN_FIELDS = ["observed", "started_utc", "requests", "failed", "status", "routes", "missing"]
+RUN_FIELDS = ["observed", "started_utc", "requests", "failed", "status", "routes", "missing", "ip"]
 
 
 def _read(path: Path) -> list[dict]:
@@ -28,8 +28,16 @@ def _append(path: Path, fields: list[str], rows: list[dict]) -> None:
         w.writerows(rows)
 
 
+def iter_prices(path: Path):
+    """Wiersze prices.csv strumieniowo (plik rośnie do milionów wierszy)."""
+    if not path.exists():
+        return
+    with path.open(newline="", encoding="utf-8") as f:
+        yield from csv.DictReader(f)
+
+
 def read_prices(path: Path) -> list[dict]:
-    return _read(path)
+    return list(iter_prices(path))
 
 
 def read_runs(path: Path) -> list[dict]:
@@ -44,7 +52,7 @@ def append_run(path: Path, row: dict) -> None:
     _append(path, RUN_FIELDS, [row])
 
 
-def last_state(rows: list[dict]) -> dict:
+def last_state(rows) -> dict:
     """(origin, dest, day) -> (dep_time, price, status) z ostatniego wiersza (plik jest chronologiczny)."""
     return {(r["origin"], r["dest"], r["day"]): (r["dep_time"], r["price"], r["status"]) for r in rows}
 
@@ -61,3 +69,17 @@ def load_routes(path: Path) -> list[str]:
 def save_routes(path: Path, routes: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(sorted(routes)) + "\n", encoding="utf-8")
+
+
+def load_airports(path: Path) -> dict:
+    """IATA -> {"name", "country"} (kod kraju ISO-2, małymi literami)."""
+    try:
+        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    except json.JSONDecodeError:
+        return {}
+
+
+def save_airports(path: Path, airports: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(dict(sorted(airports.items())), ensure_ascii=False, indent=1) + "\n",
+                    encoding="utf-8")

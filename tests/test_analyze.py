@@ -13,7 +13,7 @@ def p(observed, day, price, status="ok", dep="10:00", origin="LCJ", dest="STN"):
 
 def run(observed, routes="STN", missing="", status="ok"):
     return {"observed": observed, "started_utc": observed + "T06:00:00Z", "requests": "24",
-            "failed": "0", "status": status, "routes": routes, "missing": missing}
+            "failed": "0", "status": status, "routes": routes, "missing": missing, "ip": ""}
 
 
 @pytest.mark.parametrize("days,label", [
@@ -54,7 +54,7 @@ def test_build_empty():
     out = analyze.build([], [], dt.date(2026, 9, 25))
     assert out == {"generated": "2026-09-25", "last_ok": None, "history_days": 0,
                    "min_n": 5, "min_n_cell": 3, "min_history_days": 30, "trip_nights": [3, 10],
-                   "routes": {}, "trips": {}, "trips_top": []}
+                   "home": "LCJ", "airports": {}, "routes": {}, "trips": {}, "trips_top": []}
 
 
 def test_build_full():
@@ -145,12 +145,32 @@ def test_heatmap_uses_lead_time_window_and_margins():
 
 
 def test_main_writes_json(tmp_path):
-    store.append_prices(tmp_path / "prices.csv", [p("2026-09-01", "2026-10-10", "100.00")])
-    store.append_run(tmp_path / "runs.csv", run("2026-09-01"))
-    out = tmp_path / "site" / "data.json"
-    assert analyze.main([str(tmp_path), str(out)]) == 0
-    data = json.loads(out.read_text())
-    assert "LCJ-STN" in data["routes"]
+    store.append_prices(tmp_path / "data" / "LCJ" / "prices.csv", [p("2026-09-01", "2026-10-10", "100.00")])
+    store.append_run(tmp_path / "data" / "LCJ" / "runs.csv", run("2026-09-01"))
+    store.save_airports(tmp_path / "data" / "LCJ" / "airports.json",
+                        {"STN": {"name": "Londyn Stansted", "country": "gb"},
+                         "XXX": {"name": "Nieużywane", "country": "zz"}})
+    assert analyze.main(["lcj", str(tmp_path / "data"), str(tmp_path / "site")]) == 0
+    data = json.loads((tmp_path / "site" / "data" / "LCJ.json").read_text())
+    assert "LCJ-STN" in data["routes"] and data["home"] == "LCJ"
+    assert data["airports"] == {"STN": {"name": "Londyn Stansted", "country": "gb"}}
+
+
+def test_curve_median_weighs_each_flight_equally():
+    prices = [p("2026-09-01", "2026-10-10", "100.00"),       # lot A: 3 obserwacje po 100
+              p("2026-09-03", "2026-10-11", "400.00")]       # lot B: 1 obserwacja 400
+    runs = [run("2026-09-01"), run("2026-09-02"), run("2026-09-03")]
+    [c] = analyze.build(prices, runs, dt.date(2026, 9, 3))["routes"]["LCJ-STN"]["curve"]
+    assert c == {"bucket": "31-60", "median": 250.0, "ratio": 1.0, "n": 2}
+
+
+def test_trips_for_other_home_airport():
+    prices = [p("2026-09-01", "2026-10-10", "100.00", origin="KTW"),
+              p("2026-09-01", "2026-10-15", "50.00", origin="STN", dest="KTW"),
+              p("2026-09-01", "2026-10-11", "10.00", origin="STN", dest="LCJ")]  # obce lotnisko — ignor.
+    out = analyze.build(prices, [run("2026-09-01")], dt.date(2026, 9, 1), home="KTW")
+    assert out["home"] == "KTW"
+    assert [(t["dest"], t["total"]) for t in out["trips_top"]] == [("STN", 150.0)]
 
 
 def test_pair_trips_picks_cheapest_return_within_window():

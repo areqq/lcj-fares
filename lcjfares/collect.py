@@ -1,4 +1,4 @@
-"""Codzienny zbiór: kalendarz cheapestPerDay dla wszystkich kierunków z/do LCJ → zmiany w data/prices.csv."""
+"""Codzienny zbiór dla jednego lotniska: kalendarz cheapestPerDay wszystkich kierunków z/do niego → zmiany w data/<HOME>/prices.csv."""
 from __future__ import annotations
 
 import datetime as dt
@@ -7,9 +7,10 @@ import sys
 import time
 from pathlib import Path
 
+import curl_cffi
+
 from lcjfares import ryanair, store
 
-HOME = "LCJ"
 MONTHS = 12
 MAX_CONSECUTIVE_FAILURES = 10
 
@@ -22,11 +23,19 @@ def months_ahead(today: dt.date, n: int = MONTHS) -> list[str]:
     return out
 
 
-def directions(routes: list[str]) -> list[tuple[str, str]]:
+def directions(routes: list[str], home: str) -> list[tuple[str, str]]:
     out = []
     for d in sorted(routes):
-        out += [(HOME, d), (d, HOME)]
+        out += [(home, d), (d, home)]
     return out
+
+
+def public_ip() -> str:
+    """Publiczne IP runnera (do analizy blokad); puste, gdy się nie da."""
+    try:
+        return curl_cffi.get("https://ifconfig.me/ip", timeout=5).text.strip()[:64]
+    except Exception:
+        return ""
 
 
 def diff_rows(snapshot, state: dict, observed: str) -> list[dict]:
@@ -42,27 +51,30 @@ def diff_rows(snapshot, state: dict, observed: str) -> list[dict]:
     return rows
 
 
-def _routes(routes_path: Path, sleep) -> list[str]:
+def _routes(data_dir: Path, home: str, sleep) -> list[str]:
     try:
-        routes = ryanair.routes_from(HOME, sleep=sleep)
-        if not routes:
+        info = ryanair.routes_info(home, sleep=sleep)
+        if not info:
             raise ryanair.ApiError("pusta lista tras")
     except ryanair.ApiError as e:
         print(f"trasy z API niedostępne ({e}) — używam zapisanej listy", file=sys.stderr)
-        return store.load_routes(routes_path)
-    store.save_routes(routes_path, routes)
-    return routes
+        return store.load_routes(data_dir / "routes.json")
+    store.save_routes(data_dir / "routes.json", list(info))
+    store.save_airports(data_dir / "airports.json", {**store.load_airports(data_dir / "airports.json"), **info})
+    return list(info)
 
 
-def run(data_dir: Path, now: dt.datetime, *, pause=(0.5, 1.0), sleep=time.sleep) -> dict:
+def run(data_dir: Path, now: dt.datetime, home: str, *, pause=(0.5, 1.0), sleep=time.sleep) -> dict:
     today = now.date()
     observed = today.isoformat()
     prices_path = data_dir / "prices.csv"
-    routes = _routes(data_dir / "routes.json", sleep)
-    state = store.last_state(store.read_prices(prices_path))
+    ip = public_ip()
+    print(f"{home}: publiczne IP runnera: {ip or '?'}")
+    routes = _routes(data_dir, home, sleep)
+    state = store.last_state(store.iter_prices(prices_path))
 
     snapshot, missing, requests, streak = [], [], 0, 0
-    for origin, dest in directions(routes):
+    for origin, dest in directions(routes, home):
         for month in months_ahead(today):
             requests += 1
             if streak >= MAX_CONSECUTIVE_FAILURES:  # API leży — nie męczymy go dalej
@@ -88,16 +100,20 @@ def run(data_dir: Path, now: dt.datetime, *, pause=(0.5, 1.0), sleep=time.sleep)
     status = "failed" if requests == 0 or failed * 2 > requests else "partial" if failed else "ok"
     run_row = {"observed": observed, "started_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
                "requests": requests, "failed": failed, "status": status,
-               "routes": ";".join(sorted(routes)), "missing": ";".join(missing)}
+               "routes": ";".join(sorted(routes)), "missing": ";".join(missing), "ip": ip}
     store.append_run(data_dir / "runs.csv", run_row)
     return run_row
 
 
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
-    data_dir = Path(argv[0] if argv else "data")
-    r = run(data_dir, dt.datetime.now(dt.timezone.utc))
-    print(f"{r['status']}: {r['requests']} zapytań, {r['failed']} nieudanych")
+    if not argv:
+        print("użycie: python -m lcjfares.collect HOME [data_root]", file=sys.stderr)
+        return 2
+    home = argv[0].upper()
+    root = Path(argv[1] if len(argv) > 1 else "data")
+    r = run(root / home, dt.datetime.now(dt.timezone.utc), home)
+    print(f"{home} {r['status']}: {r['requests']} zapytań, {r['failed']} nieudanych")
     return 1 if r["status"] == "failed" else 0
 
 

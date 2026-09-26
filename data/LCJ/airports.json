@@ -1,0 +1,30 @@
+{
+ "AGP": {
+  "name": "Malaga",
+  "country": "es"
+ },
+ "ALC": {
+  "name": "Alicante",
+  "country": "es"
+ },
+ "BGY": {
+  "name": "Mediolan-Bergamo",
+  "country": "it"
+ },
+ "BHX": {
+  "name": "Birmingham",
+  "country": "gb"
+ },
+ "CRL": {
+  "name": "Bruksela-Charleroi",
+  "country": "be"
+ },
+ "DUB": {
+  "name": "Dublin",
+  "country": "ie"
+ },
+ "STN": {
+  "name": "Londyn-Stansted",
+  "country": "gb"
+ }
+}

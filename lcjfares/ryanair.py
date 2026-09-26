@@ -80,9 +80,11 @@ def cheapest_per_day(origin, dest, month, *, sleep=time.sleep) -> list[Fare]:
     return fares
 
 
-def routes_from(origin, *, sleep=time.sleep) -> list[str]:
-    data = get_json(f"{W}/views/locate/searchWidget/routes/en/airport/{origin}", sleep=sleep)
+def routes_info(origin, *, sleep=time.sleep) -> dict[str, dict]:
+    """Kierunki z lotniska: IATA -> {"name": polska nazwa, "country": kod ISO-2}."""
+    data = get_json(f"{W}/views/locate/searchWidget/routes/pl/airport/{origin}", sleep=sleep)
     try:
-        return [r["arrivalAirport"]["code"] for r in data]
+        return {a["code"]: {"name": a["name"], "country": a["country"]["code"]}
+                for a in (r["arrivalAirport"] for r in data)}
     except (KeyError, TypeError) as e:
         raise ApiError(f"nieoczekiwany format tras: {e!r}") from e

@@ -31,7 +31,8 @@ def test_append_empty_does_not_create_file(tmp_path):
 def test_append_run_roundtrip(tmp_path):
     p = tmp_path / "runs.csv"
     r = {"observed": "2026-09-25", "started_utc": "2026-09-25T06:00:00Z", "requests": 168,
-         "failed": 1, "status": "partial", "routes": "DUB;STN", "missing": "LCJ-STN-2026-11"}
+         "failed": 1, "status": "partial", "routes": "DUB;STN", "missing": "LCJ-STN-2026-11",
+         "ip": "203.0.113.7"}
     store.append_run(p, r)
     assert store.read_runs(p) == [{k: str(v) for k, v in r.items()}]
 
@@ -57,3 +58,21 @@ def test_load_routes_corrupted_file_returns_empty(tmp_path):
     p = tmp_path / "routes.json"
     p.write_text("{not json")
     assert store.load_routes(p) == []
+
+
+def test_iter_prices_streams_rows(tmp_path):
+    p = tmp_path / "prices.csv"
+    assert list(store.iter_prices(p)) == []
+    store.append_prices(p, [row("2026-09-25", "2026-11-01", "394.24")])
+    it = store.iter_prices(p)
+    assert next(it)["price"] == "394.24"
+
+
+def test_airports_roundtrip_and_corrupt(tmp_path):
+    p = tmp_path / "airports.json"
+    assert store.load_airports(p) == {}
+    a = {"STN": {"name": "Londyn Stansted", "country": "gb"}}
+    store.save_airports(p, a)
+    assert store.load_airports(p) == a
+    p.write_text("{oops")
+    assert store.load_airports(p) == {}
