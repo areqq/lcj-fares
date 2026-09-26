@@ -45,7 +45,7 @@
    "normal": {
     "median": 417.0,
     "q1": 264.7,
-    "q3": 525.29,
+    "q3": 518.0,
     "n": 100
    },
    "heatmap": [
@@ -82,7 +82,7 @@
     },
     {
      "weekday": 4,
-     "median": 278.86,
+     "median": 277.76,
      "n": 4
     },
     {
@@ -99,15 +99,15 @@
     },
     {
      "month": "2026-11",
-     "median": 236.52,
+     "median": 244.19,
      "n": 10
     }
    ],
    "curve": [
     {
      "bucket": "0-7",
-     "median": 937.47,
-     "ratio": 1.019,
+     "median": 930.89,
+     "ratio": 1.027,
      "n": 3
     },
     {
@@ -124,8 +124,8 @@
     },
     {
      "bucket": "31-60",
-     "median": 236.52,
-     "ratio": 1.015,
+     "median": 247.48,
+     "ratio": 1.013,
      "n": 11
     },
     {
@@ -213,7 +213,7 @@
   "ALC-LCJ": {
    "normal": {
     "median": 391.0,
-    "q1": 252.72,
+    "q1": 252.9,
     "q3": 586.0,
     "n": 102
    },
@@ -245,7 +245,7 @@
     {
      "month": "2026-11",
      "weekday": 3,
-     "median": 260.62,
+     "median": 265.0,
      "n": 3
     }
    ],
@@ -257,7 +257,7 @@
     },
     {
      "weekday": 3,
-     "median": 314.12,
+     "median": 316.31,
      "n": 4
     },
     {
@@ -288,25 +288,25 @@
     {
      "bucket": "8-14",
      "median": 413.95,
-     "ratio": 1.005,
+     "ratio": 1.011,
      "n": 3
     },
     {
      "bucket": "15-30",
      "median": 383.28,
-     "ratio": 1.014,
+     "ratio": 1.03,
      "n": 7
     },
     {
      "bucket": "31-60",
      "median": 422.17,
-     "ratio": 1.011,
+     "ratio": 1.014,
      "n": 10
     },
     {
      "bucket": "61-90",
      "median": 188.33,
-     "ratio": 1.001,
+     "ratio": 1.009,
      "n": 9
     },
     {
@@ -317,7 +317,7 @@
     },
     {
      "bucket": "181+",
-     "median": 560.5,
+     "median": 561.6,
      "ratio": 1.0,
      "n": 46
     }
@@ -408,7 +408,7 @@
     {
      "month": "2026-10",
      "weekday": 4,
-     "median": 65.0,
+     "median": 70.63,
      "n": 1
     },
     {
@@ -420,7 +420,7 @@
     {
      "month": "2026-11",
      "weekday": 4,
-     "median": 69.66,
+     "median": 65.0,
      "n": 3
     }
    ],
@@ -437,14 +437,14 @@
     },
     {
      "weekday": 4,
-     "median": 67.33,
+     "median": 65.0,
      "n": 4
     }
    ],
    "heatmap_month": [
     {
      "month": "2026-10",
-     "median": 66.82,
+     "median": 70.63,
      "n": 3
     },
     {
@@ -456,32 +456,32 @@
    "curve": [
     {
      "bucket": "0-7",
-     "median": 140.14,
-     "ratio": 1.0,
+     "median": 148.9,
+     "ratio": 1.022,
      "n": 5
     },
     {
      "bucket": "8-14",
      "median": 119.34,
-     "ratio": 1.064,
+     "ratio": 1.016,
      "n": 6
     },
     {
      "bucket": "15-30",
      "median": 127.0,
-     "ratio": 1.017,
+     "ratio": 1.024,
      "n": 13
     },
     {
      "bucket": "31-60",
-     "median": 97.34,
-     "ratio": 1.024,
+     "median": 95.93,
+     "ratio": 1.011,
      "n": 10
     },
     {
      "bucket": "61-90",
      "median": 124.71,
-     "ratio": 1.01,
+     "ratio": 1.001,
      "n": 9
     },
     {
@@ -511,7 +511,7 @@
      "vs_median_pct": -69
     },
     {
-     "day": "2026-10-30",
+     "day": "2026-11-06",
      "dep_time": "09:50",
      "price": 65.0,
      "vs_median_pct": -69
@@ -523,14 +523,32 @@
      "vs_median_pct": -69
     },
     {
+     "day": "2026-11-20",
+     "dep_time": "09:50",
+     "price": 65.0,
+     "vs_median_pct": -69
+    },
+    {
+     "day": "2026-11-27",
+     "dep_time": "09:50",
+     "price": 65.0,
+     "vs_median_pct": -69
+    },
+    {
+     "day": "2026-10-08",
+     "dep_time": "07:35",
+     "price": 65.67,
+     "vs_median_pct": -69
+    },
+    {
      "day": "2026-10-13",
      "dep_time": "19:55",
      "price": 65.67,
      "vs_median_pct": -69
     },
     {
-     "day": "2026-10-21",
-     "dep_time": "06:20",
+     "day": "2026-10-15",
+     "dep_time": "07:35",
      "price": 65.67,
      "vs_median_pct": -69
     },
@@ -539,24 +557,6 @@
      "dep_time": "13:35",
      "price": 66.93,
      "vs_median_pct": -69
-    },
-    {
-     "day": "2026-10-01",
-     "dep_time": "07:35",
-     "price": 70.05,
-     "vs_median_pct": -67
-    },
-    {
-     "day": "2026-10-15",
-     "dep_time": "07:35",
-     "price": 70.05,
-     "vs_median_pct": -67
-    },
-    {
-     "day": "2026-12-11",
-     "dep_time": "09:50",
-     "price": 70.05,
-     "vs_median_pct": -67
     }
    ]
   },
@@ -577,7 +577,7 @@
     {
      "month": "2026-10",
      "weekday": 4,
-     "median": 74.0,
+     "median": 88.4,
      "n": 1
     },
     {
@@ -607,7 +607,7 @@
     },
     {
      "weekday": 4,
-     "median": 87.0,
+     "median": 87.7,
      "n": 4
     },
     {
@@ -619,7 +619,7 @@
    "heatmap_month": [
     {
      "month": "2026-10",
-     "median": 100.9,
+     "median": 108.09,
      "n": 2
     },
     {
@@ -649,7 +649,7 @@
     },
     {
      "bucket": "31-60",
-     "median": 91.83,
+     "median": 92.53,
      "ratio": 1.0,
      "n": 12
     },
@@ -673,12 +673,6 @@
     }
    ],
    "cheapest": [
-    {
-     "day": "2026-10-30",
-     "dep_time": "06:40",
-     "price": 74.0,
-     "vs_median_pct": -73
-    },
     {
      "day": "2026-11-12",
      "dep_time": "15:25",
@@ -722,24 +716,30 @@
      "vs_median_pct": -68
     },
     {
-     "day": "2026-12-06",
-     "dep_time": "15:45",
-     "price": 91.57,
-     "vs_median_pct": -66
-    },
-    {
      "day": "2026-11-19",
      "dep_time": "15:25",
      "price": 96.66,
      "vs_median_pct": -64
+    },
+    {
+     "day": "2026-12-06",
+     "dep_time": "15:45",
+     "price": 96.66,
+     "vs_median_pct": -64
+    },
+    {
+     "day": "2026-09-28",
+     "dep_time": "18:25",
+     "price": 102.79,
+     "vs_median_pct": -62
     }
    ]
   },
   "CRL-LCJ": {
    "normal": {
-    "median": 76.62,
-    "q1": 70.05,
-    "q3": 124.81,
+    "median": 74.43,
+    "q1": 65.79,
+    "q3": 128.1,
     "n": 8
    },
    "heatmap": [],
@@ -748,71 +748,71 @@
    "curve": [
     {
      "bucket": "0-7",
-     "median": 334.0,
-     "ratio": 1.104,
+     "median": 331.81,
+     "ratio": 1.1,
      "n": 2
     },
     {
      "bucket": "8-14",
-     "median": 73.2,
-     "ratio": 1.017,
+     "median": 73.41,
+     "ratio": 1.014,
      "n": 2
     },
     {
      "bucket": "15-30",
-     "median": 84.29,
-     "ratio": 1.028,
+     "median": 83.19,
+     "ratio": 1.0,
      "n": 4
     }
    ],
    "cheapest": [
     {
+     "day": "2026-10-15",
+     "dep_time": "13:05",
+     "price": 65.67,
+     "vs_median_pct": -12
+    },
+    {
+     "day": "2026-10-22",
+     "dep_time": "13:05",
+     "price": 65.67,
+     "vs_median_pct": -12
+    },
+    {
      "day": "2026-10-08",
      "dep_time": "13:05",
-     "price": 65.0,
-     "vs_median_pct": -15
+     "price": 65.83,
+     "vs_median_pct": -12
     },
     {
      "day": "2026-10-01",
      "dep_time": "13:05",
      "price": 70.05,
-     "vs_median_pct": -9
-    },
-    {
-     "day": "2026-10-22",
-     "dep_time": "13:05",
-     "price": 70.05,
-     "vs_median_pct": -9
-    },
-    {
-     "day": "2026-10-15",
-     "dep_time": "13:05",
-     "price": 74.43,
-     "vs_median_pct": -3
+     "vs_median_pct": -6
     },
     {
      "day": "2026-10-04",
      "dep_time": "12:05",
      "price": 78.81,
-     "vs_median_pct": 3
+     "vs_median_pct": 6
     },
     {
      "day": "2026-10-11",
      "dep_time": "12:05",
-     "price": 96.34,
-     "vs_median_pct": 26
+     "price": 100.72,
+     "vs_median_pct": 35
     },
     {
      "day": "2026-10-18",
      "dep_time": "12:05",
      "price": 210.24,
-     "vs_median_pct": 174
+     "vs_median_pct": 182
     },
     {
      "day": "2026-09-27",
      "dep_time": "12:05",
-     "price": 700.9,
-     "vs_median_pct": 815
+     "price": 692.14,
+     "vs_median_pct": 830
     }
    ]
   },
@@ -845,7 +845,7 @@
     {
      "month": "2026-11",
      "weekday": 4,
-     "median": 137.78,
+     "median": 131.09,
      "n": 3
     }
    ],
@@ -857,7 +857,7 @@
     },
     {
      "weekday": 4,
-     "median": 153.2,
+     "median": 149.86,
      "n": 4
     }
    ],
@@ -876,31 +876,31 @@
    "curve": [
     {
      "bucket": "0-7",
-     "median": 563.47,
-     "ratio": 1.005,
+     "median": 568.94,
+     "ratio": 1.012,
      "n": 2
     },
     {
      "bucket": "8-14",
-     "median": 206.96,
-     "ratio": 1.045,
+     "median": 206.95,
+     "ratio": 1.047,
      "n": 2
     },
     {
      "bucket": "15-30",
-     "median": 243.09,
-     "ratio": 1.012,
+     "median": 258.43,
+     "ratio": 1.024,
      "n": 5
     },
     {
      "bucket": "31-60",
      "median": 139.85,
-     "ratio": 1.012,
+     "ratio": 1.008,
      "n": 9
     },
     {
      "bucket": "61-90",
-     "median": 170.81,
+     "median": 166.43,
      "ratio": 1.021,
      "n": 9
     },
@@ -919,8 +919,14 @@
    ],
    "cheapest": [
     {
-     "day": "2026-11-20",
+     "day": "2026-11-13",
      "dep_time": "16:20",
+     "price": 130.0,
+     "vs_median_pct": -67
+    },
+    {
+     "day": "2026-11-30",
+     "dep_time": "09:00",
      "price": 130.0,
      "vs_median_pct": -67
     },
@@ -931,16 +937,16 @@
      "vs_median_pct": -67
     },
     {
+     "day": "2026-11-20",
+     "dep_time": "16:20",
+     "price": 132.19,
+     "vs_median_pct": -67
+    },
+    {
      "day": "2026-11-09",
      "dep_time": "09:00",
      "price": 136.22,
      "vs_median_pct": -66
-    },
-    {
-     "day": "2026-11-30",
-     "dep_time": "09:00",
-     "price": 137.89,
-     "vs_median_pct": -65
     },
     {
      "day": "2026-12-04",
@@ -961,12 +967,6 @@
      "vs_median_pct": -64
     },
     {
-     "day": "2026-11-13",
-     "dep_time": "16:20",
-     "price": 145.55,
-     "vs_median_pct": -63
-    },
-    {
      "day": "2026-11-02",
      "dep_time": "09:00",
      "price": 145.77,
@@ -983,7 +983,7 @@
   "LCJ-AGP": {
    "normal": {
     "median": 323.0,
-    "q1": 179.0,
+    "q1": 193.2,
     "q3": 370.0,
     "n": 100
    },
@@ -1038,15 +1038,15 @@
     },
     {
      "month": "2026-11",
-     "median": 164.24,
+     "median": 166.43,
      "n": 10
     }
    ],
    "curve": [
     {
      "bucket": "0-7",
-     "median": 175.32,
-     "ratio": 1.0,
+     "median": 204.55,
+     "ratio": 1.166,
      "n": 3
     },
     {
@@ -1058,13 +1058,13 @@
     {
      "bucket": "15-30",
      "median": 213.98,
-     "ratio": 1.022,
+     "ratio": 1.018,
      "n": 6
     },
     {
      "bucket": "31-60",
-     "median": 129.37,
-     "ratio": 1.017,
+     "median": 133.57,
+     "ratio": 1.026,
      "n": 11
     },
     {
@@ -1178,25 +1178,25 @@
     {
      "month": "2026-11",
      "weekday": 0,
-     "median": 123.0,
+     "median": 121.88,
      "n": 4
     },
     {
      "month": "2026-11",
      "weekday": 3,
-     "median": 216.81,
+     "median": 214.62,
      "n": 3
     }
    ],
    "heatmap_weekday": [
     {
      "weekday": 0,
-     "median": 129.19,
+     "median": 135.76,
      "n": 5
     },
     {
      "weekday": 3,
-     "median": 224.65,
+     "median": 223.55,
      "n": 4
     },
     {
@@ -1226,26 +1226,26 @@
     },
     {
      "bucket": "8-14",
-     "median": 262.81,
-     "ratio": 1.053,
+     "median": 258.43,
+     "ratio": 1.069,
      "n": 3
     },
     {
      "bucket": "15-30",
      "median": 365.76,
-     "ratio": 1.01,
+     "ratio": 1.015,
      "n": 7
     },
     {
      "bucket": "31-60",
-     "median": 191.62,
-     "ratio": 1.021,
+     "median": 189.43,
+     "ratio": 1.007,
      "n": 10
     },
     {
      "bucket": "61-90",
      "median": 118.24,
-     "ratio": 1.009,
+     "ratio": 1.001,
      "n": 9
     },
     {
@@ -1281,6 +1281,18 @@
      "vs_median_pct": -65
     },
     {
+     "day": "2026-11-23",
+     "dep_time": "19:20",
+     "price": 108.0,
+     "vs_median_pct": -65
+    },
+    {
+     "day": "2026-11-30",
+     "dep_time": "19:20",
+     "price": 108.0,
+     "vs_median_pct": -65
+    },
+    {
      "day": "2026-12-10",
      "dep_time": "11:55",
      "price": 108.0,
@@ -1299,34 +1311,22 @@
      "vs_median_pct": -61
     },
     {
-     "day": "2026-09-30",
-     "dep_time": "09:40",
-     "price": 123.25,
-     "vs_median_pct": -60
-    },
-    {
-     "day": "2026-11-23",
-     "dep_time": "19:20",
-     "price": 125.61,
-     "vs_median_pct": -59
-    },
-    {
      "day": "2026-10-19",
      "dep_time": "21:30",
      "price": 127.0,
      "vs_median_pct": -58
     },
     {
-     "day": "2026-11-30",
+     "day": "2027-01-04",
      "dep_time": "19:20",
-     "price": 128.28,
-     "vs_median_pct": -58
+     "price": 136.0,
+     "vs_median_pct": -55
     }
    ]
   },
   "LCJ-BGY": {
    "normal": {
-    "median": 188.33,
+    "median": 197.1,
     "q1": 90.98,
     "q3": 285.0,
     "n": 107
@@ -1353,7 +1353,7 @@
     {
      "month": "2026-11",
      "weekday": 0,
-     "median": 68.9,
+     "median": 65.34,
      "n": 4
     },
     {
@@ -1366,7 +1366,7 @@
    "heatmap_weekday": [
     {
      "weekday": 0,
-     "median": 67.63,
+     "median": 65.67,
      "n": 5
     },
     {
@@ -1388,39 +1388,39 @@
     },
     {
      "month": "2026-11",
-     "median": 70.17,
+     "median": 65.67,
      "n": 7
     }
    ],
    "curve": [
     {
      "bucket": "0-7",
-     "median": 148.91,
-     "ratio": 1.03,
+     "median": 151.1,
+     "ratio": 1.045,
      "n": 5
     },
     {
      "bucket": "8-14",
-     "median": 77.72,
+     "median": 78.81,
      "ratio": 1.066,
      "n": 6
     },
     {
      "bucket": "15-30",
      "median": 70.05,
-     "ratio": 1.028,
+     "ratio": 1.021,
      "n": 13
     },
     {
      "bucket": "31-60",
-     "median": 68.9,
-     "ratio": 1.036,
+     "median": 66.38,
+     "ratio": 1.0,
      "n": 10
     },
     {
      "bucket": "61-90",
      "median": 91.88,
-     "ratio": 1.0,
+     "ratio": 1.001,
      "n": 9
     },
     {
@@ -1438,72 +1438,72 @@
    ],
    "cheapest": [
     {
-     "day": "2026-09-29",
-     "dep_time": "22:10",
-     "price": 65.0,
-     "vs_median_pct": -65
-    },
-    {
-     "day": "2026-10-04",
-     "dep_time": "18:05",
-     "price": 65.0,
-     "vs_median_pct": -65
-    },
-    {
      "day": "2026-10-13",
      "dep_time": "22:10",
      "price": 65.0,
-     "vs_median_pct": -65
-    },
-    {
-     "day": "2026-10-21",
-     "dep_time": "08:35",
-     "price": 65.0,
-     "vs_median_pct": -65
-    },
-    {
-     "day": "2026-10-26",
-     "dep_time": "12:25",
-     "price": 65.0,
-     "vs_median_pct": -65
+     "vs_median_pct": -67
     },
     {
      "day": "2026-10-28",
      "dep_time": "15:55",
      "price": 65.0,
-     "vs_median_pct": -65
+     "vs_median_pct": -67
+    },
+    {
+     "day": "2026-11-09",
+     "dep_time": "12:25",
+     "price": 65.0,
+     "vs_median_pct": -67
     },
     {
      "day": "2026-11-13",
      "dep_time": "12:10",
      "price": 65.0,
-     "vs_median_pct": -65
+     "vs_median_pct": -67
+    },
+    {
+     "day": "2026-11-16",
+     "dep_time": "12:25",
+     "price": 65.0,
+     "vs_median_pct": -67
+    },
+    {
+     "day": "2026-09-29",
+     "dep_time": "22:10",
+     "price": 65.18,
+     "vs_median_pct": -67
     },
     {
      "day": "2026-10-06",
      "dep_time": "22:10",
      "price": 65.67,
-     "vs_median_pct": -65
+     "vs_median_pct": -67
     },
     {
      "day": "2026-10-14",
      "dep_time": "12:45",
      "price": 65.67,
-     "vs_median_pct": -65
+     "vs_median_pct": -67
     },
     {
      "day": "2026-10-19",
      "dep_time": "13:30",
      "price": 65.67,
-     "vs_median_pct": -65
+     "vs_median_pct": -67
+    },
+    {
+     "day": "2026-10-20",
+     "dep_time": "22:10",
+     "price": 65.67,
+     "vs_median_pct": -67
     }
    ]
   },
   "LCJ-BHX": {
    "normal": {
-    "median": 240.91,
+    "median": 243.35,
     "q1": 166.99,
-    "q3": 312.19,
+    "q3": 310.0,
     "n": 115
    },
    "heatmap": [
@@ -1570,8 +1570,8 @@
    "curve": [
     {
      "bucket": "0-7",
-     "median": 292.6,
-     "ratio": 1.016,
+     "median": 300.02,
+     "ratio": 1.052,
      "n": 2
     },
     {
@@ -1616,13 +1616,13 @@
      "day": "2026-12-03",
      "dep_time": "19:10",
      "price": 78.81,
-     "vs_median_pct": -67
+     "vs_median_pct": -68
     },
     {
      "day": "2026-12-04",
      "dep_time": "10:25",
-     "price": 83.19,
-     "vs_median_pct": -65
+     "price": 78.81,
+     "vs_median_pct": -68
     },
     {
      "day": "2026-11-13",
@@ -1670,15 +1670,15 @@
      "day": "2026-12-10",
      "dep_time": "19:10",
      "price": 100.72,
-     "vs_median_pct": -58
+     "vs_median_pct": -59
     }
    ]
   },
   "LCJ-CRL": {
    "normal": {
-    "median": 83.28,
+    "median": 81.09,
     "q1": 65.67,
-    "q3": 137.95,
+    "q3": 140.14,
     "n": 8
    },
    "heatmap": [],
@@ -1687,20 +1687,20 @@
    "curve": [
     {
      "bucket": "0-7",
-     "median": 324.58,
-     "ratio": 1.067,
+     "median": 328.97,
+     "ratio": 1.076,
      "n": 2
     },
     {
      "bucket": "8-14",
-     "median": 86.48,
-     "ratio": 1.033,
+     "median": 85.38,
+     "ratio": 1.045,
      "n": 2
     },
     {
      "bucket": "15-30",
-     "median": 91.95,
-     "ratio": 1.022,
+     "median": 93.04,
+     "ratio": 1.028,
      "n": 4
     }
    ],
@@ -1709,56 +1709,56 @@
      "day": "2026-10-01",
      "dep_time": "15:30",
      "price": 65.0,
-     "vs_median_pct": -22
+     "vs_median_pct": -20
     },
     {
      "day": "2026-10-08",
      "dep_time": "15:30",
      "price": 65.67,
-     "vs_median_pct": -21
+     "vs_median_pct": -19
     },
     {
      "day": "2026-10-15",
      "dep_time": "15:30",
      "price": 65.67,
-     "vs_median_pct": -21
+     "vs_median_pct": -19
     },
     {
      "day": "2026-10-22",
      "dep_time": "15:30",
      "price": 65.83,
-     "vs_median_pct": -21
+     "vs_median_pct": -19
     },
     {
      "day": "2026-10-04",
      "dep_time": "14:25",
-     "price": 100.72,
-     "vs_median_pct": 21
+     "price": 96.34,
+     "vs_median_pct": 19
     },
     {
      "day": "2026-10-18",
      "dep_time": "14:25",
-     "price": 127.0,
-     "vs_median_pct": 52
+     "price": 131.38,
+     "vs_median_pct": 62
     },
     {
      "day": "2026-10-11",
      "dep_time": "14:25",
-     "price": 170.81,
+     "price": 166.43,
      "vs_median_pct": 105
     },
     {
      "day": "2026-09-27",
      "dep_time": "14:25",
-     "price": 622.04,
-     "vs_median_pct": 647
+     "price": 639.57,
+     "vs_median_pct": 689
     }
    ]
   },
   "LCJ-DUB": {
    "normal": {
-    "median": 446.0,
-    "q1": 219.0,
+    "median": 448.19,
+    "q1": 218.66,
     "q3": 603.0,
     "n": 98
    },
@@ -1772,7 +1772,7 @@
     {
      "month": "2026-10",
      "weekday": 4,
-     "median": 414.94,
+     "median": 443.1,
      "n": 1
     },
     {
@@ -1796,14 +1796,14 @@
     },
     {
      "weekday": 4,
-     "median": 188.34,
+     "median": 186.15,
      "n": 4
     }
    ],
    "heatmap_month": [
     {
      "month": "2026-10",
-     "median": 305.93,
+     "median": 320.0,
      "n": 2
     },
     {
@@ -1815,32 +1815,32 @@
    "curve": [
     {
      "bucket": "0-7",
-     "median": 893.39,
-     "ratio": 1.032,
+     "median": 891.2,
+     "ratio": 1.021,
      "n": 2
     },
     {
      "bucket": "8-14",
-     "median": 246.38,
-     "ratio": 1.013,
+     "median": 249.67,
+     "ratio": 1.024,
      "n": 2
     },
     {
      "bucket": "15-30",
      "median": 196.87,
-     "ratio": 1.037,
+     "ratio": 1.046,
      "n": 5
     },
     {
      "bucket": "31-60",
      "median": 162.05,
-     "ratio": 1.008,
+     "ratio": 1.022,
      "n": 9
     },
     {
      "bucket": "61-90",
      "median": 167.12,
-     "ratio": 1.009,
+     "ratio": 1.0,
      "n": 9
     },
     {
@@ -1861,7 +1861,19 @@
      "day": "2026-12-04",
      "dep_time": "20:25",
      "price": 109.48,
-     "vs_median_pct": -75
+     "vs_median_pct": -76
+    },
+    {
+     "day": "2026-11-27",
+     "dep_time": "20:25",
+     "price": 130.0,
+     "vs_median_pct": -71
+    },
+    {
+     "day": "2026-11-30",
+     "dep_time": "13:05",
+     "price": 130.0,
+     "vs_median_pct": -71
     },
     {
      "day": "2026-12-11",
@@ -1873,7 +1885,7 @@
      "day": "2026-11-09",
      "dep_time": "13:05",
      "price": 132.19,
-     "vs_median_pct": -70
+     "vs_median_pct": -71
     },
     {
      "day": "2026-11-23",
@@ -1891,25 +1903,13 @@
      "day": "2026-11-16",
      "dep_time": "13:05",
      "price": 136.05,
-     "vs_median_pct": -69
-    },
-    {
-     "day": "2026-11-30",
-     "dep_time": "13:05",
-     "price": 139.86,
-     "vs_median_pct": -69
+     "vs_median_pct": -70
     },
     {
      "day": "2026-11-13",
      "dep_time": "20:25",
      "price": 140.14,
      "vs_median_pct": -69
-    },
-    {
-     "day": "2026-11-27",
-     "dep_time": "20:25",
-     "price": 141.26,
-     "vs_median_pct": -68
     },
     {
      "day": "2026-10-22",
@@ -1923,7 +1923,7 @@
    "normal": {
     "median": 238.51,
     "q1": 184.71,
-    "q3": 354.52,
+    "q3": 376.05,
     "n": 294
    },
    "heatmap": [
@@ -1942,7 +1942,7 @@
     {
      "month": "2026-10",
      "weekday": 3,
-     "median": 219.14,
+     "median": 209.06,
      "n": 1
     },
     {
@@ -1954,7 +1954,7 @@
     {
      "month": "2026-10",
      "weekday": 5,
-     "median": 369.59,
+     "median": 393.27,
      "n": 1
     },
     {
@@ -1978,13 +1978,13 @@
     {
      "month": "2026-11",
      "weekday": 5,
-     "median": 162.05,
+     "median": 164.24,
      "n": 3
     },
     {
      "month": "2026-11",
      "weekday": 6,
-     "median": 186.14,
+     "median": 185.05,
      "n": 4
     }
    ],
@@ -2001,7 +2001,7 @@
     },
     {
      "weekday": 3,
-     "median": 249.92,
+     "median": 244.88,
      "n": 4
     },
     {
@@ -2011,12 +2011,12 @@
     },
     {
      "weekday": 5,
-     "median": 229.96,
+     "median": 231.05,
      "n": 4
     },
     {
      "weekday": 6,
-     "median": 186.14,
+     "median": 185.05,
      "n": 4
     }
    ],
@@ -2054,13 +2054,13 @@
     {
      "bucket": "31-60",
      "median": 183.0,
-     "ratio": 1.012,
+     "ratio": 1.014,
      "n": 22
     },
     {
      "bucket": "61-90",
      "median": 102.88,
-     "ratio": 1.0,
+     "ratio": 1.001,
      "n": 22
     },
     {
@@ -2078,15 +2078,15 @@
    ],
    "cheapest": [
     {
+     "day": "2026-10-20",
+     "dep_time": "20:45",
+     "price": 75.53,
+     "vs_median_pct": -68
+    },
+    {
      "day": "2026-12-12",
      "dep_time": "12:25",
      "price": 78.81,
-     "vs_median_pct": -67
-    },
-    {
-     "day": "2026-10-20",
-     "dep_time": "20:45",
-     "price": 79.34,
      "vs_median_pct": -67
     },
     {
@@ -2096,12 +2096,6 @@
      "vs_median_pct": -66
     },
     {
-     "day": "2026-11-29",
-     "dep_time": "13:40",
-     "price": 87.0,
-     "vs_median_pct": -64
-    },
-    {
      "day": "2026-12-05",
      "dep_time": "12:25",
      "price": 87.0,
@@ -2109,13 +2103,13 @@
     },
     {
      "day": "2026-12-11",
-     "dep_time": "14:20",
+     "dep_time": "10:10",
      "price": 87.0,
      "vs_median_pct": -64
     },
     {
      "day": "2026-12-13",
-     "dep_time": "13:40",
+     "dep_time": "17:30",
      "price": 87.0,
      "vs_median_pct": -64
     },
@@ -2126,23 +2120,29 @@
      "vs_median_pct": -64
     },
     {
-     "day": "2026-12-06",
-     "dep_time": "13:40",
-     "price": 87.57,
-     "vs_median_pct": -63
-    },
-    {
      "day": "2026-12-14",
      "dep_time": "10:55",
      "price": 87.57,
      "vs_median_pct": -63
+    },
+    {
+     "day": "2026-11-29",
+     "dep_time": "13:40",
+     "price": 90.99,
+     "vs_median_pct": -62
+    },
+    {
+     "day": "2026-12-06",
+     "dep_time": "13:40",
+     "price": 96.34,
+     "vs_median_pct": -60
     }
    ]
   },
   "STN-LCJ": {
    "normal": {
     "median": 251.0,
-    "q1": 178.1,
+    "q1": 178.91,
     "q3": 378.0,
     "n": 295
    },
@@ -2262,7 +2262,7 @@
     {
      "bucket": "8-14",
      "median": 220.77,
-     "ratio": 1.011,
+     "ratio": 1.019,
      "n": 7
     },
     {
@@ -2274,13 +2274,13 @@
     {
      "bucket": "31-60",
      "median": 114.69,
-     "ratio": 1.011,
+     "ratio": 1.013,
      "n": 22
     },
     {
      "bucket": "61-90",
      "median": 204.31,
-     "ratio": 1.003,
+     "ratio": 1.012,
      "n": 22
     },
     {
@@ -2300,20 +2300,14 @@
     {
      "day": "2026-10-07",
      "dep_time": "08:15",
-     "price": 74.0,
-     "vs_median_pct": -71
+     "price": 75.1,
+     "vs_median_pct": -70
     },
     {
      "day": "2026-11-08",
      "dep_time": "10:05",
      "price": 76.3,
      "vs_median_pct": -70
-    },
-    {
-     "day": "2026-10-06",
-     "dep_time": "17:10",
-     "price": 82.98,
-     "vs_median_pct": -67
     },
     {
      "day": "2026-11-01",
@@ -2328,8 +2322,8 @@
      "vs_median_pct": -65
     },
     {
-     "day": "2026-12-04",
-     "dep_time": "06:35",
+     "day": "2026-11-29",
+     "dep_time": "10:05",
      "price": 87.0,
      "vs_median_pct": -65
     },
@@ -2337,12 +2331,6 @@
      "day": "2026-12-05",
      "dep_time": "08:50",
      "price": 87.0,
-     "vs_median_pct": -65
-    },
-    {
-     "day": "2026-11-06",
-     "dep_time": "06:35",
-     "price": 88.45,
      "vs_median_pct": -65
     },
     {
@@ -2355,6 +2343,18 @@
      "day": "2026-11-13",
      "dep_time": "06:35",
      "price": 89.28,
+     "vs_median_pct": -64
+    },
+    {
+     "day": "2026-11-06",
+     "dep_time": "06:35",
+     "price": 91.34,
+     "vs_median_pct": -64
+    },
+    {
+     "day": "2026-11-14",
+     "dep_time": "08:50",
+     "price": 91.51,
      "vs_median_pct": -64
     }
    ]
@@ -2468,14 +2468,14 @@
     {
      "out_day": "2026-11-19",
      "out_time": "12:50",
-     "out_price": 131.38,
+     "out_price": 140.14,
      "ret_day": "2026-11-26",
      "ret_time": "08:40",
      "ret_price": 121.0,
      "nights": 7,
-     "total": 252.38,
+     "total": 261.14,
      "weekend": true,
-     "vs_median_pct": -62
+     "vs_median_pct": -61
     },
     {
      "out_day": "2026-12-13",
@@ -2524,6 +2524,18 @@
      "vs_median_pct": -69
     },
     {
+     "out_day": "2026-11-30",
+     "out_time": "19:20",
+     "out_price": 108.0,
+     "ret_day": "2026-12-10",
+     "ret_time": "08:15",
+     "ret_price": 96.34,
+     "nights": 10,
+     "total": 204.34,
+     "weekend": true,
+     "vs_median_pct": -69
+    },
+    {
      "out_day": "2026-12-17",
      "out_time": "11:55",
      "out_price": 108.0,
@@ -2533,6 +2545,18 @@
      "nights": 7,
      "total": 204.34,
      "weekend": true,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-23",
+     "out_time": "19:20",
+     "out_price": 108.0,
+     "ret_day": "2026-11-26",
+     "ret_time": "08:15",
+     "ret_price": 96.34,
+     "nights": 3,
+     "total": 204.34,
+     "weekend": false,
      "vs_median_pct": -69
     },
     {
@@ -2558,30 +2582,6 @@
      "total": 216.0,
      "weekend": true,
      "vs_median_pct": -67
-    },
-    {
-     "out_day": "2026-11-23",
-     "out_time": "19:20",
-     "out_price": 125.61,
-     "ret_day": "2026-11-26",
-     "ret_time": "08:15",
-     "ret_price": 96.34,
-     "nights": 3,
-     "total": 221.95,
-     "weekend": false,
-     "vs_median_pct": -66
-    },
-    {
-     "out_day": "2026-11-30",
-     "out_time": "19:20",
-     "out_price": 128.28,
-     "ret_day": "2026-12-10",
-     "ret_time": "08:15",
-     "ret_price": 96.34,
-     "nights": 10,
-     "total": 224.62,
-     "weekend": true,
-     "vs_median_pct": -66
     },
     {
      "out_day": "2027-03-01",
@@ -2623,41 +2623,17 @@
   },
   "BGY": {
    "normal": {
-    "median": 314.67,
+    "median": 315.05,
     "q1": 199.48,
     "q3": 574.0,
     "n": 105
    },
    "best": [
     {
-     "out_day": "2026-09-29",
-     "out_time": "22:10",
+     "out_day": "2026-10-28",
+     "out_time": "15:55",
      "out_price": 65.0,
-     "ret_day": "2026-10-07",
-     "ret_time": "10:30",
-     "ret_price": 65.0,
-     "nights": 8,
-     "total": 130.0,
-     "weekend": true,
-     "vs_median_pct": -59
-    },
-    {
-     "out_day": "2026-10-04",
-     "out_time": "18:05",
-     "out_price": 65.0,
-     "ret_day": "2026-10-14",
-     "ret_time": "10:30",
-     "ret_price": 65.0,
-     "nights": 10,
-     "total": 130.0,
-     "weekend": true,
-     "vs_median_pct": -59
-    },
-    {
-     "out_day": "2026-10-21",
-     "out_time": "08:35",
-     "out_price": 65.0,
-     "ret_day": "2026-10-30",
+     "ret_day": "2026-11-06",
      "ret_time": "09:50",
      "ret_price": 65.0,
      "nights": 9,
@@ -2666,15 +2642,51 @@
      "vs_median_pct": -59
     },
     {
-     "out_day": "2026-10-26",
+     "out_day": "2026-11-13",
+     "out_time": "12:10",
+     "out_price": 65.0,
+     "ret_day": "2026-11-20",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 7,
+     "total": 130.0,
+     "weekend": true,
+     "vs_median_pct": -59
+    },
+    {
+     "out_day": "2026-11-09",
      "out_time": "12:25",
      "out_price": 65.0,
-     "ret_day": "2026-10-30",
+     "ret_day": "2026-11-13",
      "ret_time": "09:50",
      "ret_price": 65.0,
      "nights": 4,
      "total": 130.0,
      "weekend": false,
+     "vs_median_pct": -59
+    },
+    {
+     "out_day": "2026-11-16",
+     "out_time": "12:25",
+     "out_price": 65.0,
+     "ret_day": "2026-11-20",
+     "ret_time": "09:50",
+     "ret_price": 65.0,
+     "nights": 4,
+     "total": 130.0,
+     "weekend": false,
+     "vs_median_pct": -59
+    },
+    {
+     "out_day": "2026-09-29",
+     "out_time": "22:10",
+     "out_price": 65.18,
+     "ret_day": "2026-10-07",
+     "ret_time": "10:30",
+     "ret_price": 65.0,
+     "nights": 8,
+     "total": 130.18,
+     "weekend": true,
      "vs_median_pct": -59
     },
     {
@@ -2687,41 +2699,29 @@
      "nights": 8,
      "total": 130.67,
      "weekend": true,
-     "vs_median_pct": -58
+     "vs_median_pct": -59
     },
     {
-     "out_day": "2026-10-13",
-     "out_time": "22:10",
-     "out_price": 65.0,
-     "ret_day": "2026-10-21",
-     "ret_time": "06:20",
-     "ret_price": 65.67,
-     "nights": 8,
-     "total": 130.67,
-     "weekend": true,
-     "vs_median_pct": -58
-    },
-    {
-     "out_day": "2026-10-20",
-     "out_time": "22:10",
+     "out_day": "2026-11-23",
+     "out_time": "12:25",
      "out_price": 65.67,
-     "ret_day": "2026-10-30",
+     "ret_day": "2026-11-27",
      "ret_time": "09:50",
      "ret_price": 65.0,
-     "nights": 10,
+     "nights": 4,
      "total": 130.67,
-     "weekend": true,
-     "vs_median_pct": -58
+     "weekend": false,
+     "vs_median_pct": -59
     },
     {
-     "out_day": "2026-10-14",
-     "out_time": "12:45",
-     "out_price": 65.67,
-     "ret_day": "2026-10-21",
-     "ret_time": "06:20",
-     "ret_price": 65.67,
-     "nights": 7,
-     "total": 131.34,
+     "out_day": "2026-10-04",
+     "out_time": "18:05",
+     "out_price": 66.88,
+     "ret_day": "2026-10-14",
+     "ret_time": "10:30",
+     "ret_price": 65.0,
+     "nights": 10,
+     "total": 131.88,
      "weekend": true,
      "vs_median_pct": -58
     },
@@ -2738,39 +2738,27 @@
      "vs_median_pct": -58
     },
     {
-     "out_day": "2026-11-09",
-     "out_time": "12:25",
-     "out_price": 70.26,
-     "ret_day": "2026-11-13",
-     "ret_time": "09:50",
-     "ret_price": 65.0,
-     "nights": 4,
-     "total": 135.26,
-     "weekend": false,
-     "vs_median_pct": -57
+     "out_day": "2026-10-20",
+     "out_time": "22:10",
+     "out_price": 65.67,
+     "ret_day": "2026-10-28",
+     "ret_time": "13:35",
+     "ret_price": 66.93,
+     "nights": 8,
+     "total": 132.6,
+     "weekend": true,
+     "vs_median_pct": -58
     }
    ]
   },
   "BHX": {
    "normal": {
     "median": 536.46,
-    "q1": 334.91,
+    "q1": 336.93,
     "q3": 658.46,
     "n": 114
    },
    "best": [
-    {
-     "out_day": "2026-12-03",
-     "out_time": "19:10",
-     "out_price": 78.81,
-     "ret_day": "2026-12-06",
-     "ret_time": "15:45",
-     "ret_price": 91.57,
-     "nights": 3,
-     "total": 170.38,
-     "weekend": true,
-     "vs_median_pct": -68
-    },
     {
      "out_day": "2026-11-20",
      "out_time": "10:25",
@@ -2794,6 +2782,18 @@
      "total": 174.0,
      "weekend": true,
      "vs_median_pct": -68
+    },
+    {
+     "out_day": "2026-12-03",
+     "out_time": "19:10",
+     "out_price": 78.81,
+     "ret_day": "2026-12-06",
+     "ret_time": "15:45",
+     "ret_price": 96.66,
+     "nights": 3,
+     "total": 175.47,
+     "weekend": true,
+     "vs_median_pct": -67
     },
     {
      "out_day": "2026-11-26",
@@ -2832,18 +2832,6 @@
      "vs_median_pct": -66
     },
     {
-     "out_day": "2026-10-22",
-     "out_time": "10:20",
-     "out_price": 140.95,
-     "ret_day": "2026-10-30",
-     "ret_time": "06:40",
-     "ret_price": 74.0,
-     "nights": 8,
-     "total": 214.95,
-     "weekend": true,
-     "vs_median_pct": -60
-    },
-    {
      "out_day": "2026-11-12",
      "out_time": "19:10",
      "out_price": 128.48,
@@ -2852,6 +2840,18 @@
      "ret_price": 87.0,
      "nights": 3,
      "total": 215.48,
+     "weekend": true,
+     "vs_median_pct": -60
+    },
+    {
+     "out_day": "2026-12-04",
+     "out_time": "10:25",
+     "out_price": 78.81,
+     "ret_day": "2026-12-10",
+     "ret_time": "15:25",
+     "ret_price": 137.38,
+     "nights": 6,
+     "total": 216.19,
      "weekend": true,
      "vs_median_pct": -60
     },
@@ -2868,24 +2868,24 @@
      "vs_median_pct": -59
     },
     {
-     "out_day": "2026-10-25",
-     "out_time": "19:30",
-     "out_price": 145.33,
-     "ret_day": "2026-10-30",
-     "ret_time": "06:40",
-     "ret_price": 74.0,
-     "nights": 5,
-     "total": 219.33,
-     "weekend": false,
-     "vs_median_pct": -59
+     "out_day": "2026-11-05",
+     "out_time": "19:10",
+     "out_price": 152.17,
+     "ret_day": "2026-11-12",
+     "ret_time": "15:25",
+     "ret_price": 76.3,
+     "nights": 7,
+     "total": 228.47,
+     "weekend": true,
+     "vs_median_pct": -57
     }
    ]
   },
   "CRL": {
    "normal": {
-    "median": 165.72,
-    "q1": 137.91,
-    "q3": 221.15,
+    "median": 162.17,
+    "q1": 131.34,
+    "q3": 214.57,
     "n": 7
    },
    "best": [
@@ -2895,23 +2895,11 @@
      "out_price": 65.0,
      "ret_day": "2026-10-08",
      "ret_time": "13:05",
-     "ret_price": 65.0,
+     "ret_price": 65.83,
      "nights": 7,
-     "total": 130.0,
+     "total": 130.83,
      "weekend": true,
-     "vs_median_pct": -22
-    },
-    {
-     "out_day": "2026-10-15",
-     "out_time": "15:30",
-     "out_price": 65.67,
-     "ret_day": "2026-10-22",
-     "ret_time": "13:05",
-     "ret_price": 70.05,
-     "nights": 7,
-     "total": 135.72,
-     "weekend": true,
-     "vs_median_pct": -18
+     "vs_median_pct": -19
     },
     {
      "out_day": "2026-10-08",
@@ -2919,59 +2907,71 @@
      "out_price": 65.67,
      "ret_day": "2026-10-15",
      "ret_time": "13:05",
-     "ret_price": 74.43,
+     "ret_price": 65.67,
      "nights": 7,
-     "total": 140.1,
+     "total": 131.34,
      "weekend": true,
-     "vs_median_pct": -15
+     "vs_median_pct": -19
+    },
+    {
+     "out_day": "2026-10-15",
+     "out_time": "15:30",
+     "out_price": 65.67,
+     "ret_day": "2026-10-22",
+     "ret_time": "13:05",
+     "ret_price": 65.67,
+     "nights": 7,
+     "total": 131.34,
+     "weekend": true,
+     "vs_median_pct": -19
     },
     {
      "out_day": "2026-10-04",
      "out_time": "14:25",
-     "out_price": 100.72,
+     "out_price": 96.34,
      "ret_day": "2026-10-08",
      "ret_time": "13:05",
-     "ret_price": 65.0,
+     "ret_price": 65.83,
      "nights": 4,
-     "total": 165.72,
+     "total": 162.17,
      "weekend": false,
      "vs_median_pct": 0
     },
     {
      "out_day": "2026-10-18",
      "out_time": "14:25",
-     "out_price": 127.0,
+     "out_price": 131.38,
      "ret_day": "2026-10-22",
      "ret_time": "13:05",
-     "ret_price": 70.05,
+     "ret_price": 65.67,
      "nights": 4,
      "total": 197.05,
      "weekend": false,
-     "vs_median_pct": 19
+     "vs_median_pct": 22
     },
     {
      "out_day": "2026-10-11",
      "out_time": "14:25",
-     "out_price": 170.81,
+     "out_price": 166.43,
      "ret_day": "2026-10-15",
      "ret_time": "13:05",
-     "ret_price": 74.43,
+     "ret_price": 65.67,
      "nights": 4,
-     "total": 245.24,
+     "total": 232.1,
      "weekend": false,
-     "vs_median_pct": 48
+     "vs_median_pct": 43
     },
     {
      "out_day": "2026-09-27",
      "out_time": "14:25",
-     "out_price": 622.04,
+     "out_price": 639.57,
      "ret_day": "2026-10-01",
      "ret_time": "13:05",
      "ret_price": 70.05,
      "nights": 4,
-     "total": 692.09,
+     "total": 709.62,
      "weekend": false,
-     "vs_median_pct": 318
+     "vs_median_pct": 338
     }
    ]
   },
@@ -2979,7 +2979,7 @@
    "normal": {
     "median": 837.0,
     "q1": 443.59,
-    "q3": 1155.38,
+    "q3": 1151.0,
     "n": 97
    },
    "best": [
@@ -2996,27 +2996,63 @@
      "vs_median_pct": -71
     },
     {
+     "out_day": "2026-11-27",
+     "out_time": "20:25",
+     "out_price": 130.0,
+     "ret_day": "2026-11-30",
+     "ret_time": "09:00",
+     "ret_price": 130.0,
+     "nights": 3,
+     "total": 260.0,
+     "weekend": true,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-30",
+     "out_time": "13:05",
+     "out_price": 130.0,
+     "ret_day": "2026-12-07",
+     "ret_time": "09:00",
+     "ret_price": 130.0,
+     "nights": 7,
+     "total": 260.0,
+     "weekend": true,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-09",
+     "out_time": "13:05",
+     "out_price": 132.19,
+     "ret_day": "2026-11-13",
+     "ret_time": "16:20",
+     "ret_price": 130.0,
+     "nights": 4,
+     "total": 262.19,
+     "weekend": false,
+     "vs_median_pct": -69
+    },
+    {
+     "out_day": "2026-11-23",
+     "out_time": "13:05",
+     "out_price": 135.65,
+     "ret_day": "2026-11-30",
+     "ret_time": "09:00",
+     "ret_price": 130.0,
+     "nights": 7,
+     "total": 265.65,
+     "weekend": true,
+     "vs_median_pct": -68
+    },
+    {
      "out_day": "2026-11-16",
      "out_time": "13:05",
      "out_price": 136.05,
      "ret_day": "2026-11-20",
      "ret_time": "16:20",
-     "ret_price": 130.0,
+     "ret_price": 132.19,
      "nights": 4,
-     "total": 266.05,
+     "total": 268.24,
      "weekend": false,
-     "vs_median_pct": -68
-    },
-    {
-     "out_day": "2026-11-30",
-     "out_time": "13:05",
-     "out_price": 139.86,
-     "ret_day": "2026-12-07",
-     "ret_time": "09:00",
-     "ret_price": 130.0,
-     "nights": 7,
-     "total": 269.86,
-     "weekend": true,
      "vs_median_pct": -68
     },
     {
@@ -3025,46 +3061,10 @@
      "out_price": 140.14,
      "ret_day": "2026-11-20",
      "ret_time": "16:20",
-     "ret_price": 130.0,
+     "ret_price": 132.19,
      "nights": 7,
-     "total": 270.14,
+     "total": 272.33,
      "weekend": true,
-     "vs_median_pct": -68
-    },
-    {
-     "out_day": "2026-11-27",
-     "out_time": "20:25",
-     "out_price": 141.26,
-     "ret_day": "2026-12-07",
-     "ret_time": "09:00",
-     "ret_price": 130.0,
-     "nights": 10,
-     "total": 271.26,
-     "weekend": true,
-     "vs_median_pct": -68
-    },
-    {
-     "out_day": "2026-11-23",
-     "out_time": "13:05",
-     "out_price": 135.65,
-     "ret_day": "2026-11-30",
-     "ret_time": "09:00",
-     "ret_price": 137.89,
-     "nights": 7,
-     "total": 273.54,
-     "weekend": true,
-     "vs_median_pct": -67
-    },
-    {
-     "out_day": "2026-11-09",
-     "out_time": "13:05",
-     "out_price": 132.19,
-     "ret_day": "2026-11-13",
-     "ret_time": "16:20",
-     "ret_price": 145.55,
-     "nights": 4,
-     "total": 277.74,
-     "weekend": false,
      "vs_median_pct": -67
     },
     {
@@ -3073,11 +3073,23 @@
      "out_price": 162.05,
      "ret_day": "2026-11-30",
      "ret_time": "09:00",
-     "ret_price": 137.89,
+     "ret_price": 130.0,
      "nights": 10,
-     "total": 299.94,
+     "total": 292.05,
      "weekend": true,
-     "vs_median_pct": -64
+     "vs_median_pct": -65
+    },
+    {
+     "out_day": "2026-12-07",
+     "out_time": "13:05",
+     "out_price": 153.21,
+     "ret_day": "2026-12-11",
+     "ret_time": "16:20",
+     "ret_price": 162.05,
+     "nights": 4,
+     "total": 315.26,
+     "weekend": false,
+     "vs_median_pct": -62
     },
     {
      "out_day": "2026-12-11",
@@ -3090,52 +3102,40 @@
      "total": 315.4,
      "weekend": true,
      "vs_median_pct": -62
-    },
-    {
-     "out_day": "2027-01-22",
-     "out_time": "20:25",
-     "out_price": 166.0,
-     "ret_day": "2027-01-29",
-     "ret_time": "16:20",
-     "ret_price": 157.67,
-     "nights": 7,
-     "total": 323.67,
-     "weekend": true,
-     "vs_median_pct": -61
     }
    ]
   },
   "STN": {
    "normal": {
-    "median": 476.0,
+    "median": 478.18,
     "q1": 341.61,
     "q3": 655.0,
     "n": 291
    },
    "best": [
     {
-     "out_day": "2026-11-29",
-     "out_time": "13:40",
-     "out_price": 87.0,
-     "ret_day": "2026-12-04",
-     "ret_time": "06:35",
-     "ret_price": 87.0,
-     "nights": 5,
-     "total": 174.0,
-     "weekend": false,
-     "vs_median_pct": -63
-    },
-    {
      "out_day": "2026-10-20",
      "out_time": "20:45",
-     "out_price": 79.34,
+     "out_price": 75.53,
      "ret_day": "2026-10-30",
      "ret_time": "06:35",
      "ret_price": 100.92,
      "nights": 10,
-     "total": 180.26,
+     "total": 176.45,
      "weekend": true,
-     "vs_median_pct": -62
+     "vs_median_pct": -63
+    },
+    {
+     "out_day": "2026-11-29",
+     "out_time": "13:40",
+     "out_price": 90.99,
+     "ret_day": "2026-12-05",
+     "ret_time": "08:50",
+     "ret_price": 87.0,
+     "nights": 6,
+     "total": 177.99,
+     "weekend": false,
+     "vs_median_pct": -63
     },
     {
      "out_day": "2026-10-21",
@@ -3162,25 +3162,13 @@
      "vs_median_pct": -61
     },
     {
-     "out_day": "2026-12-06",
-     "out_time": "13:40",
-     "out_price": 87.57,
-     "ret_day": "2026-12-11",
-     "ret_time": "06:35",
-     "ret_price": 99.43,
-     "nights": 5,
-     "total": 187.0,
-     "weekend": false,
-     "vs_median_pct": -61
-    },
-    {
      "out_day": "2026-11-28",
      "out_time": "12:25",
      "out_price": 100.72,
-     "ret_day": "2026-12-04",
-     "ret_time": "06:35",
+     "ret_day": "2026-12-05",
+     "ret_time": "08:50",
      "ret_price": 87.0,
-     "nights": 6,
+     "nights": 7,
      "total": 187.72,
      "weekend": true,
      "vs_median_pct": -61
@@ -3198,8 +3186,20 @@
      "vs_median_pct": -60
     },
     {
-     "out_day": "2026-10-25",
+     "out_day": "2026-12-06",
      "out_time": "13:40",
+     "out_price": 96.34,
+     "ret_day": "2026-12-11",
+     "ret_time": "06:35",
+     "ret_price": 99.43,
+     "nights": 5,
+     "total": 195.77,
+     "weekend": false,
+     "vs_median_pct": -59
+    },
+    {
+     "out_day": "2026-10-25",
+     "out_time": "17:30",
      "out_price": 111.85,
      "ret_day": "2026-11-01",
      "ret_time": "10:05",
@@ -3207,16 +3207,16 @@
      "nights": 7,
      "total": 198.33,
      "weekend": true,
-     "vs_median_pct": -58
+     "vs_median_pct": -59
     },
     {
      "out_day": "2026-11-27",
      "out_time": "10:10",
      "out_price": 113.86,
-     "ret_day": "2026-12-04",
-     "ret_time": "06:35",
+     "ret_day": "2026-12-05",
+     "ret_time": "08:50",
      "ret_price": 87.0,
-     "nights": 7,
+     "nights": 8,
      "total": 200.86,
      "weekend": true,
      "vs_median_pct": -58
@@ -3231,7 +3231,7 @@
      "nights": 4,
      "total": 202.86,
      "weekend": false,
-     "vs_median_pct": -57
+     "vs_median_pct": -58
     }
    ]
   }
@@ -3239,15 +3239,41 @@
  "trips_top": [
   {
    "dest": "BGY",
-   "out_day": "2026-09-29",
-   "out_time": "22:10",
+   "out_day": "2026-10-28",
+   "out_time": "15:55",
    "out_price": 65.0,
-   "ret_day": "2026-10-07",
-   "ret_time": "10:30",
+   "ret_day": "2026-11-06",
+   "ret_time": "09:50",
    "ret_price": 65.0,
-   "nights": 8,
+   "nights": 9,
    "total": 130.0,
    "weekend": true,
+   "vs_median_pct": -59
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-11-13",
+   "out_time": "12:10",
+   "out_price": 65.0,
+   "ret_day": "2026-11-20",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 7,
+   "total": 130.0,
+   "weekend": true,
+   "vs_median_pct": -59
+  },
+  {
+   "dest": "BGY",
+   "out_day": "2026-11-09",
+   "out_time": "12:25",
+   "out_price": 65.0,
+   "ret_day": "2026-11-13",
+   "ret_time": "09:50",
+   "ret_price": 65.0,
+   "nights": 4,
+   "total": 130.0,
+   "weekend": false,
    "vs_median_pct": -59
   },
   {
@@ -3257,50 +3283,11 @@
    "out_price": 65.0,
    "ret_day": "2026-10-08",
    "ret_time": "13:05",
-   "ret_price": 65.0,
+   "ret_price": 65.83,
    "nights": 7,
-   "total": 130.0,
+   "total": 130.83,
    "weekend": true,
-   "vs_median_pct": -22
-  },
-  {
-   "dest": "BGY",
-   "out_day": "2026-10-04",
-   "out_time": "18:05",
-   "out_price": 65.0,
-   "ret_day": "2026-10-14",
-   "ret_time": "10:30",
-   "ret_price": 65.0,
-   "nights": 10,
-   "total": 130.0,
-   "weekend": true,
-   "vs_median_pct": -59
-  },
-  {
-   "dest": "BGY",
-   "out_day": "2026-10-21",
-   "out_time": "08:35",
-   "out_price": 65.0,
-   "ret_day": "2026-10-30",
-   "ret_time": "09:50",
-   "ret_price": 65.0,
-   "nights": 9,
-   "total": 130.0,
-   "weekend": true,
-   "vs_median_pct": -59
-  },
-  {
-   "dest": "CRL",
-   "out_day": "2026-10-15",
-   "out_time": "15:30",
-   "out_price": 65.67,
-   "ret_day": "2026-10-22",
-   "ret_time": "13:05",
-   "ret_price": 70.05,
-   "nights": 7,
-   "total": 135.72,
-   "weekend": true,
-   "vs_median_pct": -18
+   "vs_median_pct": -19
   },
   {
    "dest": "CRL",
@@ -3309,24 +3296,24 @@
    "out_price": 65.67,
    "ret_day": "2026-10-15",
    "ret_time": "13:05",
-   "ret_price": 74.43,
+   "ret_price": 65.67,
    "nights": 7,
-   "total": 140.1,
+   "total": 131.34,
    "weekend": true,
-   "vs_median_pct": -15
+   "vs_median_pct": -19
   },
   {
-   "dest": "BHX",
-   "out_day": "2026-12-03",
-   "out_time": "19:10",
-   "out_price": 78.81,
-   "ret_day": "2026-12-06",
-   "ret_time": "15:45",
-   "ret_price": 91.57,
-   "nights": 3,
-   "total": 170.38,
+   "dest": "CRL",
+   "out_day": "2026-10-15",
+   "out_time": "15:30",
+   "out_price": 65.67,
+   "ret_day": "2026-10-22",
+   "ret_time": "13:05",
+   "ret_price": 65.67,
+   "nights": 7,
+   "total": 131.34,
    "weekend": true,
-   "vs_median_pct": -68
+   "vs_median_pct": -19
   },
   {
    "dest": "BHX",
@@ -3355,16 +3342,29 @@
    "vs_median_pct": -68
   },
   {
+   "dest": "BHX",
+   "out_day": "2026-12-03",
+   "out_time": "19:10",
+   "out_price": 78.81,
+   "ret_day": "2026-12-06",
+   "ret_time": "15:45",
+   "ret_price": 96.66,
+   "nights": 3,
+   "total": 175.47,
+   "weekend": true,
+   "vs_median_pct": -67
+  },
+  {
    "dest": "STN",
-   "out_day": "2026-11-29",
-   "out_time": "13:40",
-   "out_price": 87.0,
-   "ret_day": "2026-12-04",
+   "out_day": "2026-10-20",
+   "out_time": "20:45",
+   "out_price": 75.53,
+   "ret_day": "2026-10-30",
    "ret_time": "06:35",
-   "ret_price": 87.0,
-   "nights": 5,
-   "total": 174.0,
-   "weekend": false,
+   "ret_price": 100.92,
+   "nights": 10,
+   "total": 176.45,
+   "weekend": true,
    "vs_median_pct": -63
   }
  ]
