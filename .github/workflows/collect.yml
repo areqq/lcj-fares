@@ -1,9 +1,18 @@
 name: collect
 
 on:
-  schedule:
-    - cron: "0 6 * * *"
+  schedule:  # każde lotnisko o innej porze (UTC), co 6 h — mniejsze obciążenie API z jednego IP
+    - cron: "0 6 * * *"   # LCJ
+    - cron: "0 12 * * *"  # KTW
+    - cron: "0 18 * * *"  # WRO
+    - cron: "0 0 * * *"   # WMI
   workflow_dispatch:
+    inputs:
+      airport:
+        description: Lotnisko
+        type: choice
+        options: [LCJ, KTW, WRO, WMI]
+        default: LCJ
 
 permissions:
   contents: write
@@ -17,7 +26,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 75
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -28,25 +37,39 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - id: home
+        run: |
+          case "${{ github.event.schedule }}" in
+            "0 6 * * *")  H=LCJ ;;
+            "0 12 * * *") H=KTW ;;
+            "0 18 * * *") H=WRO ;;
+            "0 0 * * *")  H=WMI ;;
+            *)            H="${{ inputs.airport }}" ;;
+          esac
+          echo "home=$H" >> "$GITHUB_OUTPUT"
+          echo "Lotnisko: $H"
+      - name: Public IP
+        run: |
+          echo "Publiczne IP runnera: $(curl -s --max-time 5 ifconfig.me || echo '?')"
       - run: pip install -r requirements.txt
       - run: pytest -q
       - id: collect
-        run: python -m lcjfares.collect data
+        run: python -m lcjfares.collect ${{ steps.home.outputs.home }}
         continue-on-error: true
       # dane commitujemy od razu — błąd analizy nie może zgubić dnia pomiarów
       - name: Commit data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data
-          git diff --cached --quiet || git commit -m "data: $(date -u +%F)"
+          git add data/${{ steps.home.outputs.home }}
+          git diff --cached --quiet || git commit -m "data: ${{ steps.home.outputs.home }} $(date -u +%F)"
           git pull --rebase
           git push
-      - run: python -m lcjfares.analyze data site/data.json
+      - run: python -m lcjfares.analyze ${{ steps.home.outputs.home }}
       - name: Commit site data
         run: |
-          git add site/data.json
-          git diff --cached --quiet || git commit -m "site: $(date -u +%F)"
+          git add site/data/${{ steps.home.outputs.home }}.json
+          git diff --cached --quiet || git commit -m "site: ${{ steps.home.outputs.home }} $(date -u +%F)"
           git pull --rebase
           git push
       - uses: actions/configure-pages@v5

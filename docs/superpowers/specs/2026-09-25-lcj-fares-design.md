@@ -1,4 +1,4 @@
-# lcj-fares — monitoring cen Ryanair z/do Łodzi (LCJ)
+# lcj-fares — monitoring cen Ryanair z/do Łodzi (LCJ), Katowic, Wrocławia i Modlina
 
 Data: 2026-09-25 · Status: zatwierdzony projekt (przed planem implementacji)
 
@@ -13,7 +13,17 @@ Zbudować wiedzę, **kiedy loty z/do Łodzi są tanie**, na podstawie własnej h
 Poza zakresem (na teraz): alerty/powiadomienia o spadkach, inne linie niż Ryanair, loty z przesiadką,
 taryfy round-trip z API (pary tam+powrót składamy z cen 1-way).
 
-## Ustalenia
+## Rozszerzenie 2026-09-26: wiele lotnisk
+
+- Lotniska bazowe: LCJ, KTW, WRO, WMI — wszystkie kierunki Ryanair z każdego (≈ 3400 zapytań/dzień łącznie).
+- Dane per lotnisko: `data/<HOME>/{prices.csv,runs.csv,routes.json,airports.json}`, wynik `site/data/<HOME>.json`.
+  Kod parametryzowany lotniskiem (`collect HOME`, `analyze HOME`); brak twardego LCJ.
+- Harmonogram: osobny cron na lotnisko, co 6 h (LCJ 06, KTW 12, WRO 18, WMI 00 UTC); timeout 75 min.
+- `runs.csv` ma kolumnę `ip` (publiczne IP runnera, do analizy blokad); IP także w logu joba.
+- Analiza strumieniowa (lot po locie); krzywa: mediana w obrębie lotu, potem po lotach (każdy lot waży tyle samo).
+- Nazwy lotnisk i kraje z API tras (locale pl), flagi liczone z kodu kraju.
+
+## Ustalenia (wersja początkowa, LCJ)
 
 | Kwestia | Decyzja | Uzasadnienie |
 |---|---|---|

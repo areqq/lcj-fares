@@ -5,11 +5,12 @@ Codzienny monitoring cen Ryanair z/do Łodzi (LCJ) — historia cen i analiza �
 **Strona:** https://areqq.github.io/lcj-fares/
 
 ## Jak to działa
-- GitHub Actions (`.github/workflows/collect.yml`) codziennie o 06:00 UTC pobiera kalendarz najtańszych cen
-  (`cheapestPerDay`) dla wszystkich kierunków z/do LCJ na 12 miesięcy do przodu.
-- `data/prices.csv` — dziennik zmian: wiersz tylko gdy cena/status lotu się zmienia.
-- `data/runs.csv` — log uruchomień (`ok` / `partial` / `failed`, lista braków).
-- `site/data.json` — agregaty dla strony (heatmapa, krzywa „kiedy kupować", najtańsze loty).
+- GitHub Actions (`.github/workflows/collect.yml`) zbiera każde lotnisko o innej porze (UTC): LCJ 06:00, KTW 12:00,
+  WRO 18:00, WMI 00:00 — kalendarz najtańszych cen (`cheapestPerDay`) dla wszystkich kierunków z/do lotniska na 12 miesięcy.
+- `data/<HOME>/prices.csv` — dziennik zmian: wiersz tylko gdy cena/status lotu się zmienia.
+- `data/<HOME>/runs.csv` — log uruchomień (`ok` / `partial` / `failed`, braki, publiczne IP runnera).
+- `data/<HOME>/routes.json`, `airports.json` — kierunki i nazwy lotnisk (z API Ryanair).
+- `site/data/<HOME>.json` — agregaty dla strony (wyjazdy, heatmapa, krzywa „kiedy kupować”, najtańsze loty).
 
 Specyfikacja: `docs/superpowers/specs/2026-09-25-lcj-fares-design.md`.
 
@@ -17,7 +18,7 @@ Specyfikacja: `docs/superpowers/specs/2026-09-25-lcj-fares-design.md`.
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/pytest -q
-.venv/bin/python -m lcjfares.collect data          # ~170 zapytań, 2–3 min
-.venv/bin/python -m lcjfares.analyze data site/data.json
+.venv/bin/python -m lcjfares.collect LCJ           # data/LCJ/, ~170 zapytań, 2–3 min
+.venv/bin/python -m lcjfares.analyze LCJ           # site/data/LCJ.json
 .venv/bin/python -m http.server -d site 8765       # http://localhost:8765/
 ```

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tanie loty z Łodzi</title>
+<title>Tanie loty z Polski</title>
 <style>
 :root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#6b6b66; --line:#e2e1dc; --accent:#1f6feb; }
 @media (prefers-color-scheme: dark) {
@@ -28,11 +28,13 @@ td.cell { color:#111; }
 </head>
 <body>
 <main>
-  <h1>Tanie loty z/do Łodzi (Ryanair)</h1>
+  <h1>Tanie loty Ryanair z Polski</h1>
+  <label>Lotnisko: <select id="home"></select></label>
   <p class="muted" id="meta">Ładowanie…</p>
 
+  <div id="content">
   <section>
-    <h2>Najtańsze wyjazdy z Łodzi (powrót po 3–10 dniach)</h2>
+    <h2 id="tripsTopTitle">Najtańsze wyjazdy (powrót po 3–10 dniach)</h2>
     <p class="muted" id="tripsTopNote"></p>
     <div class="scroll"><table id="tripsTop"></table></div>
   </section>
@@ -66,17 +68,23 @@ td.cell { color:#111; }
     <p class="muted" id="normal"></p>
     <div class="scroll"><table id="cheap"></table></div>
   </section>
+  </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
         integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
         crossorigin="anonymous"></script>
 <script>
 const WD = ["Pn", "Wt", "Śr", "Cz", "Pt", "So", "Nd"];
-const AIRPORTS = {
-  LCJ: ["🇵🇱", "Łódź"], AGP: ["🇪🇸", "Malaga"], ALC: ["🇪🇸", "Alicante"], BGY: ["🇮🇹", "Mediolan-Bergamo"],
-  BHX: ["🇬🇧", "Birmingham"], CRL: ["🇧🇪", "Bruksela-Charleroi"], DUB: ["🇮🇪", "Dublin"], STN: ["🇬🇧", "Londyn-Stansted"],
+const HOMES = {  // [mianownik, dopełniacz]
+  LCJ: ["Łódź", "Łodzi"], KTW: ["Katowice", "Katowic"], WRO: ["Wrocław", "Wrocławia"], WMI: ["Warszawa-Modlin", "Modlina"],
 };
-const ap = code => AIRPORTS[code] ? `${AIRPORTS[code][0]} ${AIRPORTS[code][1]} (${code})` : code;
+const flag = cc => cc && cc.length === 2
+  ? String.fromCodePoint(...[...cc.toUpperCase()].map(c => 0x1F1E6 + c.charCodeAt(0) - 65)) : "";
+const ap = code => {
+  if (HOMES[code]) return `🇵🇱 ${HOMES[code][0]} (${code})`;
+  const a = DATA && DATA.airports[code];
+  return a ? `${flag(a.country)} ${a.name} (${code})` : code;
+};
 const zl = v => v == null ? "–" : Math.round(v) + " zł";
 let DATA, chart;
 
@@ -172,9 +180,9 @@ function renderTrips(t, list, withDest) {
 }
 
 function renderRouteTrips(name) {
-  const dest = name.split("-").find(c => c !== "LCJ");
+  const dest = name.split("-").find(c => c !== DATA.home);
   const tr = DATA.trips[dest];
-  document.getElementById("tripsTitle").textContent = `Wyjazdy Łódź ⇄ ${ap(dest)}`;
+  document.getElementById("tripsTitle").textContent = `Wyjazdy ${HOMES[DATA.home][0]} ⇄ ${ap(dest)}`;
   document.getElementById("tripsNormal").textContent = tr && tr.normal.n
     ? `Typowy wyjazd (mediana najlepszych par z każdego dnia wylotu): ${zl(tr.normal.median)}, zwykle ${zl(tr.normal.q1)}–${zl(tr.normal.q3)}.`
     : "Brak par wylot + powrót w oknie.";
@@ -197,25 +205,37 @@ function render() {
   renderRouteTrips(name); renderHeat(r); renderCurve(r); renderCheap(r);
 }
 
-fetch("data.json", { cache: "no-store" })
-  .then(res => res.json())
-  .then(data => {
-    DATA = data;
-    document.getElementById("meta").textContent =
-      `Ostatni udany pomiar: ${data.last_ok ?? "brak"} · dni historii: ${data.history_days}`;
-    const sel = document.getElementById("route");
-    const names = Object.keys(data.routes);
-    if (!names.length) { document.getElementById("meta").textContent += " · brak danych jeszcze"; return; }
-    const [lo, hi] = data.trip_nights;
-    document.getElementById("tripsTopNote").textContent =
-      `Wylot z Łodzi + najtańszy powrót ${lo}–${hi} dni później, ceny z ostatniego pomiaru, max 3 na kierunek; przy równej cenie wyżej wyjazdy obejmujące weekend. „vs norma” — względem typowego wyjazdu na ten kierunek.`;
-    renderTrips(document.getElementById("tripsTop"), data.trips_top, true);
-    names.forEach(n => sel.append(new Option(n.split("-").map(ap).join(" → "), n)));
-    sel.value = names.find(n => n.startsWith("LCJ-")) ?? names[0];
-    sel.addEventListener("change", render);
-    render();
-  })
-  .catch(e => { document.getElementById("meta").textContent = "Nie udało się wczytać danych: " + e; });
+function load(home) {
+  location.hash = home;
+  const meta = document.getElementById("meta"), content = document.getElementById("content");
+  const sel = document.getElementById("route");
+  DATA = null; sel.replaceChildren(); content.hidden = true; meta.textContent = "Ładowanie…";
+  fetch(`data/${home}.json`, { cache: "no-store" })
+    .then(res => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
+    .then(data => {
+      DATA = data;
+      meta.textContent = `Ostatni udany pomiar: ${data.last_ok ?? "brak"} · dni historii: ${data.history_days}`;
+      const names = Object.keys(data.routes);
+      if (!names.length) { meta.textContent += " · brak danych jeszcze"; return; }
+      const [lo, hi] = data.trip_nights, gen = HOMES[home][1];
+      document.getElementById("tripsTopTitle").textContent = `Najtańsze wyjazdy z ${gen} (powrót po ${lo}–${hi} dniach)`;
+      document.getElementById("tripsTopNote").textContent =
+        `Wylot z ${gen} + najtańszy powrót ${lo}–${hi} dni później, ceny z ostatniego pomiaru, max 3 na kierunek; przy równej cenie wyżej wyjazdy obejmujące weekend. „vs norma” — względem typowego wyjazdu na ten kierunek.`;
+      renderTrips(document.getElementById("tripsTop"), data.trips_top, true);
+      names.forEach(n => sel.append(new Option(n.split("-").map(ap).join(" → "), n)));
+      sel.value = names.find(n => n.startsWith(`${home}-`)) ?? names[0];
+      content.hidden = false;
+      render();
+    })
+    .catch(e => { meta.textContent = `Brak danych dla ${HOMES[home][1]} (${e.message}) — pierwszy pomiar jeszcze się nie odbył?`; });
+}
+
+const homeSel = document.getElementById("home");
+Object.entries(HOMES).forEach(([code, [name]]) => homeSel.append(new Option(`${name} (${code})`, code)));
+homeSel.value = HOMES[location.hash.slice(1)] ? location.hash.slice(1) : "LCJ";
+homeSel.addEventListener("change", () => load(homeSel.value));
+document.getElementById("route").addEventListener("change", render);
+load(homeSel.value);
 </script>
 </body>
 </html>
