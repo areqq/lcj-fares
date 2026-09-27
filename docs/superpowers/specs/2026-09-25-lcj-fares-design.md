@@ -19,6 +19,7 @@ taryfy round-trip z API (pary tam+powrót składamy z cen 1-way).
 - Dane per lotnisko: `data/<HOME>/{prices.csv,runs.csv,routes.json,airports.json}`, wynik `site/data/<HOME>.json`.
   Kod parametryzowany lotniskiem (`collect HOME`, `analyze HOME`); brak twardego LCJ.
 - Harmonogram: osobny cron na lotnisko, co 6 h (LCJ 06, KTW 12, WRO 18, WMI 00 UTC); timeout 75 min.
+- 2026-09-27: dodana Bydgoszcz (BZG, 6 kierunków), cron 03:00 UTC.
 - `runs.csv` ma kolumnę `ip` (publiczne IP runnera, do analizy blokad); IP także w logu joba.
 - Analiza strumieniowa (lot po locie); krzywa: mediana w obrębie lotu, potem po lotach (każdy lot waży tyle samo).
 - Nazwy lotnisk i kraje z API tras (locale pl), flagi liczone z kodu kraju.

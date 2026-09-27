@@ -1,9 +1,9 @@
 # lcj-fares
 
-Codzienny monitoring cen **Ryanair** z/do **Łodzi (LCJ), Katowic (KTW), Wrocławia (WRO) i Warszawy-Modlina (WMI)**:
+Codzienny monitoring cen **Ryanair** z/do **Łodzi (LCJ), Katowic (KTW), Wrocławia (WRO), Warszawy-Modlina (WMI) i Bydgoszczy (BZG)**:
 własna historia cen, żeby wiedzieć, kiedy i dokąd lata się tanio i kiedy kupować.
 
-**Strona:** https://areqq.github.io/lcj-fares/ — lotnisko wybierasz na górze (albo w adresie: `#LCJ`, `#KTW`, `#WRO`, `#WMI`).
+**Strona:** https://areqq.github.io/lcj-fares/ — lotnisko wybierasz na górze (albo w adresie: `#LCJ`, `#KTW`, `#WRO`, `#WMI`, `#BZG`).
 
 ## Co pokazuje strona
 Dla wybranego lotniska:
@@ -29,6 +29,7 @@ Ceny „aktualne” pochodzą zawsze z ostatniego udanego pomiaru; wyszarzone s�
   | KTW Katowice | 12:00 | 28 | ~670 |
   | WRO Wrocław | 18:00 | 53 | ~1270 |
   | WMI Modlin | 00:00 | 52 | ~1250 |
+  | BZG Bydgoszcz | 03:00 | 6 | ~140 |
 
   Każdy run: testy → zbiór (wszystkie kierunki w obie strony, 12 miesięcy do przodu) → commit danych → analiza →
   commit wyniku → publikacja strony. GitHub potrafi opóźnić zaplanowany run o kilka godzin — dane są dzienne, więc to nie szkodzi.

@@ -6,12 +6,13 @@ on:
     - cron: "0 12 * * *"  # KTW
     - cron: "0 18 * * *"  # WRO
     - cron: "0 0 * * *"   # WMI
+    - cron: "0 3 * * *"   # BZG
   workflow_dispatch:
     inputs:
       airport:
         description: Lotnisko
         type: choice
-        options: [LCJ, KTW, WRO, WMI]
+        options: [LCJ, KTW, WRO, WMI, BZG]
         default: LCJ
 
 permissions:
@@ -44,6 +45,7 @@ jobs:
             "0 12 * * *") H=KTW ;;
             "0 18 * * *") H=WRO ;;
             "0 0 * * *")  H=WMI ;;
+            "0 3 * * *")  H=BZG ;;
             *)            H="${{ inputs.airport }}" ;;
           esac
           [ -n "$H" ] || { echo "nieznany harmonogram: ${{ github.event.schedule }}"; exit 1; }
