@@ -1,19 +1,15 @@
 name: collect
 
 on:
-  schedule:  # każde lotnisko o innej porze (UTC), co 6 h — mniejsze obciążenie API z jednego IP
-    - cron: "0 6 * * *"   # LCJ
-    - cron: "0 12 * * *"  # KTW
-    - cron: "0 18 * * *"  # WRO
-    - cron: "0 0 * * *"   # WMI
-    - cron: "0 3 * * *"   # BZG
+  schedule:  # co 2 h; skrypt wybiera lotnisko (lcjfares/schedule.py) — opóźnione/pominięte runy nadrabia następny
+    - cron: "23 */2 * * *"
   workflow_dispatch:
     inputs:
       airport:
-        description: Lotnisko
+        description: "Lotnisko (auto = jak cron: najdawniej mierzone)"
         type: choice
-        options: [LCJ, KTW, WRO, WMI, BZG]
-        default: LCJ
+        options: [auto, LCJ, KTW, WRO, WMI, BZG]
+        default: auto
 
 permissions:
   contents: write
@@ -40,27 +36,28 @@ jobs:
           python-version: "3.12"
       - id: home
         run: |
-          case "${{ github.event.schedule }}" in
-            "0 6 * * *")  H=LCJ ;;
-            "0 12 * * *") H=KTW ;;
-            "0 18 * * *") H=WRO ;;
-            "0 0 * * *")  H=WMI ;;
-            "0 3 * * *")  H=BZG ;;
-            *)            H="${{ inputs.airport }}" ;;
-          esac
-          [ -n "$H" ] || { echo "nieznany harmonogram: ${{ github.event.schedule }}"; exit 1; }
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.airport }}" != "auto" ]; then
+            H="${{ inputs.airport }}"
+          else
+            H=$(python -m lcjfares.schedule data)
+          fi
           echo "home=$H" >> "$GITHUB_OUTPUT"
-          echo "Lotnisko: $H"
+          echo "Lotnisko: ${H:-brak — wszystkie zmierzone w ciągu 18 h}"
       - name: Public IP
+        if: steps.home.outputs.home != ''
         run: |
           echo "Publiczne IP runnera: $(curl -s --max-time 5 ifconfig.me || echo '?')"
       - run: pip install -r requirements.txt
+        if: steps.home.outputs.home != ''
       - run: pytest -q
+        if: steps.home.outputs.home != ''
       - id: collect
+        if: steps.home.outputs.home != ''
         run: python -m lcjfares.collect ${{ steps.home.outputs.home }}
         continue-on-error: true
       # dane commitujemy od razu — błąd analizy nie może zgubić dnia pomiarów
       - name: Commit data
+        if: steps.home.outputs.home != ''
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -69,17 +66,22 @@ jobs:
           git pull --rebase
           git push
       - run: python -m lcjfares.analyze ${{ steps.home.outputs.home }}
+        if: steps.home.outputs.home != ''
       - name: Commit site data
+        if: steps.home.outputs.home != ''
         run: |
           git add site/data/${{ steps.home.outputs.home }}.json
           git diff --cached --quiet || git commit -m "site: ${{ steps.home.outputs.home }} $(date -u +%F)"
           git pull --rebase
           git push
       - uses: actions/configure-pages@v5
+        if: steps.home.outputs.home != ''
       - uses: actions/upload-pages-artifact@v3
+        if: steps.home.outputs.home != ''
         with:
           path: site
       - id: deploy
+        if: steps.home.outputs.home != ''
         uses: actions/deploy-pages@v4
       - name: Fail if collection failed
         if: steps.collect.outcome == 'failure'

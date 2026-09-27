@@ -21,18 +21,22 @@ Ceny „aktualne” pochodzą zawsze z ostatniego udanego pomiaru; wyszarzone s�
 ## Jak to działa
 - Źródło: otwarte (nieoficjalne) API Ryanair — `farfnd/v4/oneWayFares/{O}/{D}/cheapestPerDay` (najtańszy lot każdego
   dnia miesiąca) i lista tras lotniska (z polskimi nazwami i krajami). Bez logowania i tokenów.
-- GitHub Actions (`.github/workflows/collect.yml`) zbiera **każde lotnisko o innej porze** (UTC):
+- GitHub Actions (`.github/workflows/collect.yml`) startuje **co 2 godziny** (minuta :23). Skrypt
+  `lcjfares/schedule.py` wybiera, które lotnisko zmierzyć: spośród tych, których ostatni udany pomiar jest starszy
+  niż 18 h (i które nie miały próby w ostatnich 4 h), **losuje jedno z 2 najdawniej mierzonych**. Gdy wszystkie są
+  świeże, run kończy się po kilkunastu sekundach bez commitu. Efekt: każde lotnisko ~raz na dobę, o zmiennej porze;
+  opóźniony, pominięty albo nieudany run nadrabia następny.
 
-  | Lotnisko | Godzina | Kierunki | Zapytań |
+  | Lotnisko | Kierunki | Zapytań | Czas |
   |---|---|---|---|
-  | LCJ Łódź | 06:00 | 7 | ~170 |
-  | KTW Katowice | 12:00 | 28 | ~670 |
-  | WRO Wrocław | 18:00 | 53 | ~1270 |
-  | WMI Modlin | 00:00 | 52 | ~1250 |
-  | BZG Bydgoszcz | 03:00 | 6 | ~140 |
+  | LCJ Łódź | 7 | ~170 | ~3 min |
+  | KTW Katowice | 28 | ~670 | ~10 min |
+  | WRO Wrocław | 53 | ~1270 | ~30 min |
+  | WMI Modlin | 52 | ~1250 | ~30 min |
+  | BZG Bydgoszcz | 6 | ~140 | ~3 min |
 
   Każdy run: testy → zbiór (wszystkie kierunki w obie strony, 12 miesięcy do przodu) → commit danych → analiza →
-  commit wyniku → publikacja strony. GitHub potrafi opóźnić zaplanowany run o kilka godzin — dane są dzienne, więc to nie szkodzi.
+  commit wyniku → publikacja strony. Nowe lotnisko = wpis w `AIRPORTS` (`lcjfares/schedule.py`) i w `HOMES` (strona).
 - Nieudany zbiór (>50% błędów) kończy job błędem → mail od GitHuba; `runs.csv` zapisuje się mimo to.
   Po 10 błędach z rzędu run przerywa zapytania (bezpiecznik).
 
@@ -47,11 +51,12 @@ Ceny „aktualne” pochodzą zawsze z ostatniego udanego pomiaru; wyszarzone s�
 Publiczne IP runnera jest też w logu joba (krok „Public IP”) — przydaje się przy analizie blokad.
 
 ## Ręczne uruchomienie
-Actions → **collect** → *Run workflow* → wybierz lotnisko. Albo:
+Actions → **collect** → *Run workflow* → `auto` (jak cron) albo konkretne lotnisko. Albo:
 ```bash
 gh workflow run collect.yml -R areqq/lcj-fares -f airport=KTW
 ```
-Uruchamiaj **po jednym lotnisku naraz** — GitHub trzyma w kolejce tylko jeden oczekujący run, kolejne anuluje.
+Uruchamiaj **jedno naraz** — GitHub trzyma w kolejce tylko jeden oczekujący run, kolejne anuluje
+(przy auto-wyborze nic nie ginie: pominięte lotnisko weźmie następny run).
 
 ## Lokalnie
 ```bash
