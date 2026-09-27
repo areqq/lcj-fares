@@ -1,0 +1,26 @@
+{
+ "ALC": {
+  "name": "Alicante",
+  "country": "es"
+ },
+ "BHX": {
+  "name": "Birmingham",
+  "country": "gb"
+ },
+ "BRS": {
+  "name": "Bristol",
+  "country": "gb"
+ },
+ "DUB": {
+  "name": "Dublin",
+  "country": "ie"
+ },
+ "LTN": {
+  "name": "Londyn-Luton",
+  "country": "gb"
+ },
+ "STN": {
+  "name": "Londyn-Stansted",
+  "country": "gb"
+ }
+}
