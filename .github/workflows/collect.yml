@@ -1,7 +1,7 @@
 name: collect
 
 on:
-  schedule:  # co 2 h; skrypt wybiera lotnisko (lcjfares/schedule.py) — opóźnione/pominięte runy nadrabia następny
+  schedule:  # co 2 h; lcjfares/schedule.py podaje czekające lotniska — GitHub część runów pomija, następny nadrabia
     - cron: "23 */2 * * *"
   workflow_dispatch:
     inputs:
@@ -23,7 +23,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 120
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -41,48 +41,50 @@ jobs:
           else
             H=$(python -m lcjfares.schedule data)
           fi
-          echo "home=$H" >> "$GITHUB_OUTPUT"
-          echo "Lotnisko: ${H:-brak — wszystkie zmierzone w ciągu 18 h}"
+          echo "homes=$H" >> "$GITHUB_OUTPUT"
+          echo "Lotniska: ${H:-brak — wszystkie zmierzone w ciągu 18 h}"
       - name: Public IP
-        if: steps.home.outputs.home != ''
+        if: steps.home.outputs.homes != ''
         run: |
           echo "Publiczne IP runnera: $(curl -s --max-time 5 ifconfig.me || echo '?')"
       - run: pip install -r requirements.txt
-        if: steps.home.outputs.home != ''
+        if: steps.home.outputs.homes != ''
       - run: pytest -q
-        if: steps.home.outputs.home != ''
-      - id: collect
-        if: steps.home.outputs.home != ''
-        run: python -m lcjfares.collect ${{ steps.home.outputs.home }}
-        continue-on-error: true
-      # dane commitujemy od razu — błąd analizy nie może zgubić dnia pomiarów
-      - name: Commit data
-        if: steps.home.outputs.home != ''
+        if: steps.home.outputs.homes != ''
+      # po kolei każde czekające lotnisko; dane commitujemy zaraz po zbiorze (błąd dalej nie zgubi pomiaru)
+      - id: run
+        name: Collect + analyze
+        if: steps.home.outputs.homes != ''
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/${{ steps.home.outputs.home }}
-          git diff --cached --quiet || git commit -m "data: ${{ steps.home.outputs.home }} $(date -u +%F)"
-          git pull --rebase
-          git push
-      - run: python -m lcjfares.analyze ${{ steps.home.outputs.home }}
-        if: steps.home.outputs.home != ''
-      - name: Commit site data
-        if: steps.home.outputs.home != ''
-        run: |
-          git add site/data/${{ steps.home.outputs.home }}.json
-          git diff --cached --quiet || git commit -m "site: ${{ steps.home.outputs.home }} $(date -u +%F)"
-          git pull --rebase
-          git push
+          start=$(date +%s); failed=""
+          for H in ${{ steps.home.outputs.homes }}; do
+            if [ $(( $(date +%s) - start )) -gt 3300 ]; then   # nie zaczynaj nowego po 55 min — reszta w następnym runie
+              echo "budżet czasu wyczerpany — $H w następnym uruchomieniu"; continue
+            fi
+            echo "::group::$H"
+            python -m lcjfares.collect "$H" || failed="$failed $H"
+            git add "data/$H"
+            git diff --cached --quiet || git commit -m "data: $H $(date -u +%F)"
+            git pull --rebase && git push
+            python -m lcjfares.analyze "$H"
+            git add "site/data/$H.json"
+            git diff --cached --quiet || git commit -m "site: $H $(date -u +%F)"
+            git pull --rebase && git push
+            echo "::endgroup::"
+          done
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
       - uses: actions/configure-pages@v5
-        if: steps.home.outputs.home != ''
+        if: steps.home.outputs.homes != ''
       - uses: actions/upload-pages-artifact@v3
-        if: steps.home.outputs.home != ''
+        if: steps.home.outputs.homes != ''
         with:
           path: site
       - id: deploy
-        if: steps.home.outputs.home != ''
+        if: steps.home.outputs.homes != ''
         uses: actions/deploy-pages@v4
       - name: Fail if collection failed
-        if: steps.collect.outcome == 'failure'
-        run: exit 1
+        if: steps.run.outputs.failed != ''
+        run: |
+          echo "nieudany zbiór:${{ steps.run.outputs.failed }}"; exit 1

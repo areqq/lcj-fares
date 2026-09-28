@@ -22,6 +22,8 @@ taryfy round-trip z API (pary tam+powrót składamy z cen 1-way).
 - 2026-09-27: dodana Bydgoszcz (BZG, 6 kierunków), cron 03:00 UTC.
 - 2026-09-27: harmonogram zastąpiony jednym cronem co 2 h (`23 */2 * * *`) + wybór lotniska w
   `lcjfares/schedule.py`: kwalifikuje się ostatni udany pomiar > 18 h i ostatnia próba > 4 h; losowo jedno z 2 najstarszych.
+- 2026-09-28: GitHub pomija większość runów co 2 h (≈4–5/dobę) → jeden run robi wszystkie czekające lotniska
+  (najstarsze najpierw, 2 najstarsze w losowej kolejności), commit per lotnisko, nie zaczyna nowego po 55 min; timeout 120 min.
 - `runs.csv` ma kolumnę `ip` (publiczne IP runnera, do analizy blokad); IP także w logu joba.
 - Analiza strumieniowa (lot po locie); krzywa: mediana w obrębie lotu, potem po lotach (każdy lot waży tyle samo).
 - Nazwy lotnisk i kraje z API tras (locale pl), flagi liczone z kodu kraju.

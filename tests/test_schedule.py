@@ -63,9 +63,25 @@ def test_random_among_two_oldest_only(tmp_path):
     assert picks == {"LCJ", "KTW"}
 
 
-def test_main_prints_choice_or_empty(tmp_path, capsys):
+def test_due_lists_all_eligible_two_oldest_first_in_random_order(tmp_path):
+    add_run(tmp_path, "LCJ", 40)
+    add_run(tmp_path, "KTW", 30)
+    add_run(tmp_path, "WRO", 20)
+    add_run(tmp_path, "WMI", 10)       # świeży — pomijany
+    orders = {tuple(schedule.due(tmp_path, NOW, airports=("LCJ", "KTW", "WRO", "WMI"), rng=random.Random(s)))
+              for s in range(50)}
+    assert orders == {("LCJ", "KTW", "WRO"), ("KTW", "LCJ", "WRO")}
+
+
+def test_due_empty_when_all_fresh(tmp_path):
+    for h in ("LCJ", "KTW"):
+        add_run(tmp_path, h, 2)
+    assert schedule.due(tmp_path, NOW, airports=("LCJ", "KTW")) == []
+
+
+def test_main_prints_space_separated_list_or_empty(tmp_path, capsys):
     assert schedule.main([str(tmp_path)], now=NOW) == 0
-    assert capsys.readouterr().out.strip() in schedule.AIRPORTS
+    assert sorted(capsys.readouterr().out.split()) == sorted(schedule.AIRPORTS)
     for h in schedule.AIRPORTS:
         add_run(tmp_path, h, 1)
     schedule.main([str(tmp_path)], now=NOW)

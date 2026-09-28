@@ -1,6 +1,8 @@
-"""Które lotnisko zmierzyć teraz: spośród dawno niemierzonych losowo jedno z 2 najstarszych.
+"""Które lotniska zmierzyć teraz: wszystkie dawno niemierzone, najstarsze najpierw
+(dwa najstarsze w losowej kolejności).
 
-Cron odpala się co 2 h; opóźnione/pominięte/nieudane uruchomienie nadrabia następne.
+Cron odpala się co 2 h, ale GitHub część uruchomień pomija — dlatego jeden run robi wszystkie
+czekające lotniska; opóźnione/pominięte/nieudane uruchomienie nadrabia następne.
 Tylko biblioteka standardowa — działa przed instalacją zależności.
 """
 from __future__ import annotations
@@ -29,7 +31,7 @@ def last_times(runs: list[dict]) -> tuple[dt.datetime | None, dt.datetime | None
     return (max(ok) if ok else None), (max(tried) if tried else None)
 
 
-def pick(data_root: Path, now: dt.datetime, airports=AIRPORTS, rng=random) -> str | None:
+def due(data_root: Path, now: dt.datetime, airports=AIRPORTS, rng=random) -> list[str]:
     candidates = []
     for home in airports:
         ok, tried = last_times(store.read_runs(data_root / home / "runs.csv"))
@@ -38,16 +40,20 @@ def pick(data_root: Path, now: dt.datetime, airports=AIRPORTS, rng=random) -> st
         if tried and now - tried < MIN_AGE_TRY:
             continue
         candidates.append((ok or NEVER, home))
-    if not candidates:
-        return None
-    candidates.sort()
-    return rng.choice(candidates[:2])[1]
+    order = [home for _, home in sorted(candidates)]
+    head = order[:2]
+    rng.shuffle(head)
+    return head + order[2:]
+
+
+def pick(data_root: Path, now: dt.datetime, airports=AIRPORTS, rng=random) -> str | None:
+    homes = due(data_root, now, airports, rng)
+    return homes[0] if homes else None
 
 
 def main(argv: list[str] | None = None, now: dt.datetime | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
-    home = pick(Path(argv[0] if argv else "data"), now or dt.datetime.now(dt.timezone.utc))
-    print(home or "")
+    print(" ".join(due(Path(argv[0] if argv else "data"), now or dt.datetime.now(dt.timezone.utc))))
     return 0
 
 

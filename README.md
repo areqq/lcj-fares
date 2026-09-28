@@ -21,11 +21,12 @@ Ceny „aktualne” pochodzą zawsze z ostatniego udanego pomiaru; wyszarzone s�
 ## Jak to działa
 - Źródło: otwarte (nieoficjalne) API Ryanair — `farfnd/v4/oneWayFares/{O}/{D}/cheapestPerDay` (najtańszy lot każdego
   dnia miesiąca) i lista tras lotniska (z polskimi nazwami i krajami). Bez logowania i tokenów.
-- GitHub Actions (`.github/workflows/collect.yml`) startuje **co 2 godziny** (minuta :23). Skrypt
-  `lcjfares/schedule.py` wybiera, które lotnisko zmierzyć: spośród tych, których ostatni udany pomiar jest starszy
-  niż 18 h (i które nie miały próby w ostatnich 4 h), **losuje jedno z 2 najdawniej mierzonych**. Gdy wszystkie są
-  świeże, run kończy się po kilkunastu sekundach bez commitu. Efekt: każde lotnisko ~raz na dobę, o zmiennej porze;
-  opóźniony, pominięty albo nieudany run nadrabia następny.
+- GitHub Actions (`.github/workflows/collect.yml`) startuje **co 2 godziny** (minuta :23) — w praktyce GitHub część
+  zaplanowanych uruchomień pomija, więc system tego nie zakłada. Skrypt `lcjfares/schedule.py` podaje **wszystkie
+  czekające lotniska**: ostatni udany pomiar starszy niż 18 h i brak próby w ostatnich 4 h; najdawniej mierzone najpierw
+  (dwa najstarsze w losowej kolejności). Run robi je po kolei (osobny commit na lotnisko); nowego nie zaczyna po 55 min —
+  resztę weźmie następny run. Gdy nic nie czeka, run kończy się po kilkunastu sekundach. Efekt: każde lotnisko ~raz na
+  dobę, o zmiennej porze; nawet 2–3 uruchomienia na dobę wystarczą.
 
   | Lotnisko | Kierunki | Zapytań | Czas |
   |---|---|---|---|
