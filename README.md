@@ -51,6 +51,14 @@ Ceny „aktualne” pochodzą zawsze z ostatniego udanego pomiaru; wyszarzone s�
 
 Publiczne IP runnera jest też w logu joba (krok „Public IP”) — przydaje się przy analizie blokad.
 
+## Lokalny popychacz (opcjonalnie)
+`tools/kick-queue.sh` — uruchamiany z crona na własnym komputerze co godzinę: jeśli któreś lotnisko czeka
+(ta sama reguła co workflow) i nic nie leci, odpala workflow w trybie `auto`; gdy nic nie czeka — nic nie robi.
+Uzupełnia cron GitHuba, który pomija część uruchomień. Wymaga zalogowanego `gh`.
+```bash
+47 * * * * /ścieżka/lcj-fares/tools/kick-queue.sh >> $HOME/.cache/lcj-fares-kick.log 2>&1
+```
+
 ## Ręczne uruchomienie
 Actions → **collect** → *Run workflow* → `auto` (jak cron) albo konkretne lotnisko. Albo:
 ```bash
