@@ -37,6 +37,18 @@ td.cell { color:#111; }
 .legend { display:flex; gap:16px; flex-wrap:wrap; font-size:.85rem; color:var(--muted); margin:.2em 0 .4em; }
 .legend i { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-1px; margin-right:5px; }
 .filters { display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin:.8em 0 .4em; font-size:.9rem; }
+.period { display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin:.6em 0 .8em; font-size:.9rem; }
+.period .seg { display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.period .seg button { font:inherit; padding:.3em .8em; border:0; background:transparent; color:var(--fg); cursor:pointer; }
+.period .seg button + button { border-left:1px solid var(--line); }
+.period .seg button[aria-pressed="true"] { background:var(--accent); color:#fff; }
+.period .nav { font:inherit; padding:.25em .6em; border:1px solid var(--line); border-radius:8px; background:transparent; color:var(--fg); cursor:pointer; }
+.period .nav:disabled { opacity:.35; cursor:default; }
+.period .which { display:flex; align-items:center; gap:6px; flex:1 1 260px; min-width:0; }
+.period .chips { display:flex; gap:6px; overflow-x:auto; scrollbar-width:thin; padding-bottom:2px; flex:1 1 auto; min-width:0; }
+.period .chips button { font:inherit; font-size:.85rem; white-space:nowrap; padding:.2em .7em; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--muted); cursor:pointer; }
+.period .chips button[aria-pressed="true"] { border-color:var(--accent); color:var(--fg); background:var(--wk-row); }
+.period .chips button:hover, .period .nav:hover:not(:disabled) { border-color:var(--accent); }
 #calTable td, #calTable th { vertical-align:top; font-variant-numeric:tabular-nums; }
 .tablebox { max-height:560px; overflow-y:auto; border:1px solid var(--line); border-radius:6px; }
 #calTable th { position:sticky; top:0; background:var(--bg); z-index:1; }
@@ -71,6 +83,16 @@ b.wkd { font-weight:700; }
   <section>
     <h2 id="calTitle">Kalendarz cen</h2>
     <p class="muted">Słupki: cena wylotu w danym dniu; linia: cena lotu powrotnego w danym dniu. Szare pasy to soboty i niedziele. Kliknij słupek, żeby przejść do tego dnia w tabeli.</p>
+    <div class="period" id="period" aria-label="Okres na wykresach">
+      <div class="seg" id="perLen" role="group" aria-label="Długość okresu">
+        <button data-len="year">Rok</button><button data-len="half">Pół roku</button><button data-len="quarter">Kwartał</button><button data-len="month">Miesiąc</button>
+      </div>
+      <div class="which">
+        <button class="nav" id="perPrev" aria-label="Poprzedni okres">◀</button>
+        <div class="chips" id="perChips" role="group" aria-label="Który okres"></div>
+        <button class="nav" id="perNext" aria-label="Następny okres">▶</button>
+      </div>
+    </div>
     <div class="legend"><span><i style="background:var(--out)"></i><span id="lgOut">tam</span></span><span><i style="background:var(--ret)"></i><span id="lgRet">z powrotem</span></span><span><i style="background:var(--band)"></i>sobota/niedziela</span></div>
     <div class="chart tall"><canvas id="cal"></canvas></div>
     <h3 style="font-size:1rem;margin:1.2em 0 .2em">Cena wyjazdu: tam + powrót</h3>
@@ -78,10 +100,10 @@ b.wkd { font-weight:700; }
     <div class="legend"><span><i style="background:var(--trip);height:3px;vertical-align:3px"></i>najtańszy z 3 powrotów</span><span><i style="background:var(--trip-band)"></i>rozrzut 3 powrotów</span><span><i style="background:var(--trip);border-radius:50%;width:8px;height:8px"></i>okazja</span><span><i style="background:var(--band)"></i>sobota/niedziela</span></div>
     <div class="chart tall"><canvas id="trip"></canvas></div>
     <div class="filters">
-      <label>Miesiąc: <select id="calMonth"></select></label>
+      <span class="muted" id="calRange"></span>
       <label><input type="checkbox" id="calWeekend"> tylko wylot w pt/sob</label>
     </div>
-    <p class="muted">Każdy wiersz: wylot i trzy najbliższe powroty (od 2. dnia). Tło ceny: <span style="background:var(--cheap)">&nbsp;tanio&nbsp;</span> = najtańsze 25% na tej trasie, <span style="background:var(--pricey)">&nbsp;drogo&nbsp;</span> = najdroższe 25%. Szare wiersze: wylot pt–nd.</p>
+    <p class="muted">Tabela obejmuje ten sam okres co wykresy. Każdy wiersz: wylot i trzy najbliższe powroty (od 2. dnia). Tło ceny: <span style="background:var(--cheap)">&nbsp;tanio&nbsp;</span> = najtańsze 25% na tej trasie, <span style="background:var(--pricey)">&nbsp;drogo&nbsp;</span> = najdroższe 25%. Szare wiersze: wylot pt–nd.</p>
     <div class="scroll tablebox"><table id="calTable"></table></div>
   </section>
 
@@ -269,22 +291,84 @@ function calendarRows(out, ret) {
   });
 }
 
+// Okresy: długość (rok / pół roku / kwartał / miesiąc) + który z nich. Wspólne dla obu wykresów i tabeli.
+const PERIOD_MONTHS = { year: 12, half: 6, quarter: 3, month: 1 };
+const PERIOD_KEY = "lcj-period";
+let period = { len: "year", idx: 0 };
+try { const sv = JSON.parse(localStorage.getItem(PERIOD_KEY)); if (sv && PERIOD_MONTHS[sv.len]) period = sv; } catch (e) {}
+const monthIdx = ym => +ym.slice(0, 4) * 12 + (+ym.slice(5, 7) - 1);   // "YYYY-MM" -> liczba miesięcy
+const ymOf = i => `${Math.floor(i / 12)}-${String(i % 12 + 1).padStart(2, "0")}`;
+const daysInMonth = ym => new Date(Date.UTC(+ym.slice(0, 4), +ym.slice(5, 7), 0)).getUTCDate();
+
+// lista okresów danej długości pokrywająca dostępne dni (pierwszy zaczyna się w miesiącu pierwszego dnia)
+function periodsFor(len, firstDay, lastDay) {
+  const n = PERIOD_MONTHS[len], a = monthIdx(firstDay), b = monthIdx(lastDay), out = [];
+  for (let i = a; i <= b; i += n) {
+    const from = `${ymOf(i)}-01`, toYm = ymOf(Math.min(i + n - 1, b)), to = `${toYm}-${daysInMonth(toYm)}`;
+    const yy = k => String(Math.floor(k / 12)).slice(2), j = monthIdx(toYm);
+    const lbl = n === 1 ? `${MONTHS[i % 12]} ${yy(i)}`
+      : yy(i) === yy(j) ? `${MONTHS[i % 12]}–${MONTHS[j % 12]} ${yy(j)}`      // ten sam rok: „sty–mar 27”
+      : `${MONTHS[i % 12]} ${yy(i)} – ${MONTHS[j % 12]} ${yy(j)}`;            // przełom roku: „paź 26 – mar 27”
+    out.push({ from, to, label: lbl });
+  }
+  return out;
+}
+
+function renderPeriodBar(periods) {
+  document.querySelectorAll("#perLen button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.len === period.len)));
+  const chips = document.getElementById("perChips");
+  chips.replaceChildren(...periods.map((pp, i) => {
+    const b = el("button", pp.label); b.setAttribute("aria-pressed", String(i === period.idx));
+    b.addEventListener("click", () => setPeriod(period.len, i));
+    return b;
+  }));
+  const cur = chips.children[period.idx]; if (cur) cur.scrollIntoView({ block: "nearest", inline: "center" });
+  document.getElementById("perPrev").disabled = period.idx <= 0;
+  document.getElementById("perNext").disabled = period.idx >= periods.length - 1;
+}
+
+function setPeriod(len, idx) {
+  // przy zmianie długości zostań w tym samym miejscu kalendarza (okres zawierający początek obecnego)
+  if (len !== period.len && calSpan) {
+    const cur = periodsFor(period.len, calSpan[0], calSpan[1])[period.idx];
+    const nxt = periodsFor(len, calSpan[0], calSpan[1]);
+    idx = Math.max(0, nxt.findIndex(pp => pp.to >= (cur ? cur.from : calSpan[0])));
+  }
+  period = { len, idx: Math.max(0, idx) };
+  try { localStorage.setItem(PERIOD_KEY, JSON.stringify(period)); } catch (e) {}
+  render();
+}
+
+let calSpan = null;  // [pierwszy dzień, ostatni dzień] z lotem na tej trasie
 function renderCalendar(name) {
   const [o, d] = name.split("-");
   const out = DATA.routes[name].calendar || [], ret = (DATA.routes[`${d}-${o}`] || {}).calendar || [];
   document.getElementById("calTitle").textContent = `Kalendarz cen: ${ap(o)} → ${ap(d)}`;
   document.getElementById("lgOut").textContent = `tam (${o} → ${d})`;
   document.getElementById("lgRet").textContent = `z powrotem (${d} → ${o})`;
-  const rows = calendarRows(out, ret);
-  const qOut = quartiles(out.map(x => x[2])), qTot = quartiles(rows.flatMap(r => r.rets.map(x => x.total)));
+  const rowsAll = calendarRows(out, ret);
+  // kolory tanio/drogo liczone dla całej trasy, nie tylko widocznego okresu — żeby porównanie między okresami było uczciwe
+  const qOut = quartiles(out.map(x => x[2])), qTot = quartiles(rowsAll.flatMap(r => r.rets.map(x => x.total)));
+  const rowByAll = Object.fromEntries(rowsAll.filter(r => r.rets.length).map(r => [r.day, r]));
+  const best = r => Math.min(...r.rets.map(x => x.total)), worst = r => Math.max(...r.rets.map(x => x.total));
+  const deal = quartiles(Object.values(rowByAll).map(best))[0];
 
-  // wykres: ciągły kalendarz, żeby luki (dni bez lotu) były widoczne
   const days = [...out, ...ret].map(x => x[0]).sort();
-  const labels = [];
-  if (days.length) for (let x = days[0]; x <= days[days.length - 1]; x = addDays(x, 1)) labels.push(x);
-  const outBy = Object.fromEntries(out.map(x => [x[0], x])), retBy = Object.fromEntries(ret.map(x => [x[0], x]));
   if (calChart) calChart.destroy();
   if (tripChart) tripChart.destroy();
+  if (!days.length) { calSpan = null; document.getElementById("perChips").replaceChildren(); renderCalTable([], qOut, qTot); return; }
+  calSpan = [days[0], days[days.length - 1]];
+  const periods = periodsFor(period.len, calSpan[0], calSpan[1]);
+  if (period.idx >= periods.length) period.idx = periods.length - 1;
+  const cur = periods[period.idx];
+  renderPeriodBar(periods);
+  document.getElementById("calRange").textContent = `Okres: ${cur.label}`;
+
+  // wykres: ciągły kalendarz w wybranym okresie, żeby luki (dni bez lotu) były widoczne
+  const labels = [];
+  for (let x = cur.from < calSpan[0] ? calSpan[0] : cur.from; x <= cur.to && x <= calSpan[1]; x = addDays(x, 1)) labels.push(x);
+  const outBy = Object.fromEntries(out.map(x => [x[0], x])), retBy = Object.fromEntries(ret.map(x => [x[0], x]));
+  const short_ = PERIOD_MONTHS[period.len] <= 3;  // krótki okres: oś w poniedziałkach, nie miesiącach
   if (window.Chart && labels.length) {
     const bands = { id: "weekendBands", beforeDatasetsDraw(c) {
       const { ctx, chartArea: a, scales: { x } } = c, w = (a.right - a.left) / labels.length;
@@ -299,8 +383,14 @@ function renderCalendar(name) {
       plugins: { legend: { display: false }, tooltip },
       scales: {
         x: { grid: { display: false }, ticks: { autoSkip: false, maxRotation: 0, color: cssVar("--muted"),
-          callback: function (v, i) {  // na wąskim ekranie co 3. miesiąc, żeby etykiety nie nachodziły
-            const l = labels[i], m = +l.slice(5, 7) - 1, step = this.chart.width < 640 ? 3 : 1;
+          callback: function (v, i) {
+            const l = labels[i], narrow = this.chart.width < 640;
+            if (short_) {  // poniedziałki (na wąskim ekranie co 2.); w miesiącu — każdy poniedziałek
+              if (wdIdx(l) !== 0) return "";
+              const wk = Math.floor(i / 7);
+              return narrow && PERIOD_MONTHS[period.len] > 1 && wk % 2 ? "" : `${l.slice(8, 10)}.${l.slice(5, 7)}`;
+            }
+            const m = +l.slice(5, 7) - 1, step = narrow ? 3 : 1;  // rok/pół roku: miesiące
             return l.endsWith("-01") && m % step === 0 ? `${MONTHS[m]} ${l.slice(2, 4)}` : "";
           } } },
         y: { beginAtZero: true, grid: { color: cssVar("--line") }, ticks: { color: cssVar("--muted"), callback: v => v + " zł" } },
@@ -308,13 +398,15 @@ function renderCalendar(name) {
       onClick: (e, els) => { if (els.length) jumpTo(labels[els[0].index]); },
     });
     const title = it => { const l = labels[it[0].dataIndex]; return `${WD[wdIdx(l)]} ${l}`; };
+    const thin = labels.length <= 31;  // w miesiącu słupki i punkty mogą być wyraźniejsze
 
     calChart = new Chart(document.getElementById("cal"), {
       data: { labels, datasets: [
         { type: "bar", label: "tam", data: labels.map(l => outBy[l] ? outBy[l][2] : null),
-          backgroundColor: cssVar("--out"), borderRadius: 2, barPercentage: .9, categoryPercentage: 1 },
+          backgroundColor: cssVar("--out"), borderRadius: thin ? 4 : 2, barPercentage: thin ? .7 : .9, categoryPercentage: 1 },
         { type: "line", label: "z powrotem", data: labels.map(l => retBy[l] ? retBy[l][2] : null),
-          borderColor: cssVar("--ret"), borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, spanGaps: true, tension: .2 },
+          borderColor: cssVar("--ret"), borderWidth: 2, pointRadius: thin ? 3 : 0, pointHoverRadius: 4, spanGaps: true, tension: .2,
+          pointBackgroundColor: cssVar("--ret") },
       ] },
       plugins: [bands],
       options: base({ callbacks: { title,
@@ -322,43 +414,34 @@ function renderCalendar(name) {
           return f ? `${it.datasetIndex ? "z powrotem" : "tam"}: ${zl(f[2])} (${f[1]})` : null; } } }),
     });
 
-    const rowBy = Object.fromEntries(rows.filter(r => r.rets.length).map(r => [r.day, r]));
-    const best = r => Math.min(...r.rets.map(x => x.total)), worst = r => Math.max(...r.rets.map(x => x.total));
-    const deal = quartiles(Object.values(rowBy).map(best))[0];
-    const bestData = labels.map(l => rowBy[l] ? best(rowBy[l]) : null);
     tripChart = new Chart(document.getElementById("trip"), {
       type: "line",
       data: { labels, datasets: [
-        { label: "najtaniej", data: bestData, borderColor: cssVar("--trip"), borderWidth: 2.5, tension: .2, spanGaps: true,
-          pointRadius: c => c.raw != null && c.raw <= deal ? 3.5 : 0, pointHoverRadius: 5,
+        { label: "najtaniej", data: labels.map(l => rowByAll[l] ? best(rowByAll[l]) : null), borderColor: cssVar("--trip"), borderWidth: 2.5, tension: .2, spanGaps: true,
+          pointRadius: c => c.raw != null && c.raw <= deal ? (thin ? 4.5 : 3.5) : (thin ? 2 : 0), pointHoverRadius: 5,
           pointBackgroundColor: cssVar("--trip"), pointBorderColor: cssVar("--bg"), pointBorderWidth: 1.5 },
-        { label: "rozrzut", data: labels.map(l => rowBy[l] ? worst(rowBy[l]) : null), borderWidth: 0,
+        { label: "rozrzut", data: labels.map(l => rowByAll[l] ? worst(rowByAll[l]) : null), borderWidth: 0,
           pointRadius: 0, pointHoverRadius: 0, tension: .2, spanGaps: true, fill: 0, backgroundColor: cssVar("--trip-band") },
       ] },
       plugins: [bands],
       options: base({ filter: it => it.datasetIndex === 0, callbacks: { title,
         label: it => `najtaniej: ${zl(it.raw)}${it.raw <= deal ? " · okazja" : ""}`,
-        afterBody: its => { const r = rowBy[labels[its[0].dataIndex]]; if (!r) return [];
+        afterBody: its => { const r = rowByAll[labels[its[0].dataIndex]]; if (!r) return [];
           const b = best(r);
           return [`wylot ${r.time} · ${zl(r.price)}`, ...r.rets.map(x =>
             `${x.total === b ? "★" : "  "} powrót ${short(x.day)} ${x.time} (+${x.nights}) · ${zl(x.price)} → ${zl(x.total)}`)]; } } }),
     });
   }
-
-  const monthSel = document.getElementById("calMonth"), keep = monthSel.value;
-  const months = [...new Set(out.map(x => x[0].slice(0, 7)))];
-  monthSel.replaceChildren(new Option("wszystkie", ""), ...months.map(m => new Option(`${MONTHS[+m.slice(5) - 1]} ${m.slice(0, 4)}`, m)));
-  monthSel.value = months.includes(keep) ? keep : "";
-  renderCalTable(rows, qOut, qTot);
+  renderCalTable(rowsAll.filter(r => r.day >= cur.from && r.day <= cur.to), qOut, qTot);
 }
 
 let calRows = [], calQ = [];
 function renderCalTable(rows = calRows, qOut = calQ[0], qTot = calQ[1]) {
   calRows = rows; calQ = [qOut, qTot];
-  const m = document.getElementById("calMonth").value, wk = document.getElementById("calWeekend").checked;
+  const wk = document.getElementById("calWeekend").checked;
   const t = document.getElementById("calTable");
   t.replaceChildren(row(["wylot", "godz.", "cena", ...Array.from({ length: RET_COUNT }, (_, i) => `powrót ${i + 1}`)], "th"));
-  rows.filter(r => (!m || r.day.startsWith(m)) && (!wk || [4, 5].includes(wdIdx(r.day)))).forEach(r => {
+  rows.filter(r => !wk || [4, 5].includes(wdIdx(r.day))).forEach(r => {
     const dayCell = el("td"), b = el("b", short(r.day), wdIdx(r.day) >= 4 ? "wkd" : "");
     dayCell.append(b);
     const priceCell = el("td", zl(r.price), tint(r.price, qOut));
@@ -374,15 +457,12 @@ function renderCalTable(rows = calRows, qOut = calQ[0], qTot = calQ[1]) {
     if (wdIdx(r.day) >= 4) tr.className = "wk";
     t.append(tr);
   });
+  if (!t.rows.length || t.rows.length === 1) t.append(row([el("td", "Brak lotów w tym okresie", "muted")]));
 }
 
 function jumpTo(day) {
   const rowEl = () => document.getElementById(`cal-${day}`);
-  if (!rowEl()) {
-    document.getElementById("calMonth").value = day.slice(0, 7);
-    document.getElementById("calWeekend").checked = false;
-    renderCalTable();
-  }
+  if (!rowEl()) { document.getElementById("calWeekend").checked = false; renderCalTable(); }
   const tr = rowEl();
   if (!tr) return;  // tego dnia brak lotu tam
   tr.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -435,8 +515,15 @@ Object.entries(HOMES).forEach(([code, [name]]) => homeSel.append(new Option(`${n
 homeSel.value = isHome(location.hash.slice(1)) ? location.hash.slice(1) : "LCJ";
 homeSel.addEventListener("change", () => load(homeSel.value));
 document.getElementById("route").addEventListener("change", render);
-document.getElementById("calMonth").addEventListener("change", () => renderCalTable());
 document.getElementById("calWeekend").addEventListener("change", () => renderCalTable());
+document.querySelectorAll("#perLen button").forEach(b => b.addEventListener("click", () => setPeriod(b.dataset.len, period.idx)));
+document.getElementById("perPrev").addEventListener("click", () => setPeriod(period.len, period.idx - 1));
+document.getElementById("perNext").addEventListener("click", () => setPeriod(period.len, period.idx + 1));
+document.addEventListener("keydown", e => {  // ← → zmieniają okres, gdy fokus nie jest w polu formularza
+  if (e.altKey || e.ctrlKey || e.metaKey || /^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  if (e.key === "ArrowLeft" && !document.getElementById("perPrev").disabled) setPeriod(period.len, period.idx - 1);
+  if (e.key === "ArrowRight" && !document.getElementById("perNext").disabled) setPeriod(period.len, period.idx + 1);
+});
 load(homeSel.value);
 </script>
 </body>
