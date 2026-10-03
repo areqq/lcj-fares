@@ -31,6 +31,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main   # najnowszy stan w chwili startu, nie z chwili zaplanowania (run mógł czekać w kolejce)
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -59,6 +60,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           start=$(date +%s); failed=""
+          # zapis na main; przy konflikcie (ktoś zapisał to samo w międzyczasie) wycofaj się czysto
+          sync() {
+            if git pull -q --rebase; then git push -q; return; fi
+            git rebase --abort; git reset -q --hard origin/main
+            echo "::warning::konflikt przy zapisie $H — lokalny wynik odrzucony, na main zostaje istniejący"
+            return 1
+          }
           for H in ${{ steps.home.outputs.homes }}; do
             if [ $(( $(date +%s) - start )) -gt 3300 ]; then   # nie zaczynaj nowego po 55 min — reszta w następnym runie
               echo "budżet czasu wyczerpany — $H w następnym uruchomieniu"; continue
@@ -67,11 +75,11 @@ jobs:
             python -m lcjfares.collect "$H" || failed="$failed $H"
             git add "data/$H"
             git diff --cached --quiet || git commit -m "data: $H $(date -u +%F)"
-            git pull --rebase && git push
+            if ! sync; then failed="$failed $H(konflikt)"; echo "::endgroup::"; continue; fi
             python -m lcjfares.analyze "$H"
             git add "site/data/$H.json"
             git diff --cached --quiet || git commit -m "site: $H $(date -u +%F)"
-            git pull --rebase && git push
+            sync || failed="$failed $H(konflikt-site)"
             echo "::endgroup::"
           done
           echo "failed=$failed" >> "$GITHUB_OUTPUT"
