@@ -23,6 +23,10 @@
   "name": "Barcelona-El Prat",
   "country": "es"
  },
+ "BDS": {
+  "name": "Brindisi",
+  "country": "it"
+ },
  "BGY": {
   "name": "Mediolan-Bergamo",
   "country": "it"
@@ -82,6 +86,10 @@
  "CTA": {
   "name": "Catania",
   "country": "it"
+ },
+ "DBV": {
+  "name": "Dubrownik",
+  "country": "hr"
  },
  "DUB": {
   "name": "Dublin",
