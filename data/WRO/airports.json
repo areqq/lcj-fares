@@ -27,6 +27,10 @@
   "name": "Mediolan-Bergamo",
   "country": "it"
  },
+ "BHX": {
+  "name": "Birmingham",
+  "country": "gb"
+ },
  "BLQ": {
   "name": "Bolonia",
   "country": "it"
@@ -34,6 +38,10 @@
  "BOH": {
   "name": "Bournemouth",
   "country": "gb"
+ },
+ "BOJ": {
+  "name": "Burgas",
+  "country": "bg"
  },
  "BRS": {
   "name": "Bristol",
@@ -58,6 +66,10 @@
  "CRL": {
   "name": "Bruksela-Charleroi",
   "country": "be"
+ },
+ "CTA": {
+  "name": "Catania",
+  "country": "it"
  },
  "DBV": {
   "name": "Dubrownik",
