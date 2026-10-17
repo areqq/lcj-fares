@@ -43,7 +43,7 @@ def test_directions_both_ways():
 def test_first_run_writes_future_days_only(tmp_path, monkeypatch):
     fake_api(monkeypatch, {("LCJ", "STN", "2026-10-10"): "199.00"})
     r = collect.run(tmp_path, NOW, "LCJ", **NOSLEEP)
-    rows = store.read_prices(tmp_path / "prices.csv")
+    rows = list(store.iter_all_prices(tmp_path))
     days = (dt.date(2027, 8, 31) - dt.date(2026, 9, 25)).days + 1
     assert len(rows) == 2 * days
     assert min(x["day"] for x in rows) == "2026-09-25"
@@ -59,19 +59,19 @@ def test_first_run_writes_future_days_only(tmp_path, monkeypatch):
 def test_rerun_same_day_adds_no_price_rows(tmp_path, monkeypatch):
     fake_api(monkeypatch, {("LCJ", "STN", "2026-10-10"): "199.00"})
     collect.run(tmp_path, NOW, "LCJ", **NOSLEEP)
-    n = len(store.read_prices(tmp_path / "prices.csv"))
+    n = len(list(store.iter_all_prices(tmp_path)))
     collect.run(tmp_path, NOW, "LCJ", **NOSLEEP)
-    assert len(store.read_prices(tmp_path / "prices.csv")) == n
+    assert len(list(store.iter_all_prices(tmp_path))) == n
     assert len(store.read_runs(tmp_path / "runs.csv")) == 2
 
 
 def test_next_day_appends_only_changes(tmp_path, monkeypatch):
     fake_api(monkeypatch, {("LCJ", "STN", "2026-10-10"): "199.00"})
     collect.run(tmp_path, NOW, "LCJ", **NOSLEEP)
-    n = len(store.read_prices(tmp_path / "prices.csv"))
+    n = len(list(store.iter_all_prices(tmp_path)))
     fake_api(monkeypatch, {("LCJ", "STN", "2026-10-10"): "149.00"})
     collect.run(tmp_path, NOW + dt.timedelta(days=1), "LCJ", **NOSLEEP)
-    rows = store.read_prices(tmp_path / "prices.csv")
+    rows = list(store.iter_all_prices(tmp_path))
     assert len(rows) == n + 1
     assert rows[-1]["observed"] == "2026-09-26" and rows[-1]["price"] == "149.00"
 
@@ -81,7 +81,7 @@ def test_partial_failure_recorded(tmp_path, monkeypatch):
     r = collect.run(tmp_path, NOW, "LCJ", **NOSLEEP)
     assert r["status"] == "partial" and r["failed"] == 1
     assert r["missing"] == "LCJ-STN-2026-11"
-    rows = store.read_prices(tmp_path / "prices.csv")
+    rows = list(store.iter_all_prices(tmp_path))
     assert not [x for x in rows if x["origin"] == "LCJ" and x["day"].startswith("2026-11")]
     assert [x for x in rows if x["origin"] == "STN" and x["day"].startswith("2026-11")]
 
@@ -134,7 +134,7 @@ def test_other_home_airport(tmp_path, monkeypatch):
     fake_api(monkeypatch, {("KTW", "STN", "2026-10-10"): "99.00"})
     assert collect.directions(["STN"], "KTW") == [("KTW", "STN"), ("STN", "KTW")]
     collect.run(tmp_path, NOW, "KTW", **NOSLEEP)
-    rows = store.read_prices(tmp_path / "prices.csv")
+    rows = list(store.iter_all_prices(tmp_path))
     assert {x["origin"] for x in rows} == {"KTW", "STN"}
     assert any(x["origin"] == "KTW" and x["price"] == "99.00" for x in rows)
 

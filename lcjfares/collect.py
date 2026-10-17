@@ -1,4 +1,4 @@
-"""Codzienny zbiór dla jednego lotniska: kalendarz cheapestPerDay wszystkich kierunków z/do niego → zmiany w data/<HOME>/prices.csv."""
+"""Codzienny zbiór dla jednego lotniska: kalendarz cheapestPerDay wszystkich kierunków z/do niego → zmiany w data/<HOME>/prices/YYYY-MM.csv."""
 from __future__ import annotations
 
 import datetime as dt
@@ -67,11 +67,10 @@ def _routes(data_dir: Path, home: str, sleep) -> list[str]:
 def run(data_dir: Path, now: dt.datetime, home: str, *, pause=(0.5, 1.0), sleep=time.sleep) -> dict:
     today = now.date()
     observed = today.isoformat()
-    prices_path = data_dir / "prices.csv"
     ip = public_ip()
     print(f"{home}: publiczne IP runnera: {ip or '?'}")
     routes = _routes(data_dir, home, sleep)
-    state = store.last_state(store.iter_prices(prices_path))
+    state = store.last_state(store.iter_all_prices(data_dir))
 
     snapshot, missing, requests, streak = [], [], 0, 0
     for origin, dest in directions(routes, home):
@@ -95,7 +94,7 @@ def run(data_dir: Path, now: dt.datetime, home: str, *, pause=(0.5, 1.0), sleep=
                              if f.day >= observed and f.day[:7] == month[:7]]
             sleep(random.uniform(*pause))
 
-    store.append_prices(prices_path, diff_rows(snapshot, state, observed))
+    store.append_monthly(data_dir, diff_rows(snapshot, state, observed))
     failed = len(missing)
     status = "failed" if requests == 0 or failed * 2 > requests else "partial" if failed else "ok"
     run_row = {"observed": observed, "started_utc": now.strftime("%Y-%m-%dT%H:%M:%SZ"),

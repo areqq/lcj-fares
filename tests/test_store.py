@@ -76,3 +76,13 @@ def test_airports_roundtrip_and_corrupt(tmp_path):
     assert store.load_airports(p) == a
     p.write_text("{oops")
     assert store.load_airports(p) == {}
+
+
+def test_append_monthly_splits_by_observed_and_reads_back_in_order(tmp_path):
+    assert list(store.iter_all_prices(tmp_path)) == []
+    store.append_monthly(tmp_path, [row("2026-10-31", "2026-11-01", "100.00"),
+                                    row("2026-11-01", "2026-11-01", "90.00")])
+    store.append_monthly(tmp_path, [row("2026-09-30", "2026-11-01", "120.00")])
+    assert sorted(p.name for p in (tmp_path / "prices").iterdir()) == ["2026-09.csv", "2026-10.csv", "2026-11.csv"]
+    assert [r["observed"] for r in store.iter_all_prices(tmp_path)] == ["2026-09-30", "2026-10-31", "2026-11-01"]
+    assert store.last_state(store.iter_all_prices(tmp_path))[("LCJ", "STN", "2026-11-01")][1] == "90.00"

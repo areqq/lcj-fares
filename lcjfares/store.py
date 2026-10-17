@@ -1,8 +1,9 @@
-"""Pliki danych lotniska: dziennik zmian cen (prices.csv), log uruchomień (runs.csv), trasy (routes.json, airports.json)."""
+"""Pliki danych lotniska: dziennik zmian cen (prices/YYYY-MM.csv), log uruchomień (runs.csv), trasy (routes.json, airports.json)."""
 from __future__ import annotations
 
 import csv
 import json
+from collections import defaultdict
 from pathlib import Path
 
 PRICE_FIELDS = ["observed", "origin", "dest", "day", "dep_time", "price", "status"]
@@ -46,6 +47,21 @@ def read_runs(path: Path) -> list[dict]:
 
 def append_prices(path: Path, rows: list[dict]) -> None:
     _append(path, PRICE_FIELDS, rows)
+
+
+def iter_all_prices(data_dir: Path):
+    """Cały dziennik lotniska: pliki prices/YYYY-MM.csv po kolei (= chronologicznie)."""
+    for p in sorted((data_dir / "prices").glob("*.csv")):
+        yield from iter_prices(p)
+
+
+def append_monthly(data_dir: Path, rows: list[dict]) -> None:
+    """Dopisuje wiersze do pliku miesiąca pomiaru: prices/<observed[:7]>.csv."""
+    by_month = defaultdict(list)
+    for r in rows:
+        by_month[r["observed"][:7]].append(r)
+    for month, rs in sorted(by_month.items()):
+        append_prices(data_dir / "prices" / f"{month}.csv", rs)
 
 
 def append_run(path: Path, row: dict) -> None:

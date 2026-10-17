@@ -210,7 +210,7 @@ def main(argv: list[str] | None = None) -> int:
     home = argv[0].upper()
     data_dir = Path(argv[1] if len(argv) > 1 else "data") / home
     out_path = Path(argv[2] if len(argv) > 2 else "site") / "data" / f"{home}.json"
-    data = build(store.iter_prices(data_dir / "prices.csv"), store.read_runs(data_dir / "runs.csv"),
+    data = build(store.iter_all_prices(data_dir), store.read_runs(data_dir / "runs.csv"),
                  dt.datetime.now(dt.timezone.utc).date(), home, store.load_airports(data_dir / "airports.json"))
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")

@@ -145,7 +145,7 @@ def test_heatmap_uses_lead_time_window_and_margins():
 
 
 def test_main_writes_json(tmp_path):
-    store.append_prices(tmp_path / "data" / "LCJ" / "prices.csv", [p("2026-09-01", "2026-10-10", "100.00")])
+    store.append_monthly(tmp_path / "data" / "LCJ", [p("2026-09-01", "2026-10-10", "100.00")])
     store.append_run(tmp_path / "data" / "LCJ" / "runs.csv", run("2026-09-01"))
     store.save_airports(tmp_path / "data" / "LCJ" / "airports.json",
                         {"STN": {"name": "Londyn Stansted", "country": "gb"},

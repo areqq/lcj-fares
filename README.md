@@ -44,7 +44,7 @@ Ceny „aktualne” pochodzą zawsze z ostatniego udanego pomiaru; wyszarzone s�
 ## Dane
 | Plik | Zawartość |
 |---|---|
-| `data/<HOME>/prices.csv` | dziennik zmian: wiersz tylko, gdy cena/status lotu się zmienia (`observed,origin,dest,day,dep_time,price,status`) |
+| `data/<HOME>/prices/YYYY-MM.csv` | dziennik zmian, plik na miesiąc pomiaru (`observed`): wiersz tylko, gdy cena/status lotu się zmienia (`observed,origin,dest,day,dep_time,price,status`) |
 | `data/<HOME>/runs.csv` | log uruchomień: status `ok`/`partial`/`failed`, liczba zapytań, braki, **publiczne IP runnera** |
 | `data/<HOME>/routes.json`, `airports.json` | kierunki i nazwy lotnisk z kodem kraju |
 | `site/data/<HOME>.json` | agregaty dla strony |
