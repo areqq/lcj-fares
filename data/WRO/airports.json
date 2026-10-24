@@ -87,6 +87,10 @@
   "name": "East Midlands",
   "country": "gb"
  },
+ "FAO": {
+  "name": "Faro",
+  "country": "pt"
+ },
  "GDN": {
   "name": "Gdańsk",
   "country": "pl"
