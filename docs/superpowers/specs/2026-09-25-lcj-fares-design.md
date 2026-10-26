@@ -20,6 +20,7 @@ taryfy round-trip z API (pary tam+powrót składamy z cen 1-way).
   Kod parametryzowany lotniskiem (`collect HOME`, `analyze HOME`); brak twardego LCJ.
 - Harmonogram: osobny cron na lotnisko, co 6 h (LCJ 06, KTW 12, WRO 18, WMI 00 UTC); timeout 75 min.
 - 2026-09-27: dodana Bydgoszcz (BZG, 6 kierunków), cron 03:00 UTC.
+- 2026-10-26: dodane Gdańsk (GDN, 53 kierunki) i Kraków (KRK, 89 kierunków).
 - 2026-09-27: harmonogram zastąpiony jednym cronem co 2 h (`23 */2 * * *`) + wybór lotniska w
   `lcjfares/schedule.py`: kwalifikuje się ostatni udany pomiar > 18 h i ostatnia próba > 4 h; losowo jedno z 2 najstarszych.
 - 2026-09-28: GitHub pomija większość runów co 2 h (≈4–5/dobę) → jeden run robi wszystkie czekające lotniska

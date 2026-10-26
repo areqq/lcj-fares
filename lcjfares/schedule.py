@@ -14,7 +14,7 @@ from pathlib import Path
 
 from lcjfares import store
 
-AIRPORTS = ["LCJ", "KTW", "WRO", "WMI", "BZG"]
+AIRPORTS = ["LCJ", "KTW", "WRO", "WMI", "BZG", "GDN", "KRK"]
 MIN_AGE_OK = dt.timedelta(hours=18)   # ostatni udany pomiar starszy niż to → lotnisko do zrobienia
 MIN_AGE_TRY = dt.timedelta(hours=4)   # po każdej próbie (także nieudanej) odczekaj — nie dobijamy się przy blokadzie
 NEVER = dt.datetime.min.replace(tzinfo=dt.timezone.utc)

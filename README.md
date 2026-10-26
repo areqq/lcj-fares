@@ -1,9 +1,9 @@
 # lcj-fares
 
-Codzienny monitoring cen **Ryanair** z/do **Łodzi (LCJ), Katowic (KTW), Wrocławia (WRO), Warszawy-Modlina (WMI) i Bydgoszczy (BZG)**:
+Codzienny monitoring cen **Ryanair** z/do **Łodzi (LCJ), Katowic (KTW), Wrocławia (WRO), Warszawy-Modlina (WMI), Bydgoszczy (BZG), Gdańska (GDN) i Krakowa (KRK)**:
 własna historia cen, żeby wiedzieć, kiedy i dokąd lata się tanio i kiedy kupować.
 
-**Strona:** https://areqq.github.io/lcj-fares/ — lotnisko wybierasz na górze (albo w adresie: `#LCJ`, `#KTW`, `#WRO`, `#WMI`, `#BZG`).
+**Strona:** https://areqq.github.io/lcj-fares/ — lotnisko wybierasz na górze (albo w adresie: `#LCJ`, `#KTW`, `#WRO`, `#WMI`, `#BZG`, `#GDN`, `#KRK`).
 
 ## Co pokazuje strona
 Dla wybranego lotniska:
@@ -35,6 +35,8 @@ Ceny „aktualne” pochodzą zawsze z ostatniego udanego pomiaru; wyszarzone s�
   | WRO Wrocław | 53 | ~1270 | ~30 min |
   | WMI Modlin | 52 | ~1250 | ~30 min |
   | BZG Bydgoszcz | 6 | ~140 | ~3 min |
+  | GDN Gdańsk | 53 | ~1270 | ~25 min |
+  | KRK Kraków | 89 | ~2140 | ~40 min |
 
   Każdy run: testy → zbiór (wszystkie kierunki w obie strony, 12 miesięcy do przodu) → commit danych → analiza →
   commit wyniku → publikacja strony. Nowe lotnisko = wpis w `AIRPORTS` (`lcjfares/schedule.py`) i w `HOMES` (strona).

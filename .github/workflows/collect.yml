@@ -8,7 +8,7 @@ on:
       airport:
         description: "Lotnisko (auto = jak cron: najdawniej mierzone)"
         type: choice
-        options: [auto, LCJ, KTW, WRO, WMI, BZG]
+        options: [auto, LCJ, KTW, WRO, WMI, BZG, GDN, KRK]
         default: auto
 
 permissions:
