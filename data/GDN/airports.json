@@ -1,0 +1,214 @@
+{
+ "AAR": {
+  "name": "Aarhus",
+  "country": "dk"
+ },
+ "AGA": {
+  "name": "Agadir",
+  "country": "ma"
+ },
+ "AGP": {
+  "name": "Malaga",
+  "country": "es"
+ },
+ "ALC": {
+  "name": "Alicante",
+  "country": "es"
+ },
+ "ARN": {
+  "name": "Sztokholm Arlanda",
+  "country": "se"
+ },
+ "BCN": {
+  "name": "Barcelona-El Prat",
+  "country": "es"
+ },
+ "BDS": {
+  "name": "Brindisi",
+  "country": "it"
+ },
+ "BGY": {
+  "name": "Mediolan-Bergamo",
+  "country": "it"
+ },
+ "BOJ": {
+  "name": "Burgas",
+  "country": "bg"
+ },
+ "BRS": {
+  "name": "Bristol",
+  "country": "gb"
+ },
+ "BTS": {
+  "name": "Bratysława",
+  "country": "sk"
+ },
+ "BUD": {
+  "name": "Budapeszt",
+  "country": "hu"
+ },
+ "BVA": {
+  "name": "Paryż-Beauvais",
+  "country": "fr"
+ },
+ "CFU": {
+  "name": "Korfu",
+  "country": "gr"
+ },
+ "CHQ": {
+  "name": "Chania (Kreta)",
+  "country": "gr"
+ },
+ "CPH": {
+  "name": "Kopenhaga",
+  "country": "dk"
+ },
+ "CTA": {
+  "name": "Catania",
+  "country": "it"
+ },
+ "DBV": {
+  "name": "Dubrownik",
+  "country": "hr"
+ },
+ "DUB": {
+  "name": "Dublin",
+  "country": "ie"
+ },
+ "EDI": {
+  "name": "Edynburg",
+  "country": "gb"
+ },
+ "EMA": {
+  "name": "East Midlands",
+  "country": "gb"
+ },
+ "FCO": {
+  "name": "Rzym-Fiumicino",
+  "country": "it"
+ },
+ "GOT": {
+  "name": "Göteborg-Landvetter",
+  "country": "se"
+ },
+ "HAM": {
+  "name": "Hamburg",
+  "country": "de"
+ },
+ "JTR": {
+  "name": "Santorini",
+  "country": "gr"
+ },
+ "KRK": {
+  "name": "Kraków",
+  "country": "pl"
+ },
+ "LBA": {
+  "name": "Leeds/Bradford",
+  "country": "gb"
+ },
+ "LPL": {
+  "name": "Liverpool",
+  "country": "gb"
+ },
+ "LUZ": {
+  "name": "Lublin",
+  "country": "pl"
+ },
+ "MAD": {
+  "name": "Madryt",
+  "country": "es"
+ },
+ "MAN": {
+  "name": "Manchester",
+  "country": "gb"
+ },
+ "MLA": {
+  "name": "Malta",
+  "country": "mt"
+ },
+ "MXP": {
+  "name": "Mediolan-Malpensa",
+  "country": "it"
+ },
+ "NAP": {
+  "name": "Neapol",
+  "country": "it"
+ },
+ "NCL": {
+  "name": "Newcastle",
+  "country": "gb"
+ },
+ "NYO": {
+  "name": "Sztokholm-Skavsta",
+  "country": "se"
+ },
+ "OPO": {
+  "name": "Porto",
+  "country": "pt"
+ },
+ "OTP": {
+  "name": "Bucharest (Otopeni)",
+  "country": "ro"
+ },
+ "PFO": {
+  "name": "Pafos",
+  "country": "cy"
+ },
+ "PMI": {
+  "name": "Palma",
+  "country": "es"
+ },
+ "PMO": {
+  "name": "Palermo",
+  "country": "it"
+ },
+ "PRG": {
+  "name": "Praga",
+  "country": "cz"
+ },
+ "PSA": {
+  "name": "Piza",
+  "country": "it"
+ },
+ "SFT": {
+  "name": "Skelleftea",
+  "country": "se"
+ },
+ "STN": {
+  "name": "Londyn-Stansted",
+  "country": "gb"
+ },
+ "TGD": {
+  "name": "Podgorica",
+  "country": "me"
+ },
+ "TIA": {
+  "name": "Tirana",
+  "country": "al"
+ },
+ "TRF": {
+  "name": "Oslo-Torp",
+  "country": "no"
+ },
+ "TRN": {
+  "name": "Turyn",
+  "country": "it"
+ },
+ "TSF": {
+  "name": "Wenecja-Treviso",
+  "country": "it"
+ },
+ "VXO": {
+  "name": "Växjö-Småland",
+  "country": "se"
+ },
+ "WRO": {
+  "name": "Wrocław",
+  "country": "pl"
+ },
+ "ZAD": {
+  "name": "Zadar",
+  "country": "hr"
+ }
+}
