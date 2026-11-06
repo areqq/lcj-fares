@@ -28,11 +28,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: main   # najnowszy stan w chwili startu, nie z chwili zaplanowania (run mógł czekać w kolejce)
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - id: home
@@ -83,15 +83,15 @@ jobs:
             echo "::endgroup::"
           done
           echo "failed=$failed" >> "$GITHUB_OUTPUT"
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
         if: steps.home.outputs.homes != ''
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: steps.home.outputs.homes != ''
         with:
           path: site
       - id: deploy
         if: steps.home.outputs.homes != ''
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
       - name: Fail if collection failed
         if: steps.run.outputs.failed != ''
         run: |
