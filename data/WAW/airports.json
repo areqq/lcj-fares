@@ -1,0 +1,70 @@
+{
+ "AGP": {
+  "name": "Malaga",
+  "country": "es"
+ },
+ "ALC": {
+  "name": "Alicante",
+  "country": "es"
+ },
+ "BLQ": {
+  "name": "Bolonia",
+  "country": "it"
+ },
+ "BRI": {
+  "name": "Bari",
+  "country": "it"
+ },
+ "CRL": {
+  "name": "Bruksela-Charleroi",
+  "country": "be"
+ },
+ "CTA": {
+  "name": "Catania",
+  "country": "it"
+ },
+ "LBA": {
+  "name": "Leeds/Bradford",
+  "country": "gb"
+ },
+ "LPL": {
+  "name": "Liverpool",
+  "country": "gb"
+ },
+ "NAP": {
+  "name": "Neapol",
+  "country": "it"
+ },
+ "OPO": {
+  "name": "Porto",
+  "country": "pt"
+ },
+ "PFO": {
+  "name": "Pafos",
+  "country": "cy"
+ },
+ "PSA": {
+  "name": "Piza",
+  "country": "it"
+ },
+ "SVQ": {
+  "name": "Sewilla",
+  "country": "es"
+ },
+ "TIA": {
+  "name": "Tirana",
+  "country": "al"
+ },
+ "TRN": {
+  "name": "Turyn",
+  "country": "it"
+ },
+ "VCE": {
+  "name": "Wenecja M.Polo",
+  "country": "it"
+ },
+ "VIE": {
+  "name": "Wiedeń",
+  "country": "at"
+ }
+}
